@@ -1,0 +1,82 @@
+@media screen and (min-width: 575px) {
+  .signOut {
+    display: block;
+    height: 50px;
+    border-radius: 100vh;
+    background-color: rgb(189, 189, 189);
+    padding: 10px;
+  }
+
+  .signOut button {
+    width: calc(100%-40px);
+    color: white;
+  }
+
+  .signOut span:first-child {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+li.nav-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signOutBtn {
+  text-align: center;
+  left: 0;
+  top: 110%;
+  right: 0;
+  background-color: rgb(189, 189, 189);
+  border-radius: 100vh;
+  padding: 5px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: signOut 0.5s forwards;
+  z-index: 99;
+}
+
+@keyframes signOut {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signOutBtn::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 10px solid;
+  border-color: transparent transparent rgb(189, 189, 189) transparent;
+}
+
+.banarImage {
+  max-height: 50px;
+  position: relative;
+  z-index: -1;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-color: var(--main-color);
+  z-index: 2;
+}

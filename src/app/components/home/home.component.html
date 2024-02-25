@@ -1,0 +1,49 @@
+<section class="my-5">
+  <app-mainslider></app-mainslider>
+  <div class="container">
+    <h2 class="fw-bolder">Shop Popular Categories</h2>
+    <app-categorie-slider></app-categorie-slider>
+    <div class="row mt-5 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+      <div *ngFor="let item of homeProducts ; index as i"
+        class="col p-4 shadow-sm position-relative parent overflow-hidden">
+        <span class="position-absolute" (click)="currentIndex(i,lightBox)">
+          <i class="fa-solid fa-eye"></i>
+        </span>
+        <div [routerLink]="['/details', item._id]" class="child cursor-pointer">
+          <span class="offer bg-danger">{{ getOffer(i , homeProducts)}}</span>
+          <div class="position-relative overflow-hidden">
+            <img class="w-100" [src]="item.imageCover" [alt]="item.category.name">
+            <div
+              class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
+              <img class="w-100 h-100" [src]="item.images[2]?item.images[2]:item.images[0]" [alt]="item.category.name">
+              <img class="w-100 h-100" [src]="item.images[0]?item.images[0]:item.images[1]" [alt]="item.category.name">
+              <img class="w-100 h-100" [src]="item.images[1]?item.images[1]:item.images[0]" [alt]="item.category.name">
+              <img class="w-100 h-100" [src]="item.images[3] ? item.images[3] :item.images[0] "
+                [alt]="item.category.name">
+            </div>
+          </div>
+          <hr />
+          <p>{{item.category.name}}</p>
+          <h2 class="h6">{{item.title.split(' ').splice(0,2).join(' ')}}</h2>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0"><span class="text-decoration-line-through text-danger h6">{{item.price + 200}}</span>
+              <span class="ps-2 h5">{{item.price}}</span>
+              EGP
+            </p>
+            <div>
+              <i [style]="'color:yellow;'" class="fas fa-star"></i>
+              {{item.ratingsAverage}}
+            </div>
+          </div>
+        </div>
+        <button class="btn-main d-block m-auto mt-3">Add To Cart</button>
+      </div>
+    </div>
+  </div>
+  <div #lightBox class="lightBoxContainer d-none" (click)="closeLightBox(lightBox)">
+    <ng-container *ngIf="homeProducts">
+      <app-home-eyelook [productIndex]="dataindex" [AllproductsInit]="homeProducts"></app-home-eyelook>
+    </ng-container>
+
+  </div>
+</section>

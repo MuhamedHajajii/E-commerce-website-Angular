@@ -1,0 +1,25 @@
+.imagePaernt {
+  width: 300px;
+}
+
+.imagesSlider {
+  width: 100px;
+  cursor: pointer;
+  border: 4px solid #ffffff00;
+  transition: 0.5s;
+}
+
+.imagesSlider:hover {
+  border: 4px solid var(--main-color);
+
+}
+
+.offer {
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  top: 5px;
+  right: 5px;
+  padding: 10px;
+  border-radius: 50%;
+}

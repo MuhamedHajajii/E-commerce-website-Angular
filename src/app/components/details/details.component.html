@@ -1,0 +1,52 @@
+<section class="my-5 ">
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-4 text-center">
+        <div>
+          <div class="px-1 py-4 rounded-4 shadow position-relative">
+            <span class="offer bg-danger">{{
+              getOffers(0,[productDetails.data],productDetails.data.category.name)}}</span>
+            <div>
+              <img #currentImage class="imagePaernt" [style]="'width:300px;'" [src]="productDetails.data.images[0]"
+                [alt]="productDetails.data.title">
+            </div>
+            <div>
+              <img #firstImage (click)="changeMainPic(currentImage,firstImage)" class="imagesSlider"
+                [src]="productDetails.data.images[1]" [alt]="productDetails.data.title">
+              <img #secondImage (click)="changeMainPic(currentImage,secondImage)" class="imagesSlider"
+                [src]="productDetails.data.images[2]" [alt]="productDetails.data.title">
+              <img #thirdImage (click)="changeMainPic(currentImage,thirdImage)" class="imagesSlider"
+                [src]="productDetails.data.images[3]?productDetails.data.images[3]:productDetails.data.images[0]"
+                [alt]="productDetails.data.title">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-8">
+        <div class="p-4">
+          <p class="fw-bolder">{{productDetails.data.description}}</p>
+          <h2 class="mb-3 h4 fw-bold">{{productDetails.data.title}}</h2>
+          <p><span class="fw-bold">Available in Stock : </span>{{productDetails.data.quantity}}</p>
+          <p><span class="fw-bold">reviews : </span>{{productDetails.data.ratingsAverage}} <i
+              class="fa-solid fa-eye"></i></p>
+          <p><span class="fw-bold">Sold : </span> {{productDetails.data.sold}} <i class="fa-solid fa-bag-shopping"></i>
+          </p>
+          <p class="fw-bold">{{productDetails.data.brand.name}}</p>
+          <img [src]="productDetails.data.brand.image" [alt]="productDetails.data.brand.name">
+          <hr />
+          <p class="fw-bold">{{productDetails.data.category.name}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="mb-0 h4"><span
+                class="h6 text-decoration-line-through text-danger me-2">{{productDetails.data.price
+                +200}}</span>{{productDetails.data.price}} EGP</p>
+            <div class="d-flex justify-content-center align-items-center">
+              <i class="fas fa-star rating-color"></i>
+              <p class="m-0 ms-2"> {{productDetails.data.ratingsAverage}}</p>
+            </div>
+          </div>
+          <button class=" mt-1 d-block w-100 btn-main">+ add to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

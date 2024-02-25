@@ -1,0 +1,10 @@
+<section>
+  <div class="container">
+    <owl-carousel-o [options]="customOptions">
+      <ng-template *ngFor="let item of allCategories" carouselSlide><img class="w-100" style="height: 200px;"
+          [src]="item.image" alt="slider">
+        <p class="fs-6">{{item.name}}</p>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</section>

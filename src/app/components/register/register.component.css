@@ -1,0 +1,33 @@
+.ErrorsContainer p {
+  opacity: 0;
+  animation: erroeMessage 0.5s forwards;
+}
+
+@keyframes erroeMessage {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+form input {
+  background-image: none !important;
+}
+
+.faspin {
+  animation: 2s infinite spiinerPadding;
+}
+
+@keyframes spiinerPadding {
+  from {
+    padding-right: 0px;
+  }
+
+  to {
+    padding-right: 30px;
+
+  }
+}
