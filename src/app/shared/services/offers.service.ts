@@ -6,29 +6,29 @@ import { Allproducts } from '../interfaces/allproducts';
 })
 export class OffersService {
   constructor() {}
-  getOffer(i: number, items: Allproducts[], gategory?: string): string {
+  getOffer(i: number, items: Allproducts[], gategory?: string): number {
     if (items[i].category.name == 'Music') {
-      return '13%';
+      return 3;
     } else if (items[i].category.name == "Men's Fashion") {
-      return '50%';
+      return 7;
     } else if (items[i].category.name == "Women's Fashion") {
-      return '10%';
+      return 9;
     } else if (items[i].category.name == 'SuperMarket') {
-      return '5%';
+      return 3;
     } else if (items[i].category.name == 'Home') {
-      return '7%';
+      return 6;
     } else if (items[i].category.name == 'Books') {
-      return '30%';
+      return 2;
     } else if (items[i].category.name == 'Mobiles') {
-      return '70%';
+      return 3;
     } else if (items[i].category.name == 'Electronics') {
-      return '14%';
+      return 13;
     } else if (items[i].category.name == 'Baby & Toys') {
-      return '17%';
+      return 11;
     } else if (items[i].category.name == 'Beauty & Health') {
-      return '55%';
+      return 5;
     } else {
-      return '1%';
+      return 1;
     }
   }
 }

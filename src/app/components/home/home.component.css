@@ -63,7 +63,7 @@
 }
 
 .parent button {
-  transform: translateY(160%);
+  transform: translateY(250%);
   transition: 0.5s all;
 }
 

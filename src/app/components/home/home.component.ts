@@ -1,7 +1,7 @@
+import { Allproducts } from './../../shared/interfaces/allproducts';
 import { OffersService } from './../../shared/services/offers.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Allproducts } from 'src/app/shared/interfaces/allproducts';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 
 @Component({
@@ -26,7 +26,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   getAllproducts(): void {
     this.callApi = this._GetHomeproductsService.gitHomeProducts().subscribe({
       next: (response) => {
-        this.homeProducts = response.data.splice(0, 15);
+        let allProductsResponse: Allproducts[] = response.data;
+        let randomNumberArr: number[] = [];
+        let displayRandomProducts: Allproducts[] = [];
+        for (let i = 0; i < allProductsResponse.length; ) {
+          let randomNumberGenerator: number = Math.floor(
+            Math.random() * allProductsResponse.length
+          );
+          if (!randomNumberArr.includes(randomNumberGenerator)) {
+            randomNumberArr.push(randomNumberGenerator);
+            displayRandomProducts.push(
+              allProductsResponse[randomNumberGenerator]
+            );
+            i++;
+            this.homeProducts = displayRandomProducts;
+          }
+        }
       },
       error: (error) => {
         console.log(error);
@@ -42,7 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     lightBox.classList.add('d-none');
   }
 
-  getOffer(i: number, items: Allproducts[]): string {
+  getOffer(i: number, items: Allproducts[]): number {
     return this._OffersService.getOffer(i, items);
   }
 }

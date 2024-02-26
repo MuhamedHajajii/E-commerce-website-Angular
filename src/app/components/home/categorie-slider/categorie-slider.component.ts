@@ -33,7 +33,7 @@ export class CategorieSliderComponent implements OnInit {
     margin: 15,
     autoplay: true,
     autoplaySpeed: 1000,
-    dots: true,
+    dots: false,
     navSpeed: 500,
     navText: ['', ''],
     responsive: {
@@ -54,6 +54,6 @@ export class CategorieSliderComponent implements OnInit {
         loop: true,
       },
     },
-    nav: true,
+    nav: false,
   };
 }

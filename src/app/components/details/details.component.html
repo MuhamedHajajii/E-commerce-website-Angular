@@ -4,17 +4,19 @@
       <div class="col col-md-4 text-center">
         <div>
           <div class="px-1 py-4 rounded-4 shadow position-relative">
-            <span class="offer bg-danger">{{
-              getOffers(0,[productDetails.data],productDetails.data.category.name)}}</span>
+            <span class="offer bg-danger">-{{
+              getOffers(0,[productDetails.data],productDetails.data.category.name)}}%</span>
             <div>
               <img #currentImage class="imagePaernt" [style]="'width:300px;'" [src]="productDetails.data.images[0]"
                 [alt]="productDetails.data.title">
             </div>
             <div>
               <img #firstImage (click)="changeMainPic(currentImage,firstImage)" class="imagesSlider"
-                [src]="productDetails.data.images[1]" [alt]="productDetails.data.title">
+                [src]="productDetails.data.images[1] ? productDetails.data.images[1]:productDetails.data.images[0]"
+                [alt]="productDetails.data.title">
               <img #secondImage (click)="changeMainPic(currentImage,secondImage)" class="imagesSlider"
-                [src]="productDetails.data.images[2]" [alt]="productDetails.data.title">
+                [src]="productDetails.data.images[2] ? productDetails.data.images[2]:productDetails.data.images[0]"
+                [alt]="productDetails.data.title">
               <img #thirdImage (click)="changeMainPic(currentImage,thirdImage)" class="imagesSlider"
                 [src]="productDetails.data.images[3]?productDetails.data.images[3]:productDetails.data.images[0]"
                 [alt]="productDetails.data.title">
@@ -37,8 +39,9 @@
           <p class="fw-bold">{{productDetails.data.category.name}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <p class="mb-0 h4"><span
-                class="h6 text-decoration-line-through text-danger me-2">{{productDetails.data.price
-                +200}}</span>{{productDetails.data.price}} EGP</p>
+                class="h6 text-decoration-line-through text-danger me-2">{{productDetails.data.price}}</span>{{productDetails.data.price
+              +(productDetails.data.price * (getOffers(0,[productDetails.data],productDetails.data.category.name)/100))
+              | number}} EGP</p>
             <div class="d-flex justify-content-center align-items-center">
               <i class="fas fa-star rating-color"></i>
               <p class="m-0 ms-2"> {{productDetails.data.ratingsAverage}}</p>

@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit {
     currentImage.setAttribute('src', first);
     change.setAttribute('src', second);
   }
-  getOffers(i: number, items: Allproducts[], categories: string): string {
+  getOffers(i: number, items: Allproducts[], categories: string): number {
     return this._OffersService.getOffer(i, items, categories);
   }
 }

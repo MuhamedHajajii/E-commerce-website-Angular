@@ -1,10 +1,15 @@
 <section>
   <div class="container">
     <owl-carousel-o [options]="customOptions">
-      <ng-template *ngFor="let item of allCategories" carouselSlide><img class="w-100" style="height: 200px;"
-          [src]="item.image" alt="slider">
-        <p class="fs-6">{{item.name}}</p>
-      </ng-template>
+      <ng-container *ngFor="let slide of allCategories">
+        <ng-template carouselSlide>
+          <img class="w-100" style="height: 200px;" [src]="slide.image" alt="slider">
+          <p class="fs-6">{{slide.name}}</p>
+        </ng-template>
+      </ng-container>
+
     </owl-carousel-o>
+
+
   </div>
 </section>
