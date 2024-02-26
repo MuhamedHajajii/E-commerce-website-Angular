@@ -12,6 +12,9 @@ import { OffersService } from 'src/app/shared/services/offers.service';
 })
 export class DetailsComponent implements OnInit {
   productDetails: ProductDetails = {} as ProductDetails;
+  productID: any;
+  currentoffer: number = 0;
+  isLoading: boolean = true;
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _GetHomeproductsService: GetHomeproductsService,
@@ -20,16 +23,26 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe({
       next: (params) => {
-        let productID = params.get('id');
-
-        this._GetHomeproductsService.getDetails(productID).subscribe({
-          next: (productDetails: ProductDetails) => {
-            console.log((this.productDetails = productDetails));
-          },
-        });
+        this.productID = params.get('id');
+        this.displayDetails();
       },
     });
   }
+
+  displayDetails(): void {
+    this._GetHomeproductsService.getDetails(this.productID).subscribe({
+      next: (productDetails: ProductDetails) => {
+        this.productDetails = productDetails;
+        this.currentoffer = this.getOffers(
+          0,
+          [this.productDetails.data],
+          this.productDetails.data.category.name
+        );
+        this.isLoading = false;
+      },
+    });
+  }
+
   changeMainPic(currentImage: any, change: HTMLImageElement): void {
     let first = change.getAttribute('src');
     let second = currentImage.getAttribute('src');
