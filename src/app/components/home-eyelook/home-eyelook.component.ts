@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Allproducts } from 'src/app/shared/interfaces/allproducts';
-import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
+import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
 
 @Component({
   selector: 'app-home-eyelook',
@@ -17,31 +17,8 @@ export class HomeEyelookComponent {
   @Input() AllproductsInit: Allproducts[] = [];
   @Input() productIndex: number = 0;
   imageSliderEye!: Allproducts;
-  constructor(private _GetHomeproductsService: GetHomeproductsService) {
-    this.getAllproducts();
-  }
-
-  getAllproducts(): void {
-    this._GetHomeproductsService.gitHomeProducts().subscribe({
-      next: (response) => {
-        this.AllproductsInit = response.data.splice(0, 15);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-
-  ngOnInit(): void {
-    this.AllproductsInit;
-  }
+  constructor() {}
   ngOnChanges(changes: SimpleChanges): void {
-    this.dispalyData();
-
-    this.imageSliderEye = this.AllproductsInit[this.productIndex];
-  }
-
-  dispalyData(): void {
     this.imageSliderEye = this.AllproductsInit[this.productIndex];
   }
 

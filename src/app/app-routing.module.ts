@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { authGurdGuard } from './shared/gurd/auth-gurd.guard';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'details/:id', component: DetailsComponent },
       { path: 'products', component: ProductsComponent },
+      { path: 'search', component: SearchComponent },
     ],
   },
   {

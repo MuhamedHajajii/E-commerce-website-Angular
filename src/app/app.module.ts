@@ -17,13 +17,16 @@ import { AuthNavbarComponent } from './components/auth-navbar/auth-navbar.compon
 import { BlankNavbarComponent } from './components/blank-navbar/blank-navbar.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { BlankComponent } from './components/blank/blank.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeEyelookComponent } from './components/home-eyelook/home-eyelook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MainsliderComponent } from './components/home/mainslider/mainslider.component';
 import { CategorieSliderComponent } from './components/home/categorie-slider/categorie-slider.component';
+import { TexttermPipe } from './shared/pipe/textterm.pipe';
+import { SearchPipe } from './shared/pipe/search.pipe';
+import { SearchComponent } from './components/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +47,9 @@ import { CategorieSliderComponent } from './components/home/categorie-slider/cat
     HomeEyelookComponent,
     MainsliderComponent,
     CategorieSliderComponent,
+    TexttermPipe,
+    SearchPipe,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +58,7 @@ import { CategorieSliderComponent } from './components/home/categorie-slider/cat
     HttpClientModule,
     BrowserAnimationsModule,
     CarouselModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,8 +1,10 @@
 import { Allproducts } from './../../shared/interfaces/allproducts';
 import { OffersService } from './../../shared/services/offers.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
+import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +14,16 @@ import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts
 export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private _GetHomeproductsService: GetHomeproductsService,
-    private _OffersService: OffersService
+    private _OffersService: OffersService,
+    private _SharedProductsService: SharedProductsService,
+    private _Router: Router
   ) {}
+  changeDisplay: boolean = true;
+  searchTitle: string = '';
   homeProducts!: Allproducts[];
   dataindex: number = 1;
   callApi!: Subscription;
+  productsLoaded: boolean = true;
   ngOnInit(): void {
     this.getAllproducts();
   }
@@ -42,6 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.homeProducts = displayRandomProducts;
           }
         }
+        this.productsLoaded = false;
       },
       error: (error) => {
         console.log(error);
@@ -59,5 +67,24 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getOffer(i: number, items: Allproducts[]): number {
     return this._OffersService.getOffer(i, items);
+  }
+  changedisplayClicOne(): void {
+    this.changeDisplay = true;
+  }
+  changedisplayClicTwo(): void {
+    this.changeDisplay = false;
+  }
+  searchArray: Allproducts[] = [];
+  searchReasult(searchvalue: string): void {
+    this.searchArray = this.homeProducts.filter((curentProduct) =>
+      curentProduct.title.toLowerCase().includes(searchvalue.toLowerCase())
+    );
+  }
+  openSearchResult(): void {
+    this._SharedProductsService.currentProducts = this.searchArray;
+
+    if (this.searchArray.length > 0) {
+      this._Router.navigate(['search']);
+    }
   }
 }
