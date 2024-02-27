@@ -1,3 +1,68 @@
+.testInput:focus {
+  animation: widthFouces 0.5s forwards;
+  box-shadow: 0 0 0 0.03rem var(--main-color);
+}
+
+.testInput {
+  animation: widthBlur 0.5s forwards;
+  border-color: var(--main-color);
+}
+
+.searchList {
+  width: 200% !important;
+  height: 600px;
+}
+
+
+.searchList>div {
+  max-height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: gold;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+:has(.testInput:focus) .searchList>div {
+  animation: sserachList 0.5s forwards;
+}
+
+
+@keyframes sserachList {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+
+  }
+}
+
+@keyframes widthFouces {
+  from {
+    width: 50%;
+  }
+
+  to {
+    width: 150%;
+  }
+}
+
+@keyframes widthBlur {
+  from {
+    width: 150%;
+  }
+
+  to {
+    width: 50%;
+  }
+}
+
+/* results */
 .sliderParent {
   width: 400%;
   opacity: 0;
@@ -37,57 +102,6 @@
 .parent:hover>div {
   border: solid 5px var(--main-color);
   border-radius: 5px;
-}
-
-.parent>span {
-  top: 10%;
-  left: 15%;
-  background-color: var(--light-color);
-  color: var(--main-color);
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  opacity: 0;
-  transition: 0.5s all;
-}
-
-.parent>span:hover {
-  background-color: var(--main-color);
-
-  color: white;
-}
-
-.parent:hover>span {
-  z-index: 999;
-  opacity: 1;
-}
-
-.child::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.6);
-  display: none;
-  transition: 0.5s all;
-}
-
-.parent:has(>span:hover) .child::after {
-  display: block;
-}
-
-.parent button {
-  transform: translateY(250%);
-  transition: 0.5s all;
-}
-
-.parent:hover button {
-  transform: translateY(0);
 }
 
 @keyframes slider {
@@ -143,17 +157,6 @@
   }
 }
 
-.lightBoxContainer {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 11111111111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .offer {
   position: absolute;
   font-weight: bold;
@@ -163,15 +166,4 @@
   padding: 10px;
   border-radius: 50%;
   z-index: 999;
-}
-
-.search:focus {
-  animation: widthFouces 0.5s forwards;
-  box-shadow: 0 0 0 0.04rem var(--main-color);
-}
-
-.search {
-  animation: widthBlur 0.5s forwards;
-  border-color: var(--main-color);
-  transition: 0.5s all;
 }

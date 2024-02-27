@@ -1,12 +1,32 @@
+<div class="position-relative">
+  <img class="w-100 banarImage" src="../../../assets/images/paymob00_topstrip_ar_web.jpg" alt="">
+  <div class="layer"></div>
+</div>
+<div class="container">
+  <div class="py-2 d-flex justify-content-between align-items-center">
+    <a class="navbar-brand" routerLink="home"><img src="../assets/images/freshcart-logo.svg"
+        alt="fresh market logo"></a>
+    <ul class="navbar-nav ">
+      <li (click)="showSignOut(logOutIcon)" class="ms-3 cursor-pointer
+      nav-item signOut position-relative">
+        <span><i class="fa-solid fa-user"></i></span>
+        <span class="text-white fw-bold mx-2">
+          {{userName}}</span>
+        <span #logOutIcon (click)="stopProp($event)" class="d-none position-absolute signOutBtn"><button
+            class="btn text-decoration-underline" (click)="singOut()">SignOut</button></span>
+      </li>
+    </ul>
+  </div>
+</div>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#"><img src="../assets/images/freshcart-logo.svg" alt="fresh market logo"></a>
+
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+    <div class="collapse  navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-4 mt-lg-0">
         <li class="nav-item">
           <a routerLink="home" routerLinkActive="active-link" class="nav-link  p-2 text-capitalize">home</a>
         </li>
@@ -22,8 +42,12 @@
         <li class="nav-item">
           <a routerLink="brands" routerLinkActive="active-link" class="nav-link  p-2 text-capitalize">brands</a>
         </li>
+        <li class="nav-item ms-auto">
+          <app-main-search-bar></app-main-search-bar>
+        </li>
       </ul>
-      <ul class="navbar-nav ms-auto flex-row justify-content-center gap-2 mt-2 mt-lg-0">
+
+      <ul class="navbar-nav mb-0 flex-row justify-content-center gap-2 mt-2 mt-lg-0">
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="fab fa-instagram"></i></a>
         </li>
@@ -42,19 +66,7 @@
         <li class="nav-item">
           <a href="#" class="nav-link"><i class="fab fa-youtube"></i></a>
         </li>
-        <li (click)="showSignOut(logOutIcon)" class="ms-3 cursor-pointer
-         nav-item signOut position-relative">
-          <span><i class="fa-solid fa-user"></i></span>
-          <span class="text-white fw-bold mx-2">
-            {{userName}}</span>
-          <span #logOutIcon (click)="stopProp($event)" class="d-none position-absolute signOutBtn"><button
-              class="btn text-decoration-underline" (click)="singOut()">SignOut</button></span>
-        </li>
       </ul>
     </div>
   </div>
 </nav>
-<div class="position-relative">
-  <img class="w-100 banarImage" src="../../../assets/images/paymob00_topstrip_ar_web.jpg" alt="">
-  <div class="layer"></div>
-</div>

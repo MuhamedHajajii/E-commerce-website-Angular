@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { Allproducts } from 'src/app/shared/interfaces/allproducts';
-import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
 
@@ -14,17 +11,18 @@ import { SharedProductsService } from 'src/app/shared/services/shared-products.s
 export class SearchComponent {
   constructor(
     private _OffersService: OffersService,
-    private _SharedProductsService: SharedProductsService,
-    private _Router: Router
+    private _SharedProductsService: SharedProductsService
   ) {}
   changeDisplay: boolean = true;
   searchTitle: string = '';
-  homeProducts!: Allproducts[];
+  homeProducts: Allproducts[] = [];
   dataindex: number = 1;
-  callApi!: Subscription;
-  productsLoaded: boolean = true;
+
   ngOnInit(): void {
     this.homeProducts = this._SharedProductsService.currentProducts;
+    this._SharedProductsService.ShareResult.subscribe((data) => {
+      this.homeProducts = data;
+    });
   }
 
   currentIndex(i: number, lightBox: HTMLDivElement): void {
@@ -50,11 +48,5 @@ export class SearchComponent {
       (curentProduct) =>
         curentProduct.title.toLowerCase().includes(searchvalue.toLowerCase())
     );
-  }
-  openSearchResult(): void {
-    this._SharedProductsService.currentProducts = this.searchArray;
-    if (this.searchArray.length > 0) {
-      this._Router.navigate(['search']);
-    }
   }
 }

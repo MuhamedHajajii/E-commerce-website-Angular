@@ -1,10 +1,9 @@
 @media screen and (min-width: 575px) {
   .signOut {
     display: block;
-    height: 50px;
     border-radius: 100vh;
     background-color: rgb(189, 189, 189);
-    padding: 10px;
+    padding: 5px 10px;
   }
 
   .signOut button {
@@ -19,9 +18,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
+    background-color: var(--light-color);
     color: white;
     cursor: pointer;
+    color: var(--main-color);
   }
 }
 
@@ -29,6 +29,13 @@ li.nav-item {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width:992px) {
+  li.nav-item {
+    justify-content: start;
+    margin-left: 0 !important;
+  }
 }
 
 .signOutBtn {

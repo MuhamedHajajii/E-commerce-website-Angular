@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.homeProducts = displayRandomProducts;
           }
         }
+        this._SharedProductsService.currentProducts = response.data;
         this.productsLoaded = false;
       },
       error: (error) => {

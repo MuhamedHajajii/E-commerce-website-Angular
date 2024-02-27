@@ -1,10 +1,10 @@
 <section class="my-5">
   <div class="container bg-main-light rounded-4 p-5 w-75 mx-auto">
-    <h2>Register Now :</h2>
+    <h2 class="mb-4 fw-bolder">Register Now :</h2>
     <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
       <div>
         <label class="d-flex justify-content-between align-items-center" for="name">
-          <span>Name:</span>
+          <span class="fw-bold">Name:</span>
           <div>
             <i *ngIf="!registerForm.get('name')?.errors  && nameInput.value.length > 0"
               class="fa-solid text-success fa-check"></i>
@@ -27,7 +27,7 @@
       </div>
       <div>
         <label class="d-flex justify-content-between align-items-center" for="email">
-          <span>Email:</span>
+          <span class="fw-bold">Email:</span>
           <div>
             <i *ngIf="!registerForm.get('email')?.errors  && emailInput.value.length > 0"
               class="fa-solid text-success fa-check"></i>
@@ -48,7 +48,7 @@
       </div>
       <div>
         <label class="d-flex justify-content-between align-items-center" for="password">
-          <span>password:</span>
+          <span class="fw-bold">password:</span>
           <div>
             <i *ngIf="!registerForm.get('password')?.errors  && passwordInput.value.length > 0"
               class="fa-solid text-success fa-check"></i>
@@ -69,7 +69,7 @@
       </div>
       <div>
         <label class="d-flex justify-content-between align-items-center" for="rePassword">
-          <span>rePassword:</span>
+          <span class="fw-bold">rePassword:</span>
           <div>
             <i *ngIf="!registerForm.get('rePassword')?.errors  && rePasswordInput.value.length > 0"
               class="fa-solid text-success fa-check"></i>
@@ -91,7 +91,7 @@
       </div>
       <div>
         <label class="d-flex justify-content-between align-items-center" for="phone">
-          <span>Phone:</span>
+          <span class="fw-bold">Phone:</span>
           <div>
             <i *ngIf="!registerForm.get('phone')?.errors  && PhoneInput.value.length > 0"
               class="fa-solid text-success fa-check"></i>
@@ -112,11 +112,13 @@
       </div>
       <div class="d-flex justify-content-between align-items-start">
         <span *ngIf="accountAreadyExistsMessage" class="alert alert-danger">{{accountAreadyExistsMessage}} </span>
-        <button [disabled]="registerForm.invalid || isLoading" class="btn-main d-block ms-auto">
+        <button [disabled]="registerForm.invalid || isLoading" class="btn-main d-block ms-auto mb-3">
           <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
           <span>Register</span>
         </button>
       </div>
+      <p class="text-center">already have an account? <a routerLink="/login" class="text-decoration-underline">LogIn
+          Now</a></p>
     </form>
   </div>
 </section>

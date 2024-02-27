@@ -1,40 +1,49 @@
 <section class="my-5">
   <div class="container bg-main-light rounded-4 p-5 w-75 mx-auto">
-    <h2>Register Now :</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="submitRegister()">
-      <div>
-        <label class="d-flex justify-content-between align-items-center" for="email">
-          <span>Email:</span>
-          <i *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
-            class="fa-solid text-danger fa-xmark"></i>
-        </label>
-        <input #emailInput class="form-control" formControlName="email" type="email" id="email" [ngClass]="{
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-6">
+        <h2 class="fw-bolder mb-4"> LogIn Now <i class="fa-solid fa-right-to-bracket"></i></h2>
+        <form [formGroup]="loginForm" (ngSubmit)="submitRegister()">
+          <div>
+            <label class="d-flex justify-content-between align-items-center" for="email">
+              <span class="fw-bold">Email:</span>
+              <i *ngIf="loginForm.get('email')?.errors && loginForm.get('email')?.touched"
+                class="fa-solid text-danger fa-xmark"></i>
+            </label>
+            <input #emailInput class="form-control" formControlName="email" type="email" id="email" [ngClass]="{
             'is-invalid': loginForm.get('email')?.errors && loginForm.get('email')?.touched,
           }">
-        <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
-        </div>
-      </div>
-      <div>
-        <label class="d-flex justify-content-between align-items-center" for="password">
-          <span>password:</span>
-          <div>
-            <i *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
-              class="fa-solid text-danger fa-xmark"></i>
+            <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
+            </div>
           </div>
-        </label>
-        <input class="form-control" formControlName="password" type="password" id="password" [ngClass]="{
+          <div>
+            <label class="d-flex justify-content-between align-items-center" for="password">
+              <span class="fw-bold">password:</span>
+              <div>
+                <i *ngIf="loginForm.get('password')?.errors && loginForm.get('password')?.touched"
+                  class="fa-solid text-danger fa-xmark"></i>
+              </div>
+            </label>
+            <input class="form-control" formControlName="password" type="password" id="password" [ngClass]="{
             'is-invalid': loginForm.get('password')?.errors && loginForm.get('password')?.touched,
           }">
-        <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
-        </div>
+            <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-start">
+            <span *ngIf="IncorrectEmailorPassword" class="alert alert-danger">{{IncorrectEmailorPassword}} </span>
+            <button [disabled]="loginForm.invalid || isLoading" class="btn-main d-block mb-3 m-auto">
+              <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
+              <span>LogIn</span>
+            </button>
+          </div>
+        </form>
+        <p class="text-center">Don't Have an account? <a routerLink="/register"
+            class="text-decoration-underline">Register Now</a></p>
       </div>
-      <div class="d-flex justify-content-between align-items-start">
-        <span *ngIf="IncorrectEmailorPassword" class="alert alert-danger">{{IncorrectEmailorPassword}} </span>
-        <button [disabled]="loginForm.invalid || isLoading" class="btn-main d-block ms-auto">
-          <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
-          <span>Register</span>
-        </button>
+      <div class="col-12 col-lg-6">
+        <app-loginsvg></app-loginsvg>
       </div>
-    </form>
+    </div>
   </div>
 </section>

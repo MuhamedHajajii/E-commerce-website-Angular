@@ -1,0 +1,94 @@
+<section>
+  <div class="row g-0 align-items-center">
+    <div class="col-3 ms-auto">
+      <button (click)="openSearchResult(searchMain)" class="btn-main w-100 py-2"><i
+          class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div class="col-9" #floatProducts>
+      <div class="position-relative w-100 h-100">
+        <input #searchMain (focus)="searchListFlag;onFoucs()" placeholder="Search All Site Products .. " type="search"
+          (keyup.Enter)="openSearchResult(searchMain);" (input)="searchReasult(searchMain.value)"
+          [(ngModel)]="searchTitle" class="form-control testInput search bg-main-light py-2">
+        <ng-container *ngIf="onInitInputStatus">
+          <div class="searchList w-100 position-absolute top-100 z-3 p-2 bottom-0 start-0 end-0">
+            <div #floatProducts class="rounded-1 bg-main-light p-2 border border-3">
+
+
+
+
+              <p *ngIf="searchEmpty" class="m-0">nothing to
+                show....
+              </p>
+              <ng-container *ngIf="homeProducts">
+                <p *ngIf="!(homeProducts | search:searchTitle).length || searchMain.value.length == 0" class="m-0">
+                  nothing
+                  to
+                  show....
+                </p>
+                <div *ngIf="searchMain.value.length" class="row mt-5 row-cols-1">
+                  <div *ngFor="let item of homeProducts | search:searchTitle ; index as i"
+                    class="col p-4 shadow-sm position-relative parent overflow-hidden">
+                    <div [routerLink]="['/details', item._id]" class="child cursor-pointer">
+                      <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
+                      <div class="row">
+                        <div class="col-3 position-relative overflow-hidden">
+                          <img class="w-100 h-100" [src]="item.imageCover" [alt]="item.category.name">
+                          <div
+                            class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
+                            <img class="w-100 h-100" [src]="item.images[2]?item.images[2]:item.images[0]"
+                              [alt]="item.category.name">
+                            <img class="w-100 h-100" [src]="item.images[0]?item.images[0]:item.images[0]"
+                              [alt]="item.category.name">
+                            <img class="w-100 h-100" [src]="item.images[1]?item.images[1]:item.images[0]"
+                              [alt]="item.category.name">
+                            <img class="w-100 h-100" [src]="item.images[3] ? item.images[3] :item.images[0] "
+                              [alt]="item.category.name">
+                          </div>
+                        </div>
+                        <div class="col-9 justify-content-between d-flex flex-column">
+                          <div>
+                            <p class="fw-bold">{{item.category.name}}</p>
+
+                            <h2 class="fw-bolder h6">
+                              {{item.title | textterm:2 }}
+                            </h2>
+                          </div>
+                          <div>
+                            <p class="mb-0 text-decoration-line-through text-danger fs-8">
+                              EGP
+                              {{item.price}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                              <p class="mb-0 d-flex justify-content-start align-items-center">
+                                <span class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0">
+                                  <span class="me-1">EGP</span>
+                                  <span>{{item.price
+                                    +item.price
+                                    * (getOffer(i , homeProducts)/100) | number}}</span>
+                                </span>
+                              </p>
+                              <div class="d-flex justify-content-end align-items-center">
+                                <i [style]="'color:yellow;'" class="fas fa-star"></i>
+                                {{item.ratingsAverage}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+
+
+
+
+            </div>
+          </div>
+        </ng-container>
+
+
+      </div>
+    </div>
+  </div>
+</section>
