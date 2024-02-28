@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Allproducts } from '../interfaces/allproducts';
+import { Categories } from '../interfaces/categories';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,31 @@ export class OffersService {
     } else if (items[i].category.name == 'Baby & Toys') {
       return 11;
     } else if (items[i].category.name == 'Beauty & Health') {
+      return 5;
+    } else {
+      return 1;
+    }
+  }
+  getOfferCategoris(items: Categories): number {
+    if (items.name == 'Music') {
+      return 3;
+    } else if (items.name == "Men's Fashion") {
+      return 7;
+    } else if (items.name == "Women's Fashion") {
+      return 9;
+    } else if (items.name == 'SuperMarket') {
+      return 3;
+    } else if (items.name == 'Home') {
+      return 6;
+    } else if (items.name == 'Books') {
+      return 2;
+    } else if (items.name == 'Mobiles') {
+      return 3;
+    } else if (items.name == 'Electronics') {
+      return 13;
+    } else if (items.name == 'Baby & Toys') {
+      return 11;
+    } else if (items.name == 'Beauty & Health') {
       return 5;
     } else {
       return 1;

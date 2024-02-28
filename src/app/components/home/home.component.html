@@ -32,7 +32,7 @@
         <ng-container *ngIf="!(homeProducts | search:searchTitle).length ">
           <div class="alert alert-danger my-4">No products with that name sorry</div>
         </ng-container>
-        <div *ngFor="let item of homeProducts | search:searchTitle ; index as i"
+        <div *ngFor="let item of homeProducts | search:searchTitle | slice:0:10 ; index as i"
           class="col p-4 shadow-sm position-relative parent overflow-hidden">
           <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
             (click)="currentIndex(i,lightBox)">
@@ -99,7 +99,7 @@
               </div>
             </div>
           </div>
-          <button class="btn-main d-block m-auto mt-3">Add To Cart</button>
+          <button (click)="addToCart(item._id)" class="btn-main d-block m-auto mt-3">Add To Cart</button>
         </div>
       </div>
     </ng-container>

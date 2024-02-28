@@ -1,1 +1,96 @@
-<p>cart works!</p>
+<section>
+  <ng-container *ngIf="allCartItems; else CartEmpty">
+    <div class="container">
+      <div class="bg-main-light p-4 my-4 rounded-3 w-75 mx-auto">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h2 class="fw-bold">Shop Cart</h2>
+            <h3 [style]="'color:var(--main-color);'" class="h4 fw-bold my-3">Total Price :
+              {{allCartItems.data.totalCartPrice
+              | currency:'EGP '}}</h3>
+          </div>
+          <div>
+            <button [swal]="{ title: 'Clear Cart ?', showCancelButton: true }" (confirm)="clearCart()"
+              class="btn-main">Clear Cart</button>
+
+          </div>
+        </div>
+        <div class="text-uppercase fw-bold d-flex justify-content-between px-5 text-muted">
+          <p class="border-bottom border-3">items</p>
+          <p class="border-bottom border-3">count</p>
+        </div>
+        <div *ngFor="let item of allCartItems.data.products" class="row mb-2 pb-2 border-bottom">
+          <div class="col-2">
+            <img [src]="item.product.imageCover" class="w-100 rounded-3" [alt]="item.product.title">
+          </div>
+          <div class="col-10">
+            <div class="d-flex justify-content-between align-items-center h-100">
+              <div>
+                <h3 class="fw-bold h5">{{item.product.title | textterm:5}}</h3>
+                <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{item.price * item.count |
+                  currency:'EGP '}}</p>
+                <button (click)="deleteItem(item.product._id)" class="btn mt-5">
+                  <i [style]="'color:var(--main-color);'" class="fa-solid fa-trash-can"></i><span>
+                    Remove</span></button>
+              </div>
+              <div class="h3">
+                <div>
+                  <button (click)="ChangeCount(item.product._id, item.count - 1)"
+                    class="mx-2 btn btn-outline-success"><span class="fs-4">-</span></button>
+                  <span>{{item.count}}</span>
+                  <button (click)="ChangeCount(item.product._id, item.count + 1)"
+                    class="mx-2 btn btn-outline-success"><span class="fs-4">+</span></button>
+                </div>
+                <button [routerLink]="['/details', item.product._id]" class="btn mt-5"><span
+                    class="text-decoration-underline">product details</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-0 py-4">
+          <button class="d-block w-100 btn-main fs-4">Online Payment <img src="./assets/images/visa-1.svg"
+              alt="vise"></button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #CartEmpty>
+    <div class="container">
+      <div class="bg-main-light p-4 my-4 rounded-3 w-75 mx-auto">
+        <h2 class="fw-bold">Shop Cart</h2>
+        <h3 [style]="'color:var(--main-color);'" class="h4 fw-bold my-3">Total Price :
+          {{0
+          | currency:'EGP '}}</h3>
+        <div class="text-uppercase fw-bold d-flex justify-content-between px-5 text-muted">
+          <p class="border-bottom border-3">items</p>
+          <p class="border-bottom border-3">count</p>
+        </div>
+        <div class="row mb-2 pb-2 border-bottom">
+          <div class="col-2">
+            <img src="../../../assets/images/6430781.webp" class="w-100 rounded-3" alt="cart empty">
+          </div>
+          <div class="col-10">
+            <div class="d-flex justify-content-between align-items-center h-100">
+              <div>
+                <h3 class="fw-bold h5 alert alert-danger">no products yet !</h3>
+                <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{00 |
+                  currency:'EGP '}}</p>
+              </div>
+              <div class="h3">
+                <div>
+                  <button class="mx-2 btn btn-outline-success"><span class="fs-4">-</span></button>
+                  <span>0</span>
+                  <button class="mx-2 btn btn-outline-success"><span class="fs-4">+</span></button>
+                </div>
+                <button routerLink="/home" class="btn mt-5"><span class="text-decoration-underline">product
+                    details</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</section>

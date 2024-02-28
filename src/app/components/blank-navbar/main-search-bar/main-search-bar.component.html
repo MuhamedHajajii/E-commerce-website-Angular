@@ -1,13 +1,13 @@
 <section>
   <div class="row g-0 align-items-center">
     <div class="col-3 ms-auto">
-      <button (click)="openSearchResult(searchMain)" class="btn-main w-100 py-2"><i
-          class="fa-solid fa-magnifying-glass"></i></button>
+      <button [ngClass]="{'opacity-50':searchMain.value.length == 0}" (click)="openSearchResult(searchMain)"
+        class="btn-main w-100 py-2"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
     <div class="col-9" #floatProducts>
       <div class="position-relative w-100 h-100">
-        <input #searchMain (focus)="searchListFlag;onFoucs()" placeholder="Search All Site Products .. " type="search"
-          (keyup.Enter)="openSearchResult(searchMain);" (input)="searchReasult(searchMain.value)"
+        <input #searchMain (focus)="onFoucs()" (blur)="OnBlur(searchMain)" placeholder="Search All Site Products .. "
+          type="search" (keyup.Enter)="openSearchResult(searchMain);" (input)="searchReasult(searchMain.value)"
           [(ngModel)]="searchTitle" class="form-control testInput search bg-main-light py-2">
         <ng-container *ngIf="onInitInputStatus">
           <div class="searchList w-100 position-absolute top-100 z-3 p-2 bottom-0 start-0 end-0">

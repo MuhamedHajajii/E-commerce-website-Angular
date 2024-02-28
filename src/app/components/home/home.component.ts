@@ -1,8 +1,11 @@
+import { ToastrService } from 'ngx-toastr';
 import { Allproducts } from './../../shared/interfaces/allproducts';
 import { OffersService } from './../../shared/services/offers.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Successadd } from 'src/app/shared/interfaces/successadd';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
 
@@ -16,7 +19,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _GetHomeproductsService: GetHomeproductsService,
     private _OffersService: OffersService,
     private _SharedProductsService: SharedProductsService,
-    private _Router: Router
+    private _Router: Router,
+    private _CartService: CartService,
+    private _ToastrService: ToastrService
   ) {}
   changeDisplay: boolean = true;
   searchTitle: string = '';
@@ -83,9 +88,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
   openSearchResult(): void {
     this._SharedProductsService.currentProducts = this.searchArray;
-
     if (this.searchArray.length > 0) {
-      this._Router.navigate(['search']);
+      this._Router.navigate(['/search']);
     }
+  }
+
+  addToCart(_Id: string): void {
+    this._CartService.addToCart(_Id).subscribe({
+      next: (response: Successadd) => {
+        let cartTotalProducts = 0;
+        response.data.products.forEach((element) => {
+          cartTotalProducts += element.count;
+        });
+        this._CartService.updateCartCound(cartTotalProducts);
+        this._ToastrService.success(response.message);
+      },
+      error: (err) => {
+        this._ToastrService.warning(err.error.message);
+      },
+    });
   }
 }

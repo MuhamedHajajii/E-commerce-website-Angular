@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Allproducts } from 'src/app/shared/interfaces/allproducts';
 import { ProductDetails } from 'src/app/shared/interfaces/product-details';
+import { Successadd } from 'src/app/shared/interfaces/successadd';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 
@@ -18,7 +21,9 @@ export class DetailsComponent implements OnInit {
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _GetHomeproductsService: GetHomeproductsService,
-    private _OffersService: OffersService
+    private _OffersService: OffersService,
+    private _ToastrService: ToastrService,
+    private _CartService: CartService
   ) {}
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe({
@@ -51,5 +56,21 @@ export class DetailsComponent implements OnInit {
   }
   getOffers(i: number, items: Allproducts[], categories: string): number {
     return this._OffersService.getOffer(i, items, categories);
+  }
+
+  addToCart(_Id: string): void {
+    this._CartService.addToCart(_Id).subscribe({
+      next: (response: Successadd) => {
+        let cartTotalProducts = 0;
+        response.data.products.forEach((element) => {
+          cartTotalProducts += element.count;
+        });
+        this._CartService.updateCartCound(cartTotalProducts);
+        this._ToastrService.success(response.message);
+      },
+      error: (err) => {
+        this._ToastrService.warning(err.error.message);
+      },
+    });
   }
 }

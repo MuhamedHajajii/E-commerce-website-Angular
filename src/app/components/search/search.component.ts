@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Allproducts } from 'src/app/shared/interfaces/allproducts';
+import { Successadd } from 'src/app/shared/interfaces/successadd';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
 
@@ -11,7 +14,9 @@ import { SharedProductsService } from 'src/app/shared/services/shared-products.s
 export class SearchComponent {
   constructor(
     private _OffersService: OffersService,
-    private _SharedProductsService: SharedProductsService
+    private _SharedProductsService: SharedProductsService,
+    private _ToastrService: ToastrService,
+    private _CartService: CartService
   ) {}
   changeDisplay: boolean = true;
   searchTitle: string = '';
@@ -19,10 +24,10 @@ export class SearchComponent {
   dataindex: number = 1;
 
   ngOnInit(): void {
-    this.homeProducts = this._SharedProductsService.currentProducts;
     this._SharedProductsService.ShareResult.subscribe((data) => {
       this.homeProducts = data;
     });
+    this.homeProducts = this._SharedProductsService.currentProducts;
   }
 
   currentIndex(i: number, lightBox: HTMLDivElement): void {
@@ -48,5 +53,21 @@ export class SearchComponent {
       (curentProduct) =>
         curentProduct.title.toLowerCase().includes(searchvalue.toLowerCase())
     );
+  }
+
+  addToCart(_Id: string): void {
+    this._CartService.addToCart(_Id).subscribe({
+      next: (response: Successadd) => {
+        let cartTotalProducts = 0;
+        response.data.products.forEach((element) => {
+          cartTotalProducts += element.count;
+        });
+        this._CartService.updateCartCound(cartTotalProducts);
+        this._ToastrService.success(response.message);
+      },
+      error: (err) => {
+        this._ToastrService.warning(err.error.message);
+      },
+    });
   }
 }

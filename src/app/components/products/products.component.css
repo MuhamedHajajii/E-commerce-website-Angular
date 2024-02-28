@@ -1,0 +1,171 @@
+.sliderParent {
+  width: 400%;
+  opacity: 0;
+  transition: 0.3s all;
+  cursor: pointer;
+}
+
+.fs-8 {
+  font-size: 12px;
+}
+
+.col {
+  opacity: 0;
+  animation: 0.5s showproduct forwards alternate;
+}
+
+@keyframes showproduct {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.search {
+  box-shadow: none;
+  border: none;
+}
+
+.parent:hover .sliderParent {
+  animation: slider 8s forwards infinite linear;
+}
+
+.parent>div {
+  transition: 0.5s all;
+  border: solid 5px transparent;
+  padding: 20px;
+}
+
+.parent:hover>div {
+  border: solid 5px var(--main-color);
+  border-radius: 5px;
+}
+
+.parent>span {
+  top: 10%;
+  left: 15%;
+  background-color: var(--light-color);
+  color: var(--main-color);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.5s all;
+}
+
+.parent>span:hover {
+  background-color: var(--main-color);
+
+  color: white;
+}
+
+.parent:hover>span {
+  z-index: 999;
+  opacity: 1;
+}
+
+.child::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: none;
+  transition: 0.5s all;
+}
+
+.parent:has(>span:hover) .child::after {
+  display: block;
+}
+
+.parent button {
+  transform: translateY(250%);
+  transition: 0.5s all;
+}
+
+.parent:hover button {
+  transform: translateY(0);
+}
+
+@keyframes slider {
+  0% {
+    transform: translateX(0);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateX(0);
+
+  }
+
+  30% {
+    opacity: 1;
+    transform: translateX(-25%);
+
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateX(-25%);
+
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateX(-50%);
+
+  }
+
+  75% {
+    opacity: 1;
+    transform: translateX(-50%);
+
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(-75%);
+
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-75%);
+
+  }
+}
+
+.lightBoxContainer {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 11111111111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.offer {
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  z-index: 999;
+}

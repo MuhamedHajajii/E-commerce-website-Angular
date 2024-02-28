@@ -61,9 +61,17 @@ export class MainSearchBarComponent {
       this.onInitInputStatus = false;
     }
   }
-  searchListFlag!: HTMLDivElement;
-  currentSlider(f: HTMLDivElement): void {
-    this.searchListFlag = f;
+
+  OnBlur(searchInputVal: HTMLInputElement): void {
+    if (searchInputVal.value.length == 0) {
+      this.onInitInputStatus = false;
+      console.log('toz');
+    } else {
+      setTimeout(() => {
+        this.onInitInputStatus = false;
+      }, 500);
+      console.log('toz2');
+    }
   }
   onInitInputStatus: boolean = false;
   onFoucs(): void {

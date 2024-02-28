@@ -29,6 +29,8 @@ import { SearchPipe } from './shared/pipe/search.pipe';
 import { SearchComponent } from './components/search/search.component';
 import { LoginsvgComponent } from './components/blank-navbar/loginsvg/loginsvg.component';
 import { MainSearchBarComponent } from './components/blank-navbar/main-search-bar/main-search-bar.component';
+import { ToastrModule } from 'ngx-toastr';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +65,10 @@ import { MainSearchBarComponent } from './components/blank-navbar/main-search-ba
     BrowserAnimationsModule,
     CarouselModule,
     FormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-left',
+    }),
+    SweetAlert2Module.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,13 +1,18 @@
 <div class="position-relative">
-  <img class="w-100 banarImage" src="../../../assets/images/paymob00_topstrip_ar_web.jpg" alt="">
+  <img class="w-100 banarImage" src="./assets/images/paymob00_topstrip_ar_web.jpg" alt="">
   <div class="layer"></div>
 </div>
 <div class="container">
   <div class="py-2 d-flex justify-content-between align-items-center">
-    <a class="navbar-brand" routerLink="home"><img src="../assets/images/freshcart-logo.svg"
-        alt="fresh market logo"></a>
-    <ul class="navbar-nav ">
-      <li (click)="showSignOut(logOutIcon)" class="ms-3 cursor-pointer
+    <a class="navbar-brand" routerLink="home"><img src="./assets/images/freshcart-logo.svg" alt="fresh market logo"></a>
+    <ul class="list-unstyled d-flex align-items-center mb-0">
+      <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart">
+        <button routerLink="/cart" class="btn">
+          <i class="fa-solid fa-2x fa-cart-shopping"></i>
+          <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
+        </button>
+      </li>
+      <li (click)="showSignOut(logOutIcon)" class="ms-3 flex-grow-1 cursor-pointer
       nav-item signOut position-relative">
         <span><i class="fa-solid fa-user"></i></span>
         <span class="text-white fw-bold mx-2">
@@ -42,7 +47,7 @@
         <li class="nav-item">
           <a routerLink="brands" routerLinkActive="active-link" class="nav-link  p-2 text-capitalize">brands</a>
         </li>
-        <li class="nav-item ms-auto">
+        <li class="nav-item ">
           <app-main-search-bar></app-main-search-bar>
         </li>
       </ul>

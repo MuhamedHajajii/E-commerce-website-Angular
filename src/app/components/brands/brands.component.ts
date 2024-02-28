@@ -1,10 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Brands } from 'src/app/shared/interfaces/brands';
+import { BrandsService } from 'src/app/shared/services/brands.service';
 
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
-  styleUrls: ['./brands.component.css']
+  styleUrls: ['./brands.component.css'],
 })
-export class BrandsComponent {
-
+export class BrandsComponent implements OnInit {
+  constructor(private _BrandsService: BrandsService) {}
+  allBrands!: Brands;
+  ngOnInit(): void {
+    this.getAllBrands();
+  }
+  getAllBrands(): void {
+    this._BrandsService.getAllBrands().subscribe({
+      next: (response: Brands) => {
+        console.log(response);
+        this.allBrands = response;
+      },
+    });
+  }
 }
