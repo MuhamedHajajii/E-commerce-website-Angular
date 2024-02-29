@@ -72,9 +72,4 @@ export class CartService {
       { headers: { token: this.userToken } }
     );
   }
-  getUserOrders(): Observable<any> {
-    return this._HttpClient.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthServisesService.userdata.id}`
-    );
-  }
 }

@@ -1,0 +1,41 @@
+.fs-8 {
+  font-size: 12px;
+}
+
+.col {
+  opacity: 0;
+  animation: 0.5s showproduct forwards alternate;
+}
+
+@keyframes showproduct {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.parent>div {
+  transition: 0.5s all;
+  border: solid 5px transparent;
+  padding: 20px;
+}
+
+.parent:hover>div {
+  border: solid 5px var(--main-color);
+  border-radius: 5px;
+}
+
+.offer {
+  position: absolute;
+  font-weight: bold;
+  color: white;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  z-index: 999;
+}

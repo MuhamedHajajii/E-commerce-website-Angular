@@ -6,6 +6,14 @@
   <div class="py-2 d-flex justify-content-between align-items-center">
     <a class="navbar-brand" routerLink="home"><img src="./assets/images/freshcart-logo.svg" alt="fresh market logo"></a>
     <ul class="list-unstyled d-flex align-items-center mb-0">
+      <li *ngIf="truckCount" class="position-relative flex-grow-0 p-2">
+        <button routerLink="/allorders" class="btn"> <span class="p-1 position-relative">track your orders <span
+              class="position-absolute top-0 start-0 translate-middle" [style]="'color: var(--main-color);'"><i
+                class="fa-solid fa-share"></i></span></span>
+          <i class="fa-solid fa-2x fa-truck cart"></i>
+          <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{truckCount}}</span>
+        </button>
+      </li>
       <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart">
         <button routerLink="/cart" class="btn">
           <i class="fa-solid fa-2x fa-cart-shopping"></i>

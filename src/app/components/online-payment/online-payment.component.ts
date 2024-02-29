@@ -43,6 +43,7 @@ export class OnlinePaymentComponent implements OnInit {
       .checkOutSession(this.currentId, this.userAddress.value)
       .subscribe({
         next: (response) => {
+          this._CartService.updateCartCound(0);
           window.location.assign(response.session.url);
         },
       });

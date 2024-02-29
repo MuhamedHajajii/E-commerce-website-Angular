@@ -16,6 +16,7 @@ import { SearchComponent } from './components/search/search.component';
 import { OnlinePaymentComponent } from './components/online-payment/online-payment.component';
 import { AllordersComponent } from './components/allorders/allorders.component';
 import { CashPaymentComponent } from './components/cash-payment/cash-payment.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,11 @@ const routes: Routes = [
         path: 'cash/:id',
         component: CashPaymentComponent,
         title: 'Fresh Market - confirm order',
+      },
+      {
+        path: 'order/:id',
+        component: OrderDetailsComponent,
+        title: 'Fresh Market - Order Details',
       },
     ],
   },

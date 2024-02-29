@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Allorders } from 'src/app/shared/interfaces/allorders';
 import { UserCart } from 'src/app/shared/interfaces/user-cart';
+import { AllordersService } from 'src/app/shared/services/allorders.service';
 import { AuthServisesService } from 'src/app/shared/services/auth-servises.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 
@@ -11,11 +13,20 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class BlankNavbarComponent implements OnInit {
   userName: string = '';
+  truckCount: number = 0;
   constructor(
     private _AuthServisesService: AuthServisesService,
     private _Router: Router,
-    private _CartService: CartService
+    private _CartService: CartService,
+    private _AllordersService: AllordersService
   ) {}
+  getTruckCount(): void {
+    this._AllordersService.changeOrdersCount.subscribe({
+      next: (response) => {
+        this.truckCount = response;
+      },
+    });
+  }
   showSignOut(icon: HTMLSpanElement): void {
     icon.classList.toggle('d-none');
   }
@@ -27,6 +38,8 @@ export class BlankNavbarComponent implements OnInit {
     this.getUserNAme();
     this.getUserCart();
     this.updateCount();
+    this.getTruckCount();
+    this.getUserOrders();
   }
   getUserNAme(): void {
     if (localStorage.getItem('userToken') != null) {
@@ -52,6 +65,14 @@ export class BlankNavbarComponent implements OnInit {
     this._CartService.totalCartItems.subscribe({
       next: (response) => {
         this.cartCount = response;
+      },
+    });
+  }
+  getUserOrders(): void {
+    this._AllordersService.getUserOrders().subscribe({
+      next: (response: Allorders) => {
+        this._AllordersService.changeTruckCount(response.length);
+        this.truckCount = response.length;
       },
     });
   }

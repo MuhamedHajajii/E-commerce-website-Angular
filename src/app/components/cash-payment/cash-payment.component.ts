@@ -44,6 +44,7 @@ export class CashPaymentComponent {
       .checkOutSessionCash(this.currentId, this.userAddress.value)
       .subscribe({
         next: (response) => {
+          this._CartService.updateCartCound(0);
           this._Router.navigate(['/allorders']);
           this.loading = false;
         },

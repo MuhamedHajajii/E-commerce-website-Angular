@@ -34,6 +34,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { OnlinePaymentComponent } from './components/online-payment/online-payment.component';
 import { AllordersComponent } from './components/allorders/allorders.component';
 import { CashPaymentComponent } from './components/cash-payment/cash-payment.component';
+import { OrderDetailsComponent } from './components/order-details/order-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { CashPaymentComponent } from './components/cash-payment/cash-payment.com
     OnlinePaymentComponent,
     AllordersComponent,
     CashPaymentComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,

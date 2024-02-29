@@ -32,7 +32,7 @@ export class OffersService {
       return 1;
     }
   }
-  getOfferCategoris(items: Categories): number {
+  getOfferCategoris(items: any): number {
     if (items.name == 'Music') {
       return 3;
     } else if (items.name == "Men's Fashion") {

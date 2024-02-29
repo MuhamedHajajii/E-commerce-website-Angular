@@ -1,0 +1,160 @@
+<section>
+  <ng-container *ngIf="singleOrderDeatails">
+    <div class="container bg-main-light rounded-2 p-4 my-4">
+      <div class="row mb-2 pb-2 border-bottom border-3">
+        <div class="col-3" height="200">
+          <div class="d-flex flex-column rounded-5 overflow-hidden p-4">
+            <div>
+              <img class="w-100" [src]="singleOrderDeatails.data.cartItems[0].product.imageCover" alt="">
+            </div>
+            <div class="d-flex pt-2">
+              <div *ngFor="let itemPerOrder of singleOrderDeatails.data.cartItems| slice:1:4">
+                <img class="w-100 h-100" [src]="itemPerOrder.product.imageCover" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-9 d-flex flex-column justify-content-between py-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <p [style]="'color:var(--main-color);'"><span class="fw-bold">Order Id:</span>
+                {{singleOrderDeatails.data.id}}</p>
+              <p class=" mb-0"><span class="fw-bold">order date:</span> {{singleOrderDeatails.data.createdAt | date
+                :'medium'}}
+              </p>
+              <p class=" mb-0"><span class="fw-bold">paid date:</span>{{singleOrderDeatails.data.paidAt | date
+                :'medium'}}</p>
+              <p class="mb-0"><span class="fw-bold">payment Method:
+                </span>{{singleOrderDeatails.data.paymentMethodType}}</p>
+              <p class="mb-0"><span class="fw-bold">shipping city:</span>
+                {{singleOrderDeatails.data.shippingAddress.city}}</p>
+              <p class="mb-0"><span class="fw-bold">shipping
+                  Address:</span>{{singleOrderDeatails.data.shippingAddress.details}}</p>
+              <p class="mb-0"><span class="fw-bold">Phone:</span>{{singleOrderDeatails.data.shippingAddress.phone}}</p>
+            </div>
+            <div>
+              <div class="mb-2 pb-2 border-bottom border-3 text-center text-uppercase">
+                <p class="d-flex justify-content-between"><span class="fw-bold me-3">shipping Price:
+                  </span><span>{{singleOrderDeatails.data.shippingPrice +80 | currency:'EGP '}}</span></p>
+                <p class="d-flex justify-content-between"><span class="fw-bold me-3">Tax Price:</span>
+                  <span>{{0.14 * singleOrderDeatails.data.totalOrderPrice
+                    | currency:'EGP '}}</span>
+                </p>
+              </div>
+              <p class="d-flex justify-content-between"><span class="fw-bold me-3">Total Order Price:</span><span>
+                  {{singleOrderDeatails.data.totalOrderPrice * 1.14 + 80 | currency:'EGP '}}</span></p>
+            </div>
+          </div>
+          <div>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h6>Order Delivered:
+                  <span class="text-success" *ngIf="singleOrderDeatails.data.isDelivered"><i
+                      class="fa-solid fa-truck"></i></span>
+                  <span class="text-danger" *ngIf="!singleOrderDeatails.data.isDelivered"><i
+                      class="fa-regular fa-circle-xmark"></i></span>
+                </h6>
+                <h6>Order Paid:
+                  <span class="text-success" *ngIf="singleOrderDeatails.data.isPaid"><i
+                      class="fa-solid fa-wallet"></i></span>
+                  <span class="text-danger" *ngIf="!singleOrderDeatails.data.isPaid"><i
+                      class="fa-regular fa-circle-xmark"></i></span>
+                </h6>
+                <p class="text-muted"><span class="fw-bold">order last update:</span>
+                  {{singleOrderDeatails.data.updatedAt | date
+                  :'medium'}}
+                </p>
+              </div>
+              <div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+
+        <div class="container">
+          <ng-container *ngIf="!displayProducts">
+            <div class="row align-items-center">
+              <div class="col-12 col-md-6">
+                <h2 class="fw-bolder mb-0">Your Products</h2>
+              </div>
+              <div class="fw-bolder col-12 col-md-6">
+                <div class="d-flex justify-content-between mt-2 mt-md-0 justify-content-md-end">
+                  <div>
+                    <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
+                        class="fa-solid fa-bars fa-2x"></i></button>
+                    <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
+                        class="fa-solid fa-table-cells fa-2x"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div [ngClass]="{
+              'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,
+              'row-cols-1':!changeDisplay
+              }" class="row mt-5">
+              <div *ngFor="let item of singleOrderDeatails.data.cartItems; index as i"
+                class="col p-4 shadow-sm position-relative parent overflow-hidden">
+
+
+                <div [routerLink]="['/details', item.product._id]" class="child cursor-pointer">
+                  <span class="offer bg-danger">-{{ getOffer(item.product.category)}}%</span>
+                  <div [ngClass]="{'row':!changeDisplay}">
+                    <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden">
+                      <img class="w-100" [src]="item.product.imageCover" [alt]="item.product.category.name">
+                    </div>
+                    <ng-container *ngIf="changeDisplay">
+                      <hr />
+                    </ng-container>
+
+                    <div [ngClass]="{'col-9 justify-content-between':!changeDisplay}" class="d-flex flex-column">
+                      <div>
+                        <p class="fw-bold">{{item.product.category.name}}</p>
+                        <ng-container *ngIf="!changeDisplay">
+                          <p class="text-muted">{{item.product.title}}</p>
+                          <p><span class="fw-bold">reviews : </span>{{item.product.ratingsAverage}} <i
+                              class="fa-solid fa-eye"></i>
+                          </p>
+                        </ng-container>
+
+                        <h2 class="fw-bolder h6">
+                          {{item.product.title| textterm:changeDisplay ?2:20 }}
+                        </h2>
+                      </div>
+                      <div>
+                        <p class="mb-0 text-decoration-line-through text-danger fs-8">
+                          EGP
+                          {{item.price}}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <p class="mb-0 d-flex justify-content-start align-items-center">
+                            <span class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0">
+                              <span class="me-1">EGP</span>
+                              <span>{{item.price
+                                +item.price
+                                * (getOffer(item.product.category.name)/100) | number}}</span>
+                            </span>
+                          </p>
+                          <div class="d-flex justify-content-end align-items-center">
+                            <i [style]="'color:yellow;'" class="fas fa-star"></i>
+                            {{item.product.ratingsAverage}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+        <button [disabled]="!displayProducts" class="btn btn-main d-block w-100"
+          (click)="displayOrderProducts()">Explore
+          Your Order Products <i class="fa-regular fa-eye"></i></button>
+      </div>
+    </div>
+  </ng-container>
+
+</section>
