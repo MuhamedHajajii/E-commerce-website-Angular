@@ -16,7 +16,6 @@ export class BrandsComponent implements OnInit {
   getAllBrands(): void {
     this._BrandsService.getAllBrands().subscribe({
       next: (response: Brands) => {
-        console.log(response);
         this.allBrands = response;
       },
     });

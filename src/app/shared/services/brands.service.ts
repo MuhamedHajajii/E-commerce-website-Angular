@@ -13,4 +13,9 @@ export class BrandsService {
       'https://ecommerce.routemisr.com/api/v1/brands'
     );
   }
+  getSpecificBrand(brandID: string | null): Observable<any> {
+    return this._HttpClient.get(
+      `https://ecommerce.routemisr.com/api/v1/brands/${brandID}`
+    );
+  }
 }

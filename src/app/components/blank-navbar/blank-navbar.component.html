@@ -52,10 +52,32 @@
         <li class="nav-item">
           <a routerLink="categories" routerLinkActive="active-link" class="nav-link  p-2 text-capitalize">categories</a>
         </li>
+        <li class="nav-item dropdown mx-2 d-none d-lg-flex">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+          <ul class="dropdown-menu">
+
+            <li class="nav-item dropend subcategoriesUl">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                subcategories
+              </a>
+              <ul class="dropdown-menu categoriesUl">
+                <app-allsupcategories></app-allsupcategories>
+              </ul>
+            </li>
+
+
+            <li>
+              <ul class="list-unstyled categoriesUl">
+                <app-subcategories></app-subcategories>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a routerLink="brands" routerLinkActive="active-link" class="nav-link  p-2 text-capitalize">brands</a>
         </li>
-        <li class="nav-item ">
+        <li class="nav-item ms-0 ms-lg-5">
           <app-main-search-bar></app-main-search-bar>
         </li>
       </ul>

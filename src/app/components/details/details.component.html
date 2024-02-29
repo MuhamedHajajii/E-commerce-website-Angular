@@ -35,7 +35,9 @@
                 class="fa-solid fa-bag-shopping"></i>
             </p>
             <p class="fw-bold">{{productDetails.data.brand.name}}</p>
-            <img [src]="productDetails.data.brand.image" [alt]="productDetails.data.brand.name">
+            <div class="parent" [routerLink]="['/specific-brand',productDetails.data.brand._id]"><img
+                [src]="productDetails.data.brand.image" [alt]="productDetails.data.brand.name">
+            </div>
             <hr />
             <p class="fw-bold">{{productDetails.data.category.name}}</p>
             <div class="d-flex justify-content-between align-items-center">

@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   dataindex: number = 1;
   callApi!: Subscription;
   productsLoaded: boolean = true;
+  searchArray: Allproducts[] = [];
   ngOnInit(): void {
     this.getAllproducts();
   }
@@ -67,6 +68,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     lightBox.classList.remove('d-none');
     this.dataindex = i;
   }
+
   closeLightBox(lightBox: HTMLDivElement): void {
     lightBox.classList.add('d-none');
   }
@@ -74,13 +76,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   getOffer(i: number, items: Allproducts[]): number {
     return this._OffersService.getOffer(i, items);
   }
+
   changedisplayClicOne(): void {
     this.changeDisplay = true;
   }
   changedisplayClicTwo(): void {
     this.changeDisplay = false;
   }
-  searchArray: Allproducts[] = [];
+
   searchReasult(searchvalue: string): void {
     this.searchArray = this.homeProducts.filter((curentProduct) =>
       curentProduct.title.toLowerCase().includes(searchvalue.toLowerCase())

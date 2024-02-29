@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormControlOptions,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServisesService } from 'src/app/shared/services/auth-servises.service';
 
@@ -13,26 +18,38 @@ export class RegisterComponent {
     private _AuthServisesService: AuthServisesService,
     private _Router: Router
   ) {}
-  registerForm: FormGroup = new FormGroup({
-    name: new FormControl(null, [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[A-Z][a-z0-9]{6,}$/),
-    ]),
-    rePassword: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^[A-Z][a-z0-9]{6,}$/),
-    ]),
-    phone: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/^01[0125][0-9]{8}$/),
-    ]),
-  });
+  registerForm: FormGroup = new FormGroup(
+    {
+      name: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^[A-Z][a-z0-9]{6,}$/),
+      ]),
+      rePassword: new FormControl(null),
+      phone: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^01[0125][0-9]{8}$/),
+      ]),
+    },
+    { validators: [this.confirmRePassword] } as FormControlOptions
+  );
+
+  confirmRePassword(form: FormGroup): void {
+    let password = form.get('password');
+    let rePassword = form.get('rePassword');
+
+    if (rePassword?.value == null || rePassword?.value == '') {
+      rePassword?.setErrors({ required: true });
+    } else if (password?.value != rePassword?.value) {
+      rePassword?.setErrors({ notMatch: true });
+    }
+  }
+
   accountAreadyExistsMessage: string = '';
   isLoading: boolean = false;
   submitRegister(): void {

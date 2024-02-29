@@ -17,6 +17,8 @@ import { OnlinePaymentComponent } from './components/online-payment/online-payme
 import { AllordersComponent } from './components/allorders/allorders.component';
 import { CashPaymentComponent } from './components/cash-payment/cash-payment.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { SpecificCategoryComponent } from './components/categories/specific-category/specific-category.component';
+import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
 
 const routes: Routes = [
   {
@@ -78,6 +80,16 @@ const routes: Routes = [
         path: 'order/:id',
         component: OrderDetailsComponent,
         title: 'Fresh Market - Order Details',
+      },
+      {
+        path: 'specific-category/:id',
+        component: SpecificCategoryComponent,
+        title: 'Fresh Market - Category Products',
+      },
+      {
+        path: 'specific-brand/:id',
+        component: SpecificBrandComponent,
+        title: 'Fresh Market - Brand Products',
       },
     ],
   },

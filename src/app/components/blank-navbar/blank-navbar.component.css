@@ -125,3 +125,40 @@ li.nav-item {
     transform: rotate(0)
   }
 }
+
+.dropdown:hover {
+  background-color: var(--main-color);
+  color: white;
+  font-weight: 700;
+}
+
+.dropdown {
+  border-radius: 20px;
+  transition: 0.5s;
+}
+
+.categoriesUl {
+  max-height: 50vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.categoriesUl::-webkit-scrollbar {
+  width: 12px;
+}
+
+.categoriesUl::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.categoriesUl::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--main-color);
+}
+
+.subcategoriesUl:hover ul {
+  display: block;
+  left: 100%;
+  top: 0;
+}

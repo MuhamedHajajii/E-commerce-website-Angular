@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Allproducts } from 'src/app/shared/interfaces/allproducts';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { CatigoriesService } from 'src/app/shared/services/catigories.service';
+import { CategorisService } from 'src/app/shared/services/categoris.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { OffersService } from 'src/app/shared/services/offers.service';
 export class CategoriesComponent implements OnInit {
   AllCategories: Categories[] = [];
   constructor(
-    private _CatigoriesService: CatigoriesService,
+    private _CatigoriesService: CategorisService,
     private _OffersService: OffersService
   ) {}
   ngOnInit(): void {

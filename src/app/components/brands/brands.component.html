@@ -4,7 +4,7 @@
       <h2 class="fw-bolder">All Brands</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
         <div *ngFor="let item of allBrands.data; index as i" class="col p-4 position-relative parent overflow-hidden">
-          <div [routerLink]="['/details', item]" class="product p-3 child cursor-pointer">
+          <div [routerLink]="['/specific-brand', item._id]" class="product p-3 child cursor-pointer">
             <div class="">
               <div class="position-relative overflow-hidden">
                 <img class="w-100 rounded-3" [src]="item.image" [alt]="item.name">

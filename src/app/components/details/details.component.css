@@ -23,3 +23,15 @@
   padding: 10px;
   border-radius: 50%;
 }
+
+.parent>img {
+  transition: 0.5s all;
+  border: solid 5px transparent;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.parent:hover>img {
+  border: solid 5px var(--main-color);
+  border-radius: 5px;
+}

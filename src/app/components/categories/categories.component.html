@@ -4,7 +4,7 @@
       <h2 class="fw-bolder">All Categories</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-5">
         <div *ngFor="let item of AllCategories ; index as i" class="col p-4 position-relative parent overflow-hidden">
-          <div [routerLink]="['/details', item]" class="product p-3 child cursor-pointer">
+          <div [routerLink]="['/specific-category', item._id]" class="product p-3 child cursor-pointer">
             <p class="text-muted position-absolute top-0 start-0 fw-bold ps-4">Enjoy Today discount</p>
             <span class="offer bg-danger">-{{getOffer(item)}}%</span>
             <div class="">

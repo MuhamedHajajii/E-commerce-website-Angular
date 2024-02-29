@@ -1,0 +1,17 @@
+<ng-container *ngIf="!allSubCategoreies"><span class="position-absolute top-50 start-50 translate-middle"><i
+      class="fas fa-spinner fa-2x fa-spin"></i></span></ng-container>
+
+
+<li *ngFor="let item of allSubCategoreies"><a class="dropdown-item subcategoriesUl"
+    [routerLink]="['/specific-category',item.category]">{{item.name}}</a>
+</li>
+<ng-container *ngIf="!allSubCategoreies">
+  <div class="opacity-0">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </div>
+</ng-container>

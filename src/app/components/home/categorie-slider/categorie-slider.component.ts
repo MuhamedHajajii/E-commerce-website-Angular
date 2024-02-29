@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Categories } from 'src/app/shared/interfaces/categories';
-import { CatigoriesService } from 'src/app/shared/services/catigories.service';
+import { CategorisService } from 'src/app/shared/services/categoris.service';
 
 @Component({
   selector: 'app-categorie-slider',
@@ -10,7 +10,7 @@ import { CatigoriesService } from 'src/app/shared/services/catigories.service';
 })
 export class CategorieSliderComponent implements OnInit {
   allCategories: Categories[] = [];
-  constructor(private _CatigoriesService: CatigoriesService) {}
+  constructor(private _CatigoriesService: CategorisService) {}
 
   CatigoriesService() {
     this._CatigoriesService.getAllCategories().subscribe({

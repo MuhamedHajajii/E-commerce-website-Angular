@@ -85,8 +85,8 @@
         <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
           <p *ngIf="registerForm.get('rePassword')?.getError('required') && registerForm.get('rePassword')?.touched"
             class="alert alert-danger">required</p>
-          <p *ngIf="registerForm.get('rePassword')?.getError('pattern') && rePasswordInput.value.length > 0"
-            class="alert alert-danger">password must start with upperCase then must be at least 6 chars</p>
+          <p *ngIf="registerForm.get('rePassword')?.getError('notMatch') && rePasswordInput.value.length > 0"
+            class="alert alert-danger">password not match</p>
         </div>
       </div>
       <div>

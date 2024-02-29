@@ -35,6 +35,10 @@ import { OnlinePaymentComponent } from './components/online-payment/online-payme
 import { AllordersComponent } from './components/allorders/allorders.component';
 import { CashPaymentComponent } from './components/cash-payment/cash-payment.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { SpecificCategoryComponent } from './components/categories/specific-category/specific-category.component';
+import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
+import { SubcategoriesComponent } from './components/blank-navbar/subcategories/subcategories.component';
+import { AllsupcategoriesComponent } from './components/blank-navbar/subcategories/allsupcategories/allsupcategories.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +68,10 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
     AllordersComponent,
     CashPaymentComponent,
     OrderDetailsComponent,
+    SpecificCategoryComponent,
+    SpecificBrandComponent,
+    SubcategoriesComponent,
+    AllsupcategoriesComponent,
   ],
   imports: [
     BrowserModule,
