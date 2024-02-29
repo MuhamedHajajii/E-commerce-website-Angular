@@ -1,11 +1,11 @@
 <section>
   <ng-container *ngIf="allCartItems; else CartEmpty">
     <div class="container">
-      <div class="bg-main-light p-4 my-4 rounded-3 w-75 mx-auto">
+      <div class="bg-main-light p-4 my-4 rounded-3">
         <div class="d-flex justify-content-between align-items-start">
           <div>
             <h2 class="fw-bold">Shop Cart</h2>
-            <h3 [style]="'color:var(--main-color);'" class="h4 fw-bold my-3">Total Price :
+            <h3 [style]="'color:var(--main-color);'" class="h4 fw-bold my-3">Total Cart Items Price :
               {{allCartItems.data.totalCartPrice
               | currency:'EGP '}}</h3>
           </div>
@@ -15,9 +15,12 @@
 
           </div>
         </div>
-        <div class="text-uppercase fw-bold d-flex justify-content-between px-5 text-muted">
-          <p class="border-bottom border-3">items</p>
-          <p class="border-bottom border-3">count</p>
+        <div class="text-uppercase fw-bold row text-muted justify-content-end">
+          <div class="col-10 d-flex justify-content-evenly">
+            <p class="w-100 text-start"><span class="border-bottom border-3">items</span></p>
+            <p class="w-100 text-center"><span class="border-bottom border-3">amount</span></p>
+            <p class="w-100 text-center"><span class="border-bottom border-3">Totla</span></p>
+          </div>
         </div>
         <div *ngFor="let item of allCartItems.data.products" class="row mb-2 pb-2 border-bottom">
           <div class="col-2">
@@ -26,8 +29,8 @@
           <div class="col-10">
             <div class="d-flex justify-content-between align-items-center h-100">
               <div>
-                <h3 class="fw-bold h5">{{item.product.title | textterm:5}}</h3>
-                <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{item.price * item.count |
+                <h3 class="fw-bold h5">{{item.product.title | textterm:2}}</h3>
+                <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2"><span>Item Price: </span>{{item.price |
                   currency:'EGP '}}</p>
                 <button (click)="deleteItem(item.product._id)" class="btn mt-5">
                   <i [style]="'color:var(--main-color);'" class="fa-solid fa-trash-can"></i><span>
@@ -41,15 +44,30 @@
                   <button (click)="ChangeCount(item.product._id, item.count + 1)"
                     class="mx-2 btn btn-outline-success"><span class="fs-4">+</span></button>
                 </div>
-                <button [routerLink]="['/details', item.product._id]" class="btn mt-5"><span
-                    class="text-decoration-underline">product details</span></button>
+              </div>
+              <div class="d-flex flex-column">
+                <div>
+                  <h3 class="h5">Total Price:</h3>
+                  <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{item.price * item.count |
+                    currency:'EGP '}}</p>
+                </div>
+                <div>
+                  <button [routerLink]="['/details', item.product._id]" class="btn mt-5"><span
+                      class="text-decoration-underline">product details</span></button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="mb-0 py-4">
-          <button class="d-block w-100 btn-main fs-4">Online Payment <img src="./assets/images/visa-1.svg"
-              alt="vise"></button>
+        <div class="mb-0 py-4 d-flex justify-content-center">
+          <div class="px-3">
+            <button (click)="OnlinePayMent()" class="d-block w-100 btn-main fs-4">Online Payment <img
+                [style]="'width:40px;'" src="./assets/images/visa-1.svg" alt="vise"></button>
+          </div>
+          <div class="px-3">
+            <button (click)="OnlineCash()" class="d-block btn btn-secondary fs-4">Cash On Delevery <img
+                [style]="'width:40px;'" src="./assets/9368523.png" alt="vise"></button>
+          </div>
         </div>
       </div>
     </div>

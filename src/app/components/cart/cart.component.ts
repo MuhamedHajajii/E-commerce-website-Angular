@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserCart } from 'src/app/shared/interfaces/user-cart';
 import { CartService } from 'src/app/shared/services/cart.service';
@@ -12,15 +13,18 @@ export class CartComponent implements OnInit {
   allCartItems!: UserCart | any;
   constructor(
     private _CartService: CartService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _Router: Router
   ) {}
   ngOnInit(): void {
     this.getCartData();
   }
+  currentUserCartId: string = '';
   getCartData(): void {
     this._CartService.getCurrentUserCart().subscribe({
       next: (response: UserCart) => {
         this.allCartItems = response;
+        this.currentUserCartId = response.data._id;
         if (response.numOfCartItems == 0) {
           this.allCartItems = undefined;
         }
@@ -63,8 +67,15 @@ export class CartComponent implements OnInit {
     this._CartService.clearCart().subscribe({
       next: () => {
         this._ToastrService.warning('Cart Empty');
+        this._CartService.updateCartCound(0);
         this.allCartItems = undefined;
       },
     });
+  }
+  OnlinePayMent(): void {
+    this._Router.navigate(['/useradress', this.currentUserCartId]);
+  }
+  OnlineCash(): void {
+    this._Router.navigate(['/cash', this.currentUserCartId]);
   }
 }

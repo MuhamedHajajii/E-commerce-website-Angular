@@ -1,21 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthServisesService } from './auth-servises.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private _HttpClient: HttpClient) {}
+  constructor(
+    private _HttpClient: HttpClient,
+    private _AuthServisesService: AuthServisesService
+  ) {}
   totalCartItems: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   changeCartCound: Observable<number> = this.totalCartItems.asObservable();
   updateCartCound(newNumber: number): void {
     this.totalCartItems.next(newNumber);
-    console.log(this.totalCartItems);
   }
 
   userToken: any = localStorage.getItem('userToken');
-
+  userId: any = '';
   addToCart(productId: string): Observable<any> {
     return this._HttpClient.post(
       'https://ecommerce.routemisr.com/api/v1/cart',
@@ -50,6 +53,28 @@ export class CartService {
       {
         headers: { token: this.userToken },
       }
+    );
+  }
+  checkOutSession(userCartId: string | null, userAddress: {}): Observable<any> {
+    return this._HttpClient.post(
+      `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${userCartId}?url=http://localhost:4200`,
+      { shippingAddress: userAddress },
+      { headers: { token: this.userToken } }
+    );
+  }
+  checkOutSessionCash(
+    userCartId: string | null,
+    userAddress: {}
+  ): Observable<any> {
+    return this._HttpClient.post(
+      `https://ecommerce.routemisr.com/api/v1/orders/${userCartId}`,
+      { shippingAddress: userAddress },
+      { headers: { token: this.userToken } }
+    );
+  }
+  getUserOrders(): Observable<any> {
+    return this._HttpClient.get(
+      `https://ecommerce.routemisr.com/api/v1/orders/user/${this._AuthServisesService.userdata.id}`
     );
   }
 }

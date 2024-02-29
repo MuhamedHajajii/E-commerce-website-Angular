@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthServisesService {
-  constructor(private _HttpClient: HttpClient) {}
+  constructor(private _HttpClient: HttpClient) {
+    this.GetUserToken();
+  }
   userdata: any;
   GetUserToken(): void {
     if (localStorage.getItem('userToken') != null) {

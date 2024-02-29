@@ -13,6 +13,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { authGurdGuard } from './shared/gurd/auth-gurd.guard';
 import { SearchComponent } from './components/search/search.component';
+import { OnlinePaymentComponent } from './components/online-payment/online-payment.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
+import { CashPaymentComponent } from './components/cash-payment/cash-payment.component';
 
 const routes: Routes = [
   {
@@ -29,12 +32,47 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
       },
-      { path: 'cart', component: CartComponent },
-      { path: 'brands', component: BrandsComponent },
-      { path: 'categories', component: CategoriesComponent },
-      { path: 'details/:id', component: DetailsComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'search', component: SearchComponent },
+      { path: 'cart', component: CartComponent, title: 'Fresh Market - cart' },
+      {
+        path: 'brands',
+        component: BrandsComponent,
+        title: 'Fresh Market - Brands',
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent,
+        title: 'Fresh Market - Categories',
+      },
+      {
+        path: 'details/:id',
+        component: DetailsComponent,
+        title: 'Fresh Market - Deatils',
+      },
+      {
+        path: 'products',
+        component: ProductsComponent,
+        title: 'Fresh Market - Products',
+      },
+      {
+        path: 'search',
+        component: SearchComponent,
+        title: 'Fresh Market - search Results',
+      },
+      {
+        path: 'useradress/:id',
+        component: OnlinePaymentComponent,
+        title: 'Fresh Market - payment',
+      },
+      {
+        path: 'allorders',
+        component: AllordersComponent,
+        title: 'Fresh Market - All Orders',
+      },
+      {
+        path: 'cash/:id',
+        component: CashPaymentComponent,
+        title: 'Fresh Market - confirm order',
+      },
     ],
   },
   {

@@ -1,0 +1,67 @@
+<section class="my-5">
+  <div class="container bg-main-light rounded-4 p-5 w-75 mx-auto">
+    <div class="row align-items-center position-relative">
+      <div class="col-12 col-lg-6">
+        <h2 class="h4 fw-bolder mb-4">Fill your address details</h2>
+        <form [formGroup]="userAddress" (ngSubmit)="confirmUserAddress()">
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <label for="details" class="my-2 text-nowrap">
+                <span class="fw-bold">Address Details :</span>
+              </label>
+              <div *ngIf="(userAddress.get('details')?.touched || userDetails.value.length > 0)"
+                class="text-end ErrorsContainer">
+                <p *ngIf="userAddress.get('details')?.getError('required')" class="text-danger mb-0">*required</p>
+                <p *ngIf="userAddress.get('details')?.getError('minlength')" class="text-danger mb-0">*min length (10)
+                  characters</p>
+              </div>
+            </div>
+            <textarea #userDetails class="form-control"
+              placeholder="ex. 30, Rue Ahmed Orabi Al-Mohandessine GIZA - 12411 EGYPT" formControlName="details"
+              type="text" id="details"></textarea>
+
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <label for="phone" class="my-2">
+                <span class="fw-bold">Phone :</span>
+              </label>
+              <div *ngIf="(userAddress.get('phone')?.touched || phone.value.length > 0)"
+                class="text-end ErrorsContainer">
+                <p *ngIf="userAddress.get('phone')?.getError('required')" class="text-danger mb-0">*required</p>
+                <p *ngIf="userAddress.get('phone')?.getError('pattern')" class="text-danger mb-0">*Accept Only Egyption
+                  Numbers</p>
+              </div>
+            </div>
+            <input #phone class="form-control" placeholder="ex. 01000001234" formControlName="phone" type="tel"
+              id="phone">
+
+          </div>
+          <div>
+            <div class="d-flex justify-content-between align-items-center">
+              <label for="city" class="my-2">
+                <span class="fw-bold">Phone :</span>
+              </label>
+              <div *ngIf="(userAddress.get('city')?.touched || city.value.length > 0)" class="text-end ErrorsContainer">
+                <p *ngIf="userAddress.get('city')?.getError('required')" class="text-danger mb-0">*required</p>
+              </div>
+            </div>
+            <input #city class="form-control" placeholder="ex. Alexandria" formControlName="city" type="text" id="city">
+          </div>
+
+          <div class="d-flex justify-content-between align-items-start my-3">
+            <button [disabled]="userAddress.invalid || loading" class="btn-main d-block mb-3 m-auto">
+              <span [ngClass]="{'d-none':!loading}" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
+              <span><img [style]="'width:40px;'" src="./assets/9368523.png" alt="vise"> Confirm Payment</span>
+            </button>
+          </div>
+        </form>
+        <button routerLink="/cart" class="btn-secondary btn d-block position-absolute top-0 end-0 m-3">Back to cart <i
+            class="fa-solid fa-cart-shopping"></i></button>
+      </div>
+      <div class="col-12 col-lg-6">
+        <img src="./assets/best-practices-for-managing-cash-on-delivery.webp" class="w-100" alt="address.logo">
+      </div>
+    </div>
+  </div>
+</section>
