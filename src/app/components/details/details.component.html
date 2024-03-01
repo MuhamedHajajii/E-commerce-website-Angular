@@ -24,15 +24,19 @@
             </div>
           </div>
         </div>
-        <div class="col col-md-8">
+        <div class="col col-md-8 position-relative">
           <div class="p-4">
             <p class="fw-bolder">{{productDetails.data.description}}</p>
             <h2 class="mb-3 h4 fw-bold">{{productDetails.data.title}}</h2>
             <p><span class="fw-bold">Available in Stock : </span>{{productDetails.data.quantity}}</p>
             <p><span class="fw-bold">reviews : </span>{{productDetails.data.ratingsAverage}} <i
-                class="fa-solid fa-eye"></i></p>
-            <p><span class="fw-bold">Sold : </span> {{productDetails.data.sold}} <i
-                class="fa-solid fa-bag-shopping"></i>
+                *ngFor="let item of [1,2,3,4,5]"
+                [class]="( productDetails.data.ratingsAverage > item) ?'fas rating-color fa-star':'fas fa-star'"></i>
+              <!-- //fa-solid rating-color fa-star-half-stroke -->
+            </p>
+            <p><span class="fw-bold">Sold : </span> {{productDetails.data.sold / 2 }} <i
+                class="fa-solid fa-bag-shopping"></i></p>
+            <p><span class="fw-bold">Total Views : </span> {{productDetails.data.sold}} <i class="fa-solid fa-eye"></i>
             </p>
             <p class="fw-bold">{{productDetails.data.brand.name}}</p>
             <div class="parent" [routerLink]="['/specific-brand',productDetails.data.brand._id]"><img
@@ -53,6 +57,18 @@
             </div>
             <button (click)="addToCart(productDetails.data._id)" class=" mt-1 d-block w-100 btn-main">+ add to
               cart</button>
+            <div class="position-absolute top-0 end-0 m-3">
+              <button *ngIf="!currentWishList.includes($any(productDetails.data._id))"
+                (click)="addToWishList(productDetails.data._id)"
+                class="wishListBtn btn-main d-flex justify-content-center align-items-center "><i
+                  class="fa-regular fa-heart fa-lg"></i></button>
+
+              <button *ngIf="currentWishList.includes($any(productDetails.data._id))"
+                (click)="removeFromWishList(productDetails.data._id)"
+                class="wishListBtn btn-danger btn d-flex justify-content-center align-items-center "><i
+                  class="fa-solid fa-heart fa-lg"></i></button>
+
+            </div>
           </div>
         </div>
       </div>

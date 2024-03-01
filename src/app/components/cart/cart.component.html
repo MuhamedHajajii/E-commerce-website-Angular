@@ -32,9 +32,29 @@
                 <h3 class="fw-bold h5">{{item.product.title | textterm:2}}</h3>
                 <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2"><span>Item Price: </span>{{item.price |
                   currency:'EGP '}}</p>
-                <button (click)="deleteItem(item.product._id)" class="btn mt-5">
-                  <i [style]="'color:var(--main-color);'" class="fa-solid fa-trash-can"></i><span>
-                    Remove</span></button>
+                <div>
+
+                  <div class="d-flex justify-content-between align-items-end  mt-5">
+
+                    <button (click)="deleteItem(item.product._id)" class="btn text-main">
+                      <i class="fa-solid fa-trash-can"></i><span>Remove</span>
+                    </button>
+
+                    <button *ngIf="!currentWishList.includes($any(item.product._id))"
+                      (click)="addToWishList(item.product._id)"
+                      class="wishListBtn btn-main bg-transparent border-0 d-flex justify-content-between align-items-center "><i
+                        class="fa-regular fa-heart fa-lg text-main"></i><span
+                        class="text-main fw-bold ms-2">Favorite</span>
+                    </button>
+
+                    <button *ngIf="currentWishList.includes($any(item.product._id))"
+                      (click)="removeFromWishList(item.product._id)"
+                      class="wishListBtn text-danger btn d-flex justify-content-center align-items-center "><i
+                        class="fa-solid fa-heart fa-lg"></i>
+                    </button>
+                  </div>
+
+                </div>
               </div>
               <div class="h3">
                 <div>
@@ -45,19 +65,19 @@
                     class="mx-2 btn btn-outline-success"><span class="fs-4">+</span></button>
                 </div>
               </div>
-              <div class="d-flex flex-column">
+              <div>
                 <div>
                   <h3 class="h5">Total Price:</h3>
                   <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{item.price * item.count |
                     currency:'EGP '}}</p>
                 </div>
-                <div>
-                  <button [routerLink]="['/details', item.product._id]" class="btn mt-5"><span
-                      class="text-decoration-underline">product details</span></button>
-                </div>
+                <button [routerLink]="['/details', item.product._id]" class="btn mt-5"><span
+                    class="text-decoration-underline">product details</span></button>
               </div>
             </div>
+
           </div>
+
         </div>
         <div class="mb-0 py-4 d-flex justify-content-center">
           <div class="px-3">

@@ -19,7 +19,6 @@ export class SubcategoriesComponent implements OnInit {
   getCategories(): void {
     this._CategorisService.getAllCategories().subscribe({
       next: (response) => {
-        console.log(response.data);
         this.allCategories = response.data;
       },
     });

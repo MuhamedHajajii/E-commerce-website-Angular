@@ -123,7 +123,19 @@
                   </div>
                 </div>
               </div>
-              <button (click)="addToCart(item._id)" class="btn-main d-block m-auto mt-3">Add To Cart</button>
+              <div class="row my-2 p-3">
+                <button (click)="addToCart(item._id)" class="col-9 d-block btn-main">Add To Cart</button>
+                <div class="px-2 col-3 ">
+                  <button *ngIf="!currentWishList.includes($any(item._id))" (click)="addToWishList(item._id)"
+                    class="wishListBtn btn-main w-100 h-100 d-flex justify-content-center align-items-center "><i
+                      class="fa-regular fa-heart fa-lg"></i></button>
+
+                  <button *ngIf="currentWishList.includes($any(item._id))" (click)="removeFromWishList(item._id)"
+                    class="wishListBtn btn-danger btn w-100 h-100 d-flex justify-content-center align-items-center "><i
+                      class="fa-solid fa-heart fa-lg"></i></button>
+
+                </div>
+              </div>
             </div>
           </div>
         </ng-container>

@@ -19,6 +19,7 @@ import { CashPaymentComponent } from './components/cash-payment/cash-payment.com
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { SpecificCategoryComponent } from './components/categories/specific-category/specific-category.component';
 import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
+import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        title: 'Fresh Market - Home',
       },
       { path: 'cart', component: CartComponent, title: 'Fresh Market - cart' },
       {
@@ -90,6 +92,11 @@ const routes: Routes = [
         path: 'specific-brand/:id',
         component: SpecificBrandComponent,
         title: 'Fresh Market - Brand Products',
+      },
+      {
+        path: 'wishlist',
+        component: WishlistComponent,
+        title: 'Fresh Market - Products Wish List',
       },
     ],
   },

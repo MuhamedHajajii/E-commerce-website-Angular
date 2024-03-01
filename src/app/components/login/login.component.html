@@ -27,6 +27,8 @@
             <input class="form-control" formControlName="password" type="password" id="password" [ngClass]="{
             'is-invalid': loginForm.get('password')?.errors && loginForm.get('password')?.touched,
           }">
+            <a routerLink="/register" class="text-decoration-underline" [style]="'color:var(--main-color);'">Forget
+              password</a>
             <div class="mx-auto mt-3 w-50 mx-auto text-center ErrorsContainer">
             </div>
           </div>
@@ -38,8 +40,8 @@
             </button>
           </div>
         </form>
-        <p class="text-center">Don't Have an account? <a routerLink="/register"
-            class="text-decoration-underline">Register Now</a></p>
+        <p class="text-center">Don't Have an account? <a routerLink="/register" class="text-decoration-underline"
+            [style]="'color:var(--main-color);'">Register Now</a></p>
       </div>
       <div class="col-12 col-lg-6">
         <app-loginsvg></app-loginsvg>

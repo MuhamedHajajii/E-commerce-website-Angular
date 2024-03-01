@@ -9,7 +9,7 @@ import { OffersService } from 'src/app/shared/services/offers.service';
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  AllCategories: Categories[] = [];
+  AllCategories!: Categories[];
   constructor(
     private _CatigoriesService: CategorisService,
     private _OffersService: OffersService
@@ -21,9 +21,7 @@ export class CategoriesComponent implements OnInit {
   getAllCategories(): void {
     this._CatigoriesService.getAllCategories().subscribe({
       next: (response) => {
-        console.log(response.data);
         this.AllCategories = response.data;
-        console.log(this.AllCategories);
       },
     });
   }

@@ -8,6 +8,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
+import { WishListService } from 'src/app/shared/services/wish-list.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,8 @@ export class ProductsComponent {
     private _SharedProductsService: SharedProductsService,
     private _Router: Router,
     private _CartService: CartService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _WishListService: WishListService
   ) {}
   changeDisplay: boolean = true;
   searchTitle: string = '';
@@ -29,8 +31,10 @@ export class ProductsComponent {
   dataindex: number = 1;
   callApi!: Subscription;
   productsLoaded: boolean = true;
+  currentWishList: string[] = [''];
   ngOnInit(): void {
     this.getAllproducts();
+    this.getUserLogedWishList();
   }
   ngOnDestroy(): void {
     this.callApi.unsubscribe();
@@ -105,6 +109,41 @@ export class ProductsComponent {
       },
       error: (err) => {
         this._ToastrService.warning(err.error.message);
+      },
+    });
+  }
+
+  addToWishList(productId: string | null): void {
+    this._WishListService.addToWisthList(productId).subscribe({
+      next: (response) => {
+        console.log(response.data);
+        this.currentWishList = response.data;
+        this._WishListService.changeHeartCount(response.data.length);
+        this._ToastrService.success(
+          response.message +
+            `<i class="text-danger fa-solid fa-heart fa-lg"></i>`
+        );
+      },
+    });
+  }
+  removeFromWishList(productId: string | null): void {
+    this._WishListService.RemoveProductFromWishList(productId).subscribe({
+      next: (response) => {
+        this._WishListService.changeHeartCount(response.data.length);
+        this.currentWishList = response.data;
+        this._ToastrService.warning(
+          response.message + ` <i class="fa-solid fa-lg fa-trash"></i>`
+        );
+      },
+    });
+  }
+  getUserLogedWishList(): void {
+    this._WishListService.currentWishList.subscribe({
+      next: (response) => {
+        if (response) {
+          let wishList = response.data.map((product: any) => product._id);
+          this.currentWishList = wishList;
+        }
       },
     });
   }

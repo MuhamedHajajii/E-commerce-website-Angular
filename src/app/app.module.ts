@@ -39,6 +39,7 @@ import { SpecificCategoryComponent } from './components/categories/specific-cate
 import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
 import { SubcategoriesComponent } from './components/blank-navbar/subcategories/subcategories.component';
 import { AllsupcategoriesComponent } from './components/blank-navbar/subcategories/allsupcategories/allsupcategories.component';
+import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,6 +73,7 @@ import { AllsupcategoriesComponent } from './components/blank-navbar/subcategori
     SpecificBrandComponent,
     SubcategoriesComponent,
     AllsupcategoriesComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,7 @@ import { AllsupcategoriesComponent } from './components/blank-navbar/subcategori
     FormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-left',
+      enableHtml: true,
     }),
     SweetAlert2Module.forRoot(),
   ],

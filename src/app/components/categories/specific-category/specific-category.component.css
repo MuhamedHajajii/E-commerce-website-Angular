@@ -33,13 +33,13 @@
   animation: slider 8s forwards infinite linear;
 }
 
-.parent>div {
+.parent>.child {
   transition: 0.5s all;
   border: solid 5px transparent;
   padding: 20px;
 }
 
-.parent:hover>div {
+.parent:hover>.child {
   border: solid 5px var(--main-color);
   border-radius: 5px;
 }

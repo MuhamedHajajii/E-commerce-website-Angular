@@ -8,6 +8,8 @@ import { Successadd } from 'src/app/shared/interfaces/successadd';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { GetHomeproductsService } from 'src/app/shared/services/get-homeproducts.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
+import { WishListService } from 'src/app/shared/services/wish-list.service';
+import { Wishlist } from 'src/app/shared/interfaces/wishlist';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _SharedProductsService: SharedProductsService,
     private _Router: Router,
     private _CartService: CartService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _WishListService: WishListService
   ) {}
   changeDisplay: boolean = true;
   searchTitle: string = '';
@@ -30,8 +33,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   callApi!: Subscription;
   productsLoaded: boolean = true;
   searchArray: Allproducts[] = [];
+  currentWishList: string[] = [''];
   ngOnInit(): void {
     this.getAllproducts();
+    this.getUserLogedWishList();
   }
   ngOnDestroy(): void {
     this.callApi.unsubscribe();
@@ -108,6 +113,41 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         this._ToastrService.warning(err.error.message);
+      },
+    });
+  }
+
+  addToWishList(productId: string | null): void {
+    this._WishListService.addToWisthList(productId).subscribe({
+      next: (response) => {
+        console.log(response.data);
+        this.currentWishList = response.data;
+        this._WishListService.changeHeartCount(response.data.length);
+        this._ToastrService.success(
+          response.message +
+            `<i class="text-danger fa-solid fa-heart fa-lg"></i>`
+        );
+      },
+    });
+  }
+  removeFromWishList(productId: string | null): void {
+    this._WishListService.RemoveProductFromWishList(productId).subscribe({
+      next: (response) => {
+        this._WishListService.changeHeartCount(response.data.length);
+        this.currentWishList = response.data;
+        this._ToastrService.warning(
+          response.message + ` <i class="fa-solid fa-lg fa-trash"></i>`
+        );
+      },
+    });
+  }
+  getUserLogedWishList(): void {
+    this._WishListService.currentWishList.subscribe({
+      next: (response) => {
+        if (response) {
+          let wishList = response.data.map((product: any) => product._id);
+          this.currentWishList = wishList;
+        }
       },
     });
   }

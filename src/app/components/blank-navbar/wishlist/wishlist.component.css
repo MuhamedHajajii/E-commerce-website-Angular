@@ -24,17 +24,22 @@
   }
 }
 
+.search {
+  box-shadow: none;
+  border: none;
+}
+
 .parent:hover .sliderParent {
   animation: slider 8s forwards infinite linear;
 }
 
-.parent>.child {
+.parent>.contentContainer {
   transition: 0.5s all;
   border: solid 5px transparent;
   padding: 20px;
 }
 
-.parent:hover>.child {
+.parent:hover>.contentContainer {
   border: solid 5px var(--main-color);
   border-radius: 5px;
 }
@@ -143,17 +148,6 @@
   }
 }
 
-.lightBoxContainer {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  z-index: 11111111111;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
 .offer {
   position: absolute;
   font-weight: bold;
@@ -165,13 +159,22 @@
   z-index: 999;
 }
 
-.search:focus {
-  animation: widthFouces 0.5s forwards;
-  box-shadow: 0 0 0 0.04rem var(--main-color);
+.wishListBtn:hover .fa-trash {
+  opacity: 1;
 }
 
-.search {
-  animation: widthBlur 0.5s forwards;
-  border-color: var(--main-color);
-  transition: 0.5s all;
+.wishListBtn:hover .fa-heart {
+  opacity: 0;
+}
+
+.fa-trash {
+  opacity: 0;
+  transition: 0.6s;
+  position: absolute;
+}
+
+.fa-heart {
+  opacity: 1;
+  transition: 0.6s;
+  position: absolute;
 }

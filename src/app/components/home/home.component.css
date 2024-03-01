@@ -14,6 +14,11 @@
   animation: 0.5s showproduct forwards alternate;
 }
 
+.wishListBtn {
+  opacity: 0;
+  animation: 0.5s showproduct forwards alternate;
+}
+
 @keyframes showproduct {
   from {
     opacity: 0;
@@ -33,13 +38,13 @@
   animation: slider 8s forwards infinite linear;
 }
 
-.parent>div {
+.parent>.contentContainer {
   transition: 0.5s all;
   border: solid 5px transparent;
   padding: 20px;
 }
 
-.parent:hover>div {
+.parent:hover>.contentContainer {
   border: solid 5px var(--main-color);
   border-radius: 5px;
 }

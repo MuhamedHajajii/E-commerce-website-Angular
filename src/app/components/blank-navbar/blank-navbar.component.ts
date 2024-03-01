@@ -5,6 +5,7 @@ import { UserCart } from 'src/app/shared/interfaces/user-cart';
 import { AllordersService } from 'src/app/shared/services/allorders.service';
 import { AuthServisesService } from 'src/app/shared/services/auth-servises.service';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { WishListService } from 'src/app/shared/services/wish-list.service';
 
 @Component({
   selector: 'app-blank-navbar',
@@ -14,11 +15,13 @@ import { CartService } from 'src/app/shared/services/cart.service';
 export class BlankNavbarComponent implements OnInit {
   userName: string = '';
   truckCount: number = 0;
+  wishList: number = 0;
   constructor(
     private _AuthServisesService: AuthServisesService,
     private _Router: Router,
     private _CartService: CartService,
-    private _AllordersService: AllordersService
+    private _AllordersService: AllordersService,
+    private _WishListService: WishListService
   ) {}
   getTruckCount(): void {
     this._AllordersService.changeOrdersCount.subscribe({
@@ -40,7 +43,27 @@ export class BlankNavbarComponent implements OnInit {
     this.updateCount();
     this.getTruckCount();
     this.getUserOrders();
+    this.changeCoundWishList();
+    this.getWishList();
   }
+
+  changeCoundWishList(): void {
+    this._WishListService.changeWishList.subscribe({
+      next: (response) => {
+        this.wishList = response;
+      },
+    });
+  }
+  getWishList(): void {
+    this._WishListService.getUserWishList().subscribe({
+      next: (response) => {
+        this._WishListService.getCurrentUserWishList(response);
+        this.wishList = response.data.length;
+        this._WishListService.userWishList = response;
+      },
+    });
+  }
+
   getUserNAme(): void {
     if (localStorage.getItem('userToken') != null) {
       this.userName = this._AuthServisesService.userdata.name;

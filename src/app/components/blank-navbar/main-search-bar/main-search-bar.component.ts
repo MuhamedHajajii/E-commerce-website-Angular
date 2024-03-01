@@ -39,8 +39,6 @@ export class MainSearchBarComponent {
   }
 
   ngOnDestroy(): void {
-    console.log('bye');
-
     this.callApi.unsubscribe();
   }
   searchReasult(searchvalue: string): void {
@@ -65,12 +63,10 @@ export class MainSearchBarComponent {
   OnBlur(searchInputVal: HTMLInputElement): void {
     if (searchInputVal.value.length == 0) {
       this.onInitInputStatus = false;
-      console.log('toz');
     } else {
       setTimeout(() => {
         this.onInitInputStatus = false;
       }, 500);
-      console.log('toz2');
     }
   }
   onInitInputStatus: boolean = false;

@@ -9,6 +9,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 import { CategorisService } from 'src/app/shared/services/categoris.service';
 import { OffersService } from 'src/app/shared/services/offers.service';
 import { SharedProductsService } from 'src/app/shared/services/shared-products.service';
+import { WishListService } from 'src/app/shared/services/wish-list.service';
 
 @Component({
   selector: 'app-specific-category',
@@ -24,6 +25,7 @@ export class SpecificCategoryComponent implements OnInit {
   dataindex: number = 1;
   productsLoaded: boolean = true;
   searchArray: Allproducts[] = [];
+  currentWishList: string[] = [''];
   constructor(
     private _ActivatedRoute: ActivatedRoute,
     private _CategorisService: CategorisService,
@@ -32,11 +34,13 @@ export class SpecificCategoryComponent implements OnInit {
     private _Router: Router,
     private _CartService: CartService,
     private _GetHomeproductsService: GetHomeproductsService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _WishListService: WishListService
   ) {}
 
   ngOnInit(): void {
     this.getCategoryIDFromRoute();
+    this.getUserLogedWishList();
   }
 
   categoryId!: string | null;
@@ -114,6 +118,40 @@ export class SpecificCategoryComponent implements OnInit {
       },
       error: (err) => {
         this._ToastrService.warning(err.error.message);
+      },
+    });
+  }
+  addToWishList(productId: string | null): void {
+    this._WishListService.addToWisthList(productId).subscribe({
+      next: (response) => {
+        console.log(response.data);
+        this.currentWishList = response.data;
+        this._WishListService.changeHeartCount(response.data.length);
+        this._ToastrService.success(
+          response.message +
+            `<i class="text-danger fa-solid fa-heart fa-lg"></i>`
+        );
+      },
+    });
+  }
+  removeFromWishList(productId: string | null): void {
+    this._WishListService.RemoveProductFromWishList(productId).subscribe({
+      next: (response) => {
+        this._WishListService.changeHeartCount(response.data.length);
+        this.currentWishList = response.data;
+        this._ToastrService.warning(
+          response.message + ` <i class="fa-solid fa-lg fa-trash"></i>`
+        );
+      },
+    });
+  }
+  getUserLogedWishList(): void {
+    this._WishListService.currentWishList.subscribe({
+      next: (response) => {
+        if (response) {
+          let wishList = response.data.map((product: any) => product._id);
+          this.currentWishList = wishList;
+        }
       },
     });
   }

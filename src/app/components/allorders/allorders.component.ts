@@ -22,7 +22,6 @@ export class AllordersComponent implements OnInit {
         this._AllordersService.changeTruckCount(response.length);
         this.truckCounter = response.length;
         this.allOrders = response;
-        console.log(response);
       },
     });
   }
