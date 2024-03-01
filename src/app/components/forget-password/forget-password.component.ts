@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ForgetPasswordService } from 'src/app/shared/services/forget-password.service';
 
 @Component({
@@ -11,7 +12,8 @@ import { ForgetPasswordService } from 'src/app/shared/services/forget-password.s
 export class ForgetPasswordComponent {
   constructor(
     private _ForgetPasswordService: ForgetPasswordService,
-    private _Router: Router
+    private _Router: Router,
+    private _ToastrService: ToastrService
   ) {}
 
   userEmail: string = '';
@@ -57,6 +59,28 @@ export class ForgetPasswordComponent {
             this.emailValidBoolean = false;
             this.emailValid = response.error.message;
           }
+        },
+      });
+  }
+  sendTimeOut!: number;
+  sendTimeOutFlag: boolean = false;
+  sendCodeAgain(): void {
+    this.sendEmailForm.get('email')?.setValue(this.userEmail);
+    console.log(this.sendEmailForm.value);
+    this._ForgetPasswordService
+      .sendUserEmail(this.sendEmailForm.value)
+      .subscribe({
+        next: (response) => {
+          let i = 30;
+          this.sendTimeOutFlag = true;
+          let interval = setInterval(() => {
+            this.sendTimeOut = --i;
+            if (i == 0) {
+              clearInterval(interval);
+              this.sendTimeOutFlag = false;
+            }
+          }, 1000);
+          this._ToastrService.show('Code Sent Again try Again After 30 sec');
         },
       });
   }
