@@ -1,0 +1,28 @@
+<ng-container *ngIf="currentUserDetails">
+  <p class="h5 row">
+    <span class="col-3 fw-bolder text-capitalize">change Password :</span>
+    <span class="col-8"><button (click)="changeDisplay()" class="btn-main">Edit</button></span>
+  </p>
+  <div *ngIf="display" class="my-4">
+    <form [formGroup]="loggedUseChangePassword" (ngSubmit)="resetPassowrdLoggedUser()">
+      <div class="w-75 mx-auto">
+        <label for="currentPassword" class="h6">Current Password:</label>
+        <input formControlName="currentPassword" class="form-control" type="password" id="currentPassword">
+      </div>
+      <div class="w-75 mx-auto">
+        <label for="password" class="h6">Password:</label>
+        <input formControlName="password" class="form-control" type="password" id="password">
+      </div>
+      <div class="w-75 mx-auto">
+        <label for="rePassword" class="h6">Current Password:</label>
+        <input formControlName="rePassword" class="form-control" type="password" id="rePassword">
+      </div>
+
+      <button [disabled]="loggedUseChangePassword.invalid || isLoading" class="btn-main d-block my-3 w-75 mx-auto">
+        <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
+        <span>Update Password</span>
+      </button>
+
+    </form>
+  </div>
+</ng-container>

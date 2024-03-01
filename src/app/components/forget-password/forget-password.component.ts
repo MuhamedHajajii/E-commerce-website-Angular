@@ -73,6 +73,7 @@ export class ForgetPasswordComponent {
         next: (response) => {
           let i = 30;
           this.sendTimeOutFlag = true;
+          this.sendTimeOut = i;
           let interval = setInterval(() => {
             this.sendTimeOut = --i;
             if (i == 0) {

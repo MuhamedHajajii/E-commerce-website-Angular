@@ -63,8 +63,13 @@ export class WishlistComponent {
 
   addToCart(_Id: string): void {
     this._CartService.addToCart(_Id).subscribe({
-      next: (response: Successadd) => {
+      next: (response) => {
+        console.log(response);
+
         let cartTotalProducts = 0;
+        response.data.products.forEach((element: any) => {
+          cartTotalProducts += element.count;
+        });
         this._CartService.updateCartCound(cartTotalProducts);
         this._ToastrService.success(response.message);
       },

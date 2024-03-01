@@ -43,6 +43,9 @@ import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './shared/loading.interceptor';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
+import { PrivacySettingsComponent } from './components/settings/privacy-settings/privacy-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +81,9 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
     AllsupcategoriesComponent,
     WishlistComponent,
     ForgetPasswordComponent,
+    SettingsComponent,
+    AccountSettingComponent,
+    PrivacySettingsComponent,
   ],
   imports: [
     BrowserModule,

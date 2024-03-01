@@ -40,7 +40,7 @@
           <div>
             <div class="d-flex justify-content-between align-items-center">
               <label for="city" class="my-2">
-                <span class="fw-bold">Phone :</span>
+                <span class="fw-bold">City :</span>
               </label>
               <div *ngIf="(userAddress.get('city')?.touched || city.value.length > 0)" class="text-end ErrorsContainer">
                 <p *ngIf="userAddress.get('city')?.getError('required')" class="text-danger mb-0">*required</p>

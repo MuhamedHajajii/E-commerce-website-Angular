@@ -21,6 +21,9 @@ import { SpecificCategoryComponent } from './components/categories/specific-cate
 import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
 import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.component';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { SettingsComponent } from './components/settings/settings.component';
+import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
+import { PrivacySettingsComponent } from './components/settings/privacy-settings/privacy-settings.component';
 
 const routes: Routes = [
   {
@@ -98,6 +101,24 @@ const routes: Routes = [
         path: 'wishlist',
         component: WishlistComponent,
         title: 'Fresh Market - Products Wish List',
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        title: 'Fresh Market - Account Settings',
+        children: [
+          { path: '', redirectTo: 'Account-Settings', pathMatch: 'full' },
+          {
+            path: 'Account-Settings',
+            component: AccountSettingComponent,
+            title: 'Account - Setting',
+          },
+          {
+            path: 'Privacy-Settings',
+            component: PrivacySettingsComponent,
+            title: 'Privacy - Setting',
+          },
+        ],
       },
     ],
   },

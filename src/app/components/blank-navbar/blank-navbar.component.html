@@ -34,9 +34,12 @@
           <span><i class="fa-solid fa-user"></i></span>
           <span class="text-white fw-bold mx-2 d-none d-md-inline">
             {{userName}}</span>
-          <span #logOutIcon (click)="stopProp($event)"
-            class="d-none translate-middle-x position-absolute signOutBtn"><button
-              class="btn-main text-decoration-underline " (click)="singOut()">SignOut</button></span>
+          <span #logOutIcon (click)="stopProp($event)" class="d-none translate-middle-x position-absolute signOutBtn">
+            <button routerLink="/settings"
+              class=" btn-dark border btn px-4 text-decoration-underline my-2">Settings</button>
+            <button class=" btn-warning border btn px-4 text-decoration-underline my-2"
+              (click)="singOut()">SignOut</button>
+          </span>
         </li>
       </ul>
     </div>

@@ -11,11 +11,13 @@ export class AuthServisesService {
     this.GetUserToken();
   }
   userdata: any;
+  userId: string = '';
   GetUserToken(): void {
     if (localStorage.getItem('userToken') != null) {
       let encode: any = localStorage.getItem('userToken');
       let Decode = jwtDecode(encode);
       this.userdata = Decode;
+      this.userId = this.userdata.id;
     }
   }
 
