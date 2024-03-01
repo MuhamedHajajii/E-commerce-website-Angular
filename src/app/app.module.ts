@@ -46,6 +46,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { SettingsComponent } from './components/settings/settings.component';
 import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
 import { PrivacySettingsComponent } from './components/settings/privacy-settings/privacy-settings.component';
+import { AddressComponent } from './components/settings/address/address.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,6 +85,7 @@ import { PrivacySettingsComponent } from './components/settings/privacy-settings
     SettingsComponent,
     AccountSettingComponent,
     PrivacySettingsComponent,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,

@@ -30,4 +30,12 @@ export class UserDetailsService {
       }
     );
   }
+
+  UpdateUserData(userNewData: {}): Observable<any> {
+    return this._HttpClient.put(
+      `${this.baseUrl}updateMe/`,
+      { userNewData },
+      { headers: { token: this._CartService.userToken } }
+    );
+  }
 }

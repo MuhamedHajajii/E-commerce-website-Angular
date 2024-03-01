@@ -1,7 +1,7 @@
 <ng-container *ngIf="currentUserDetails">
-  <p class="h5 row">
-    <span class="col-3 fw-bolder text-capitalize">change Password :</span>
-    <span class="col-8"><button (click)="changeDisplay()" class="btn-main">Edit</button></span>
+  <p class="h5 row justify-content-between">
+    <span class="col-md-8 fw-bolder text-capitalize">change Password :</span>
+    <span class="col-md-4 text-end"><button (click)="changeDisplay()" class="btn-main">Edit</button></span>
   </p>
   <div *ngIf="display" class="my-4">
     <form [formGroup]="loggedUseChangePassword" (ngSubmit)="resetPassowrdLoggedUser()">

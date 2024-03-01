@@ -1,0 +1,14 @@
+<ng-container *ngIf="currentUserDetails">
+  <div class="h5 row">
+    <div class="col-md-8">
+      <span class=" col-2 fw-bolder text-capitalize">addresses </span>
+      <span class="col-1"> :</span>
+      <span class="col-7">{{currentUserDetails.addresses}}
+        <span *ngIf="currentUserDetails.addresses.length == 0" class="text-danger fw-bold">no address yet </span>
+      </span>
+    </div>
+    <div class="col-md-4">
+      <span class="col-2"><button class="btn-main">Edit</button></span>
+    </div>
+  </div>
+</ng-container>

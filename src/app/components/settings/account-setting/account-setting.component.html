@@ -1,37 +1,30 @@
 <ng-container *ngIf="currentUserDetails">
-  <p class="h5 row">
-    <span class="col-2 fw-bolder text-capitalize">name </span>
-    <span class="col-1"> :</span>
-    <span class="col-7">{{currentUserDetails.name}}</span>
-    <span class="col-2"><button class="btn-main">Edit</button></span>
-  </p>
-  <p class="h5 row"><span class=" col-2 fw-bolder text-capitalize">
-      email </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.email}}</span>
-    <span class="col-2"><button class="btn-main">Edit</button></span>
-  </p>
-  <p class="h5 row"><span class=" col-2 fw-bolder text-capitalize">
-      addresses </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.addresses}} <span
-        *ngIf="currentUserDetails.addresses.length == 0" class="text-danger fw-bold">no address yet </span></span>
-    <span class="col-2"><button class="btn-main">Edit</button></span>
-  </p>
-  <p class="h5 row"><span class=" col-2 fw-bolder text-capitalize">
-      _id </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails._id}}</span>
-    <span class="col-2"><button class="btn-main">Edit</button></span>
-  </p>
-  <p class="h5 row pb-3"><span class=" col-2 fw-bolder text-capitalize">
-      phone </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.phone}}</span>
-    <span class="col-2"><button class="btn-main">Edit</button></span>
-  </p>
-  <div class="border-top border-4 row pt-3">
-    <p class="h5 row"><span class=" col-2 text-capitalize">
-        role </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.role}}</span>
-    </p>
-    <p class="h5 row"><span class=" col-2 text-capitalize">
-        updatedAt </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.updatedAt |
-        date:'medium'}}</span>
-    </p>
-    <p class="h5 row"><span class=" col-2 text-capitalize">
-        createdAt </span> <span class="col-1"> :</span><span class="col-7">{{currentUserDetails.createdAt |
-        date:'medium'}}</span> </p>
-  </div>
+  <form [formGroup]="userUpdateDateForm" (ngSubmit)="UpdateData()">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="h5 row">
+          <span class="col-2 fw-bolder text-capitalize">name </span>
+          <span class="col-1"> :</span>
+          <span class="col-7"><input formControlName="name" type="text" class="form-control"></span>
+        </p>
+        <p class="h5 row">
+          <span class=" col-2 fw-bolder text-capitalize">email </span>
+          <span class="col-1"> :</span>
+          <span class="col-7"><input formControlName="email" type="text" class="form-control"></span>
+        </p>
+        <p class="h5 row pb-3">
+          <span class=" col-2 fw-bolder text-capitalize">phone </span>
+          <span class="col-1"> :</span>
+          <span class="col-7">
+            <input formControlName="phone" type="text" class="form-control">
+          </span>
+        </p>
+      </div>
+      <div class="col-md-4 d-flex flex-column">
+        <span *ngIf="!editMood" class="col-2"><button (click)="StartEdit()" class="btn-main mb-3">Edit</button></span>
+        <span *ngIf="editMood" class="col-2"><button (click)="UpdateData()"
+            class="btn-secondary btn">Update</button></span>
+      </div>
+    </div>
+  </form>
 </ng-container>

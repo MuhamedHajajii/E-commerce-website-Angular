@@ -24,6 +24,7 @@ import { ForgetPasswordComponent } from './components/forget-password/forget-pas
 import { SettingsComponent } from './components/settings/settings.component';
 import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
 import { PrivacySettingsComponent } from './components/settings/privacy-settings/privacy-settings.component';
+import { AddressComponent } from './components/settings/address/address.component';
 
 const routes: Routes = [
   {
@@ -117,6 +118,11 @@ const routes: Routes = [
             path: 'Privacy-Settings',
             component: PrivacySettingsComponent,
             title: 'Privacy - Setting',
+          },
+          {
+            path: 'Address-Settings',
+            component: AddressComponent,
+            title: 'Adress - Setting',
           },
         ],
       },
