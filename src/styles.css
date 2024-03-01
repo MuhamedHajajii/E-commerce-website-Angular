@@ -70,7 +70,7 @@ a:hover {
 .btn-main {
   background-color: var(--main-color);
   padding: 7px 20px;
-  border: 1px solid #ccc;
+  border: 1px solid transparent;
   border-radius: 5px;
   color: #fff;
   cursor: pointer;

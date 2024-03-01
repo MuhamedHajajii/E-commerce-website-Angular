@@ -6,5 +6,29 @@
 }
 
 .main-section {
-  margin-top: 188px;
+  padding-top: 188px;
+}
+
+::selection {
+  background-color: transparent;
+
+}
+
+img {
+  width: 200%;
+  transform: translateX(-25%);
+}
+
+span {
+  background-color: var(--main-color);
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

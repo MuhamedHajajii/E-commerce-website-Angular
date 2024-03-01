@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Allorders } from 'src/app/shared/interfaces/allorders';
 import { UserCart } from 'src/app/shared/interfaces/user-cart';
@@ -21,7 +28,8 @@ export class BlankNavbarComponent implements OnInit {
     private _Router: Router,
     private _CartService: CartService,
     private _AllordersService: AllordersService,
-    private _WishListService: WishListService
+    private _WishListService: WishListService,
+    private _Renderer2: Renderer2
   ) {}
   getTruckCount(): void {
     this._AllordersService.changeOrdersCount.subscribe({
@@ -98,5 +106,25 @@ export class BlankNavbarComponent implements OnInit {
         this.truckCount = response.length;
       },
     });
+  }
+
+  @ViewChild('navBanner') navElement!: ElementRef;
+  @ViewChild('navCounters') navCounters!: ElementRef;
+  @ViewChild('navSocialIcons') navSocialIcons!: ElementRef;
+  @ViewChild('navMainCounters') navMainCounters!: ElementRef;
+
+  @HostListener('window:scroll')
+  onNavScroll(): void {
+    if (scrollY > 180) {
+      this._Renderer2.addClass(this.navElement.nativeElement, 'd-none');
+      this._Renderer2.addClass(this.navSocialIcons.nativeElement, 'd-none');
+      this._Renderer2.removeClass(this.navCounters.nativeElement, 'd-none');
+      this._Renderer2.addClass(this.navMainCounters.nativeElement, 'd-none');
+    } else {
+      this._Renderer2.removeClass(this.navElement.nativeElement, 'd-none');
+      this._Renderer2.removeClass(this.navSocialIcons.nativeElement, 'd-none');
+      this._Renderer2.addClass(this.navCounters.nativeElement, 'd-none');
+      this._Renderer2.removeClass(this.navMainCounters.nativeElement, 'd-none');
+    }
   }
 }

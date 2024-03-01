@@ -20,6 +20,7 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { SpecificCategoryComponent } from './components/categories/specific-category/specific-category.component';
 import { SpecificBrandComponent } from './components/brands/specific-brand/specific-brand.component';
 import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 const routes: Routes = [
   {
@@ -104,8 +105,13 @@ const routes: Routes = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent, title: 'LogIn' },
+      { path: 'register', component: RegisterComponent, title: 'signup' },
+      {
+        path: 'forgetpassword',
+        component: ForgetPasswordComponent,
+        title: 'resetpassword',
+      },
     ],
   },
 

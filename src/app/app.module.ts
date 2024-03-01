@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +18,7 @@ import { BlankNavbarComponent } from './components/blank-navbar/blank-navbar.com
 import { AuthComponent } from './components/auth/auth.component';
 import { BlankComponent } from './components/blank/blank.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeEyelookComponent } from './components/home-eyelook/home-eyelook.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -40,6 +40,9 @@ import { SpecificBrandComponent } from './components/brands/specific-brand/speci
 import { SubcategoriesComponent } from './components/blank-navbar/subcategories/subcategories.component';
 import { AllsupcategoriesComponent } from './components/blank-navbar/subcategories/allsupcategories/allsupcategories.component';
 import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './shared/loading.interceptor';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +77,7 @@ import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.c
     SubcategoriesComponent,
     AllsupcategoriesComponent,
     WishlistComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,8 +92,12 @@ import { WishlistComponent } from './components/blank-navbar/wishlist/wishlist.c
       enableHtml: true,
     }),
     SweetAlert2Module.forRoot(),
+    NgxSpinnerModule,
   ],
-  providers: [],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

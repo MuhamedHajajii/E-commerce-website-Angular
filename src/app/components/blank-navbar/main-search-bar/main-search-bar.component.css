@@ -9,9 +9,11 @@
 }
 
 .searchList {
-  width: 200% !important;
+  width: 300% !important;
   height: 600px;
+  margin-top: 20px;
 }
+
 
 
 .searchList>div {
@@ -48,13 +50,13 @@
   }
 
   to {
-    width: 150%;
+    width: 100%;
   }
 }
 
 @keyframes widthBlur {
   from {
-    width: 150%;
+    width: 100%;
   }
 
   to {

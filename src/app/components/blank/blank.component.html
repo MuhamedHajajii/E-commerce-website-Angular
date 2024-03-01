@@ -3,3 +3,12 @@
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>
+
+<button (click)="scrollTopBtn()" class="btn p-0 m-0">
+  <span><i class="fa-solid fa-arrow-up"></i></span>
+</button>
+
+<ngx-spinner bdColor="rgba(255,255,255,0.8)" size="medium" color="var(--main-color)" type="ball-atom"
+  [fullScreen]="true">
+  <img src="./assets/images/freshcart-logo.svg" class="bg-transparent">
+</ngx-spinner>

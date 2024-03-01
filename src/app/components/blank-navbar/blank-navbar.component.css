@@ -156,3 +156,9 @@
     left: 100%;
     top: 0;
   }
+
+  .dropdownCategories:hover .dropdownCategoriesChild {
+    display: block;
+    top: 100%;
+    left: 0;
+  }
