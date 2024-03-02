@@ -112,17 +112,17 @@ const routes: Routes = [
           {
             path: 'Account-Settings',
             component: AccountSettingComponent,
-            title: 'Account - Setting',
+            title: 'Fresh Market - Account - Setting',
           },
           {
             path: 'Privacy-Settings',
             component: PrivacySettingsComponent,
-            title: 'Privacy - Setting',
+            title: 'Fresh Market - Privacy - Setting',
           },
           {
             path: 'Address-Settings',
             component: AddressComponent,
-            title: 'Adress - Setting',
+            title: 'Fresh Market - Adress - Setting',
           },
         ],
       },

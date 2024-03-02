@@ -1,29 +1,79 @@
 <ng-container *ngIf="currentUserAddress">
-  <div class="h5 row my-5">
+  <div class="h5 row my-3">
     <div class="col-md-8">
       <span class=" col-2 fw-bolder text-capitalize">addresses </span>
       <span class="col-1"> :</span>
       <span class="col-7">
-        <span class="fs-3"> {{currentUserAddress.results}}</span>
-        <span *ngIf="currentUserAddress.results == 0" class="text-danger fw-bold">no address yet </span>
+        <span *ngIf="currentUserAddress.data.length > 0" class="fs-3"> {{currentUserAddress.data.length}}</span>
+        <span *ngIf="currentUserAddress.results == 0" class="text-danger fs-6 fw-bold"> ( *no address yet* ) </span>
       </span>
       <div *ngFor="let item of currentUserAddress.data">
-        <div class="bg-light p-3 my-2 rounded-4">
-          <p class="row"><span class="fw-bolder col-4 f5">address for </span><span class="col-1">:</span>{{item.name}}
+        <div class="bg-light p-5 my-2 rounded-4">
+          <p class="row"><span class="fw-bolder col-4 f5">Name</span><span class="col-1">:</span>{{item.name}}
           </p>
           <p class="row"><span class="fw-bolder col-4 f5">city </span><span class="col-1">:</span>{{item.city}}</p>
           <p class="row"><span class="fw-bolder col-4 f5">description </span><span
               class="col-1">:</span>{{item.details}}</p>
           <p class="row"><span class="fw-bolder col-4 f5">phone </span><span class="col-1">:</span>{{item.phone}}</p>
-          <div class="col-4">
-            <span class="col-2"><button class="btn-main">Edit</button></span>
+          <div class="d-flex justify-content-start col-12">
+            <button (click)="EditAddress(item._id)" class="btn-main">Edit</button>
+            <button (click)="RemoveAddress(item._id)" class="btn-danger btn ms-2 fs-5 fw-bold"><i
+                class="fa-solid fa-trash-can"></i></button>
           </div>
         </div>
       </div>
 
     </div>
     <div class="col-4">
-      <span class="col-2"><button class="btn-main">Add New Address</button></span>
+      <span class="col-2"><button (click)="openAddAddress()" class="btn-main">Add New Address</button></span>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="addAddressFlag">
+  <div (click)="closeAddAddress()" class="lightBox d-flex justify-content-center align-items-center">
+    <div (click)="closeAddAddressPop($event)" class="lightBoxContent rounded-4 bg-main-light p-5 w-75">
+      <button class="btn d-block ms-auto fs-5 fw-bold btn-close" (click)="closeAddAddress()"></button>
+      <h2 class="text-main fw-bolder">New Address:</h2>
+      <form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <label class="my-2 fs-5 fw-bold" for="name">Name: </label>
+            <p *ngIf="addressForm.get('name')?.getError('required') && addressForm.get('name')?.touched"
+              class="text-danger fw-bold">required*</p>
+          </div>
+          <input formControlName="name" id="name" placeholder="ex. office" type="text" class="form-control">
+        </div>
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <label class="my-2 fs-5 fw-bold" for="city">City: </label>
+            <p *ngIf="addressForm.get('city')?.getError('required') && addressForm.get('city')?.touched"
+              class="text-danger fw-bold">required*</p>
+          </div>
+          <input formControlName="city" id="city" placeholder="ex. Cairo" type="text" class="form-control">
+        </div>
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <label class="my-2 fs-5 fw-bold" for="details">description: </label>
+            <p *ngIf="addressForm.get('details')?.getError('required') && addressForm.get('details')?.touched"
+              class="text-danger fw-bold">required*</p>
+          </div>
+          <input formControlName="details" id="details"
+            placeholder="ex. 30, Rue Ahmed Orabi Al-Mohandessine GIZA - 12411 EGYPT" type="text" class="form-control">
+        </div>
+        <div>
+          <div class="d-flex justify-content-between align-items-center">
+            <label class="my-2 fs-5 fw-bold" for="phone">Phone: </label>
+            <p *ngIf="addressForm.get('phone')?.getError('required') && addressForm.get('phone')?.touched"
+              class="text-danger fw-bold">required*</p>
+          </div>
+          <input formControlName="phone" id="phone" placeholder="ex. 0100000011" type="tel" class="form-control">
+        </div>
+        <button (click)="addNewAddressFlag('add')" *ngIf="!updateAddressFlag" [disabled]="addressForm.invalid"
+          class="btn-main d-block ms-auto mt-3 fs-5 fw-bold">Add address</button>
+        <button (click)="updateNewAddressFlag('update')" *ngIf="updateAddressFlag" [disabled]="addressForm.invalid"
+          class="btn-warning btn d-block ms-auto mt-3 fs-5 fw-bold">update address</button>
+      </form>
     </div>
   </div>
 </ng-container>
