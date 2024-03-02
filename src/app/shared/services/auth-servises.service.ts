@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,7 @@ export class AuthServisesService {
   constructor(private _HttpClient: HttpClient) {
     this.GetUserToken();
   }
+  userName: BehaviorSubject<string> = new BehaviorSubject('');
   userdata: any;
   userId: string = '';
   GetUserToken(): void {
@@ -17,7 +18,7 @@ export class AuthServisesService {
       let encode: any = localStorage.getItem('userToken');
       let Decode = jwtDecode(encode);
       this.userdata = Decode;
-
+      this.userName.next(this.userdata.name);
       this.userId = this.userdata.id;
     }
   }

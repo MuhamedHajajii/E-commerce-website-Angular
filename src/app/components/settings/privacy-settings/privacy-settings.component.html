@@ -1,28 +1,68 @@
-<ng-container *ngIf="currentUserDetails">
-  <p class="h5 row justify-content-between">
-    <span class="col-md-8 fw-bolder text-capitalize">change Password :</span>
-    <span class="col-md-4 text-end"><button (click)="changeDisplay()" class="btn-main">Edit</button></span>
-  </p>
-  <div *ngIf="display" class="my-4">
-    <form [formGroup]="loggedUseChangePassword" (ngSubmit)="resetPassowrdLoggedUser()">
-      <div class="w-75 mx-auto">
-        <label for="currentPassword" class="h6">Current Password:</label>
-        <input formControlName="currentPassword" class="form-control" type="password" id="currentPassword">
+<p class="h5 row justify-content-between align-items-center w-75 mx-auto border-bottom border-2 pb-4">
+  <span class="col-md-8 p-0 fw-bolder text-capitalize">change Password :</span>
+  <span class="col-md-4 p-0 text-end"><button (click)="startEdit()" class="btn-main">Edit</button></span>
+</p>
+<div class="my-4">
+  <form [formGroup]="loggedUseChangePasswordForm" (ngSubmit)="resetPassowrdLoggedUser()">
+    <div class="w-75 mx-auto">
+      <div class="d-flex justify-content-between align-items-center">
+        <label for="currentPassword" class="h6 mb-2">Current Password:</label>
+        <div class="text-end w-75">
+          <p *ngIf="incorrectPassword" class="text-danger fw-bold">password
+            incorrect*</p>
+          <p *ngIf="loggedUseChangePasswordForm.get('currentPassword')?.getError('required') && loggedUseChangePasswordForm.get('currentPassword')?.touched"
+            class="text-danger fw-bold">required*</p>
+          <p *ngIf="loggedUseChangePasswordForm.get('currentPassword')?.getError('pattern') && currentPassword.value.length > 0"
+            class="text-danger fw-bold">password must start with upperCase then must be at least 6 chars to 10*</p>
+        </div>
       </div>
-      <div class="w-75 mx-auto">
-        <label for="password" class="h6">Password:</label>
-        <input formControlName="password" class="form-control" type="password" id="password">
+      <input placeholder="*********" (input)="incorrectError(currentPassword)"
+        [class]="incorrectPassword?'is-invalid':''" #currentPassword formControlName="currentPassword"
+        class="form-control" type="password" id="currentPassword">
+    </div>
+    <div class="w-75 mx-auto">
+      <div class="d-flex justify-content-between align-items-center">
+        <label for="password" class="h6 mb-2">Password:</label>
+        <div class="w-75 text-end">
+          <p *ngIf="loggedUseChangePasswordForm.get('password')?.getError('required') && loggedUseChangePasswordForm.get('password')?.touched"
+            class="text-danger fw-bold">
+            reqiured</p>
+          <p *ngIf="loggedUseChangePasswordForm.get('password')?.getError('pattern') && password.value.length > 0"
+            class="text-danger fw-bold">password
+            must start with
+            upperCase then must be at least 6 chars to 10*</p>
+        </div>
       </div>
-      <div class="w-75 mx-auto">
-        <label for="rePassword" class="h6">Current Password:</label>
-        <input formControlName="rePassword" class="form-control" type="password" id="rePassword">
+      <input placeholder="*********" #password formControlName="password" class="form-control" type="password"
+        id="password">
+    </div>
+    <div class="w-75 mx-auto">
+      <div class="d-flex justify-content-between align-items-center">
+        <label for="password" class="h6 mb-2">rePassword:</label>
+        <div class="text-end w-75">
+          <p *ngIf="loggedUseChangePasswordForm.get('rePassword')?.getError('required') && loggedUseChangePasswordForm.get('rePassword')?.touched"
+            class="text-danger fw-bold">
+            reqiured</p>
+          <p *ngIf="loggedUseChangePasswordForm.get('rePassword')?.getError('notMatch') && rePassword.value.length > 0"
+            class="text-danger fw-bold">password not match</p>
+        </div>
       </div>
+      <input placeholder="*********" #rePassword formControlName="rePassword" class="form-control" type="password"
+        id="rePassword">
+    </div>
 
-      <button [disabled]="loggedUseChangePassword.invalid || isLoading" class="btn-main d-block my-3 w-75 mx-auto">
-        <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
-        <span>Update Password</span>
-      </button>
+    <button [disabled]="loggedUseChangePasswordForm.invalid || isLoading" class="btn-main d-block my-3 w-75 mx-auto">
+      <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
+      <span>Update Password</span>
+    </button>
+  </form>
+</div>
 
-    </form>
+<div (click)="finishChangePassword()" *ngIf="finishChangePasswordFlag"
+  class="lightBox d-flex justify-content-center align-items-center">
+  <div class="lighBoxContent bg-light p-5 rounded-5">
+    <h2 class="text-main">Success</h2>
+    <p>you have successflly changed your password and must sign in again</p>
+    <button class="btn-main d-block ms-auto">Ok</button>
   </div>
-</ng-container>
+</div>

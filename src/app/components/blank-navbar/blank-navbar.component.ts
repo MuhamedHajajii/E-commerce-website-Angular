@@ -73,9 +73,11 @@ export class BlankNavbarComponent implements OnInit {
   }
 
   getUserNAme(): void {
-    if (localStorage.getItem('userToken') != null) {
-      this.userName = this._AuthServisesService.userdata.name;
-    }
+    this._AuthServisesService.userName.subscribe({
+      next: (response) => {
+        this.userName = response;
+      },
+    });
   }
   singOut(): void {
     this._Router.navigate(['/login']);

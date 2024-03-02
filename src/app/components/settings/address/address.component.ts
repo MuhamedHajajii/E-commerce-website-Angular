@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UserDetailsService } from '../user-details.service';
 import { UserDetails } from '../user-details';
+import { UserAddressService } from '../../user-address.service';
+import { Address } from '../../address';
 
 @Component({
   selector: 'app-address',
@@ -8,20 +10,19 @@ import { UserDetails } from '../user-details';
   styleUrls: ['./address.component.css'],
 })
 export class AddressComponent {
-  constructor(private _UserDetailsService: UserDetailsService) {}
+  constructor(private _UserAddressService: UserAddressService) {}
 
-  currentUserDetails!: UserDetails;
+  currentUserAddress!: Address;
 
   ngOnInit(): void {
-    this.getUserDetails();
+    this.getUserAddress();
   }
 
-  getUserDetails(): void {
-    this._UserDetailsService.getCurrentUserData().subscribe({
+  getUserAddress(): void {
+    this._UserAddressService.getUserAddress().subscribe({
       next: (response) => {
-        this.currentUserDetails = response.data;
+        this.currentUserAddress = response;
         console.log(response);
-        console.log(response.data);
       },
     });
   }

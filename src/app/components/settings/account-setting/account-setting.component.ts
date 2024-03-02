@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthServisesService } from 'src/app/shared/services/auth-servises.service';
 
 @Component({
   selector: 'app-account-setting',
@@ -16,7 +17,8 @@ import {
 export class AccountSettingComponent implements OnInit, OnDestroy {
   constructor(
     private _UserDetailsService: UserDetailsService,
-    private _FormBuilder: FormBuilder
+    private _FormBuilder: FormBuilder,
+    private _AuthServisesService: AuthServisesService
   ) {}
   currentUserDetails!: UserDetails;
 
@@ -29,7 +31,6 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
     this._UserDetailsService.getCurrentUserData().subscribe({
       next: (response) => {
         this.currentUserDetails = response.data;
-        console.log(response);
 
         this.setUserDataInInputs();
       },
@@ -47,6 +48,7 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.getUserDetails();
+          this._AuthServisesService.userName.next(response.user.name);
           this.EndtEdit();
         },
       });
@@ -54,9 +56,7 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
   editing(): void {
     this.StartEdit();
     this._UserDetailsService.tipsandTricks().subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: (response) => {},
     });
   }
 

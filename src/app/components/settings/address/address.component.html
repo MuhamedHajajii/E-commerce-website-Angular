@@ -1,14 +1,29 @@
-<ng-container *ngIf="currentUserDetails">
-  <div class="h5 row">
+<ng-container *ngIf="currentUserAddress">
+  <div class="h5 row my-5">
     <div class="col-md-8">
       <span class=" col-2 fw-bolder text-capitalize">addresses </span>
       <span class="col-1"> :</span>
-      <span class="col-7">{{currentUserDetails.addresses}}
-        <span *ngIf="currentUserDetails.addresses.length == 0" class="text-danger fw-bold">no address yet </span>
+      <span class="col-7">
+        <span class="fs-3"> {{currentUserAddress.results}}</span>
+        <span *ngIf="currentUserAddress.results == 0" class="text-danger fw-bold">no address yet </span>
       </span>
+      <div *ngFor="let item of currentUserAddress.data">
+        <div class="bg-light p-3 my-2 rounded-4">
+          <p class="row"><span class="fw-bolder col-4 f5">address for </span><span class="col-1">:</span>{{item.name}}
+          </p>
+          <p class="row"><span class="fw-bolder col-4 f5">city </span><span class="col-1">:</span>{{item.city}}</p>
+          <p class="row"><span class="fw-bolder col-4 f5">description </span><span
+              class="col-1">:</span>{{item.details}}</p>
+          <p class="row"><span class="fw-bolder col-4 f5">phone </span><span class="col-1">:</span>{{item.phone}}</p>
+          <div class="col-4">
+            <span class="col-2"><button class="btn-main">Edit</button></span>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="col-md-4">
-      <span class="col-2"><button class="btn-main">Edit</button></span>
+    <div class="col-4">
+      <span class="col-2"><button class="btn-main">Add New Address</button></span>
     </div>
   </div>
 </ng-container>
