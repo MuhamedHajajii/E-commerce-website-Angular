@@ -18,6 +18,8 @@ export class UserDetailsService {
 
   getCurrentUserData(): Observable<any> {
     let userID = this._AuthServisesService.userId;
+    console.log(userID);
+
     return this._HttpClient.get(`${this.baseUrl}${userID}`);
   }
   updateLoggedUserPassword(newPasswrod: object): Observable<any> {
@@ -31,11 +33,41 @@ export class UserDetailsService {
     );
   }
 
+  userToken: any = localStorage.getItem('userToken');
+
   UpdateUserData(userNewData: {}): Observable<any> {
     return this._HttpClient.put(
-      `${this.baseUrl}updateMe/`,
-      { userNewData },
-      { headers: { token: this._CartService.userToken } }
+      'https://ecommerce.routemisr.com/api/v1/users/updateMe/',
+      userNewData,
+      { headers: { token: this.userToken } }
+    );
+  }
+
+  // trick To make Api Change User Name and email and phoneNumber =D
+  tipsandTricks(): Observable<any> {
+    return this._HttpClient.put(
+      'https://ecommerce.routemisr.com/api/v1/users/updateMe/',
+      {
+        name: 'TestTestTest',
+        email: 'TestTestTestTestTestTest@outlook.com',
+        phone: '01010700700',
+      },
+      { headers: { token: this.userToken } }
     );
   }
 }
+
+/* 
+
+{
+        name: 'hajajii hajajii',
+        email: 'hajajiihajajii@outlook.com',
+        phone: '01002821454',
+      }
+{
+        name: 'TestTestTest',
+        email: 'TestTestTest@outlook.com',
+        phone: '01234567890',
+      }
+
+*/

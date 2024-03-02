@@ -17,6 +17,7 @@ export class AuthServisesService {
       let encode: any = localStorage.getItem('userToken');
       let Decode = jwtDecode(encode);
       this.userdata = Decode;
+
       this.userId = this.userdata.id;
     }
   }

@@ -1,30 +1,37 @@
-<ng-container *ngIf="currentUserDetails">
-  <form [formGroup]="userUpdateDateForm" (ngSubmit)="UpdateData()">
+<ng-container>
+  <form [formGroup]="userUpdateDateForm" (ngSubmit)="UpdateUserData()">
     <div class="row">
       <div class="col-md-8">
         <p class="h5 row">
-          <span class="col-2 fw-bolder text-capitalize">name </span>
+          <span class="col-2 fw-bolder text-capitalize"><label for="name">name</label> </span>
           <span class="col-1"> :</span>
-          <span class="col-7"><input formControlName="name" type="text" class="form-control"></span>
+          <span class="col-7 d-flex justify-content-start align-items-center">
+            <input id="name" formControlName="name" type="text" class="form-control">
+            <i class="fa-solid text-secondary ms-2 fa-lock" *ngIf="!editMood"></i>
+            <i class="fa-solid text-main ms-2 fa-lock-open" *ngIf="editMood"></i>
+          </span>
         </p>
         <p class="h5 row">
-          <span class=" col-2 fw-bolder text-capitalize">email </span>
+          <span class=" col-2 fw-bolder text-capitalize"><label for="email">email</label> </span>
           <span class="col-1"> :</span>
-          <span class="col-7"><input formControlName="email" type="text" class="form-control"></span>
+          <span class="col-7 d-flex justify-content-start align-items-center">
+            <input id="email" formControlName="email" type="email" class="form-control">
+            <i class="fa-solid text-secondary ms-2 fa-lock" *ngIf="!editMood"></i>
+            <i class="fa-solid text-main ms-2 fa-lock-open" *ngIf="editMood"></i>
+          </span>
         </p>
         <p class="h5 row pb-3">
-          <span class=" col-2 fw-bolder text-capitalize">phone </span>
+          <span class=" col-2 fw-bolder text-capitalize"><label for="phone">phone</label> </span>
           <span class="col-1"> :</span>
-          <span class="col-7">
-            <input formControlName="phone" type="text" class="form-control">
+          <span class="col-7 d-flex justify-content-start align-items-center">
+            <input id="phone" formControlName="phone" type="tel" class="form-control">
+            <i class="fa-solid text-secondary ms-2 fa-lock" *ngIf="!editMood"></i>
+            <i class="fa-solid text-main ms-2 fa-lock-open" *ngIf="editMood"></i>
           </span>
         </p>
       </div>
-      <div class="col-md-4 d-flex flex-column">
-        <span *ngIf="!editMood" class="col-2"><button (click)="StartEdit()" class="btn-main mb-3">Edit</button></span>
-        <span *ngIf="editMood" class="col-2"><button (click)="UpdateData()"
-            class="btn-secondary btn">Update</button></span>
-      </div>
     </div>
+    <span class="col-2"><button *ngIf="editMood" class="btn-secondary btn">Update</button></span>
   </form>
+  <span class="col-2"><button *ngIf="!editMood" (click)="editing()" class="btn-main mb-3">Edit</button></span>
 </ng-container>
