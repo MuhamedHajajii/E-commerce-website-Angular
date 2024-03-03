@@ -1,19 +1,20 @@
-<section class="my-5">
-  <div class="container">
+<section class="my-b">
+  <div class="container-fluid">
     <ng-container *ngIf="!productsLoaded">
-      <div class="row align-items-start">
+      <div class="row align-items-start position-sticky p-4 bg-main-light" style="top: 88px;">
         <div class="col-12 col-md-6 mb-3 mb-md-0">
-          <h2 class="fw-bolder mb-0">All Products</h2>
+          <h2 class="fw-bolder mb-0"><img src="./assets/images/freshcart-logo.svg" alt=""> All <span
+              class="text-main">Products</span>:</h2>
         </div>
         <div class="fw-boldercol-12 justify-content-end d-md-flex d-block col-md-6">
-          <div class="mt-2 mt-md-0">
+          <div class="mt-2 mt-md-0 d-flex justify-content-end align-items-center">
             <div class="d-flex aling-items-center justify-content-end">
               <button (click)="openSearchResult()" class="btn-main"><i
                   class="fa-solid fa-magnifying-glass"></i></button>
               <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
                 [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
             </div>
-            <div class="text-end  d-none d-md-block">
+            <div #changeDisplayBtns class="text-end  d-none d-md-block">
               <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
                   class="fa-solid fa-bars fa-2x"></i></button>
               <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
@@ -23,10 +24,13 @@
         </div>
       </div>
       <div [ngClass]="{
-        'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,
+        'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-5':changeDisplay,
         'row-cols-1':!changeDisplay
         }" class="row mt-5">
-        <div *ngFor="let item of homeProducts | search:searchTitle ; index as i"
+        <div *ngFor="let item of homeProducts | paginate: { id: 'allProductsPagenetion',
+        itemsPerPage: pageSize,
+        currentPage: currentPage,
+        totalItems: totalItems } | search:searchTitle ; index as i"
           class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
           <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
             (click)="currentIndex(i,lightBox)">
@@ -126,3 +130,20 @@
 
   </div>
 </section>
+
+<div *ngIf="startPaginitionFlag" class="my-3">
+  <button [disabled]="!endThisButton" (click)="DisplayMoreData()" class="btn-main d-block w-50 m-auto p-2">Load More
+    Product</button>
+</div>
+<div *ngIf="!startPaginitionFlag" class="my-3">
+  <button [disabled]="!endPage" (click)="DisplayMoreDataPages()" class="btn-main d-block w-50 m-auto p-2">Load More
+    Product</button>
+</div>
+
+<div class="d-flex justify-content-center">
+  <pagination-controls class="AllProdcutsPagenation" id="allProductsPagenetion" (pageChange)="pageChanged($event)"
+    (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
+    [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+  </pagination-controls>
+</div>

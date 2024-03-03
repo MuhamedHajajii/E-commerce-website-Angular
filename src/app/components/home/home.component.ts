@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.callApi.unsubscribe();
   }
+
   getAllproducts(): void {
     this.callApi = this._GetHomeproductsService.gitHomeProducts().subscribe({
       next: (response) => {

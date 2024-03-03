@@ -30,7 +30,7 @@
 
       <div [ngClass]="{'row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,'row-cols-1':!changeDisplay}"
         class="row mt-5">
-        <div *ngFor="let item of homeProducts | search:searchTitle | slice:0:10 ; index as i"
+        <div *ngFor="let item of homeProducts | search:searchTitle | slice:0:8 ; index as i"
           class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
           <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
             (click)="currentIndex(i,lightBox)">

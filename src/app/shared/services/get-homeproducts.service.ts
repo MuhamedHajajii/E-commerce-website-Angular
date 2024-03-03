@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class GetHomeproductsService {
   constructor(private _HttpClient: HttpClient) {}
-  gitHomeProducts(): Observable<any> {
+  gitHomeProducts(pageNumber: number = 1): Observable<any> {
     return this._HttpClient.get(
-      'https://ecommerce.routemisr.com/api/v1/products'
+      `https://ecommerce.routemisr.com/api/v1/products?page=${pageNumber}`
     );
   }
   getDetails(productID: any): Observable<any> {

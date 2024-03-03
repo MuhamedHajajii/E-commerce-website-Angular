@@ -25,6 +25,7 @@
     "i": "^0.3.7",
     "jwt-decode": "^4.0.0",
     "ngx-owl-carousel-o": "^16.0.0",
+    "ngx-pagination": "^6.0.3",
     "ngx-spinner": "^16.0.2",
     "ngx-toastr": "^17.0.2",
     "npm": "^10.5.0",

@@ -47,6 +47,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { AccountSettingComponent } from './components/settings/account-setting/account-setting.component';
 import { PrivacySettingsComponent } from './components/settings/privacy-settings/privacy-settings.component';
 import { AddressComponent } from './components/settings/address/address.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,6 +102,7 @@ import { AddressComponent } from './components/settings/address/address.componen
     }),
     SweetAlert2Module.forRoot(),
     NgxSpinnerModule,
+    NgxPaginationModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

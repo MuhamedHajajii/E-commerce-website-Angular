@@ -169,3 +169,28 @@
   border-radius: 50%;
   z-index: 999;
 }
+
+
+.AllProdcutsPagenation ::ng-deep .ngx-pagination .current {
+  background: var(--main-color);
+  border-radius: 20px;
+  font-weight: 900;
+  border: px solid;
+  border-color: var(--main-color);
+  font-size: 20px;
+  background: #e6e6e6;
+  color: var(--main-color);
+}
+
+.AllProdcutsPagenation ::ng-deep .ngx-pagination {
+  border-radius: 20px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.5);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.position-sticky {
+  z-index: 999999;
+}

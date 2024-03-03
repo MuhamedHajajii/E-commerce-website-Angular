@@ -66,9 +66,7 @@ export class SearchComponent {
           cartTotalProducts += element.count;
         });
         this._CartService.updateCartCound(cartTotalProducts);
-        this._ToastrService.success(
-          response.message + '<img src="./assets/6828646.png">'
-        );
+        this._ToastrService.success(response.message);
       },
       error: (err) => {
         this._ToastrService.warning(err.error.message);
