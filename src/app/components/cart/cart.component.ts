@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject } from 'rxjs';
 import { UserCart } from 'src/app/shared/interfaces/user-cart';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { WishListService } from 'src/app/shared/services/wish-list.service';
@@ -51,22 +59,7 @@ export class CartComponent implements OnInit {
       },
     });
   }
-  ChangeCount(_ID: string, newNumber: number): void {
-    if (newNumber > 0) {
-      this._CartService.updateQuantity(_ID, newNumber).subscribe({
-        next: (response: UserCart) => {
-          this.allCartItems = response;
-          let cartTotalProducts: number = 0;
-          response.data.products.forEach((element) => {
-            cartTotalProducts += element.count;
-          });
-          this._CartService.updateCartCound(cartTotalProducts);
-        },
-      });
-    } else if (newNumber <= 0) {
-      this.deleteItem(_ID);
-    }
-  }
+
   clearCart(): void {
     this._CartService.clearCart().subscribe({
       next: () => {
@@ -113,6 +106,39 @@ export class CartComponent implements OnInit {
           let wishList = response.data.map((product: any) => product._id);
           this.currentWishList = wishList;
         }
+      },
+    });
+  }
+  @Input() activeAction: string = '';
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getCartData();
+  }
+
+  ChangeCount(itemId: number, flag: string, currentIndex: number) {
+    if (flag == 'plus' && itemId > 0) {
+      console.log(
+        (this.allCartItems.data.products[currentIndex].count = itemId++)
+      );
+    } else if (flag == 'minus' && itemId > 0) {
+      console.log(
+        (this.allCartItems.data.products[currentIndex].count = itemId--)
+      );
+    }
+  }
+
+  sendNewCount(productId: string, productCount: number): void {
+    console.log(productId, productCount);
+    this._CartService.updateQuantity(productId, productCount).subscribe({
+      next: (response: UserCart) => {
+        this.allCartItems = response;
+        let cartTotalProducts: number = 0;
+        response.data.products.forEach((element) => {
+          cartTotalProducts += element.count;
+        });
+        this._ToastrService.success(
+          'cart Updated successfully' + '<img src="./assets/6828646.png">'
+        );
+        this._CartService.updateCartCound(cartTotalProducts);
       },
     });
   }

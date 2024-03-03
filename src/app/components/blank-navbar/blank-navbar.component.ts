@@ -87,9 +87,11 @@ export class BlankNavbarComponent implements OnInit {
   getUserCart(): void {
     this._CartService.getCurrentUserCart().subscribe({
       next: (response: UserCart) => {
+        let Counter = 0;
         response.data.products.forEach((element) => {
-          this.cartCount += element.count;
+          Counter += element.count;
         });
+        this.cartCount = Counter;
       },
       error: (err) => {},
     });
@@ -128,5 +130,12 @@ export class BlankNavbarComponent implements OnInit {
       this._Renderer2.addClass(this.navCounters.nativeElement, 'd-none');
       this._Renderer2.removeClass(this.navMainCounters.nativeElement, 'd-none');
     }
+  }
+  fireCart(): void {
+    this.activeAction += `0`;
+  }
+  activeAction: string = '';
+  cartFlow(e: Event): void {
+    e.stopPropagation();
   }
 }

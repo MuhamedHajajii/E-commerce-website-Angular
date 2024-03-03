@@ -16,7 +16,7 @@
             <input #search (input)="searchReasult(search.value)" [(ngModel)]="searchTitle" placeholder="Filter .. "
               type="search" class="form-control search">
           </div>
-          <div>
+          <div class="d-none d-md-block">
             <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
                 class="fa-solid fa-bars fa-2x"></i></button>
             <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
@@ -34,7 +34,7 @@
           <div class="alert alert-danger mb-0">No products with that name sorry</div>
         </ng-container>
         <div *ngFor="let item of homeProducts | search:searchTitle ; index as i"
-          class="col p-4 shadow-sm position-relative parent overflow-hidden">
+          class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
           <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
             (click)="currentIndex(i,lightBox)">
             <i class="fa-solid fa-eye"></i>
@@ -44,7 +44,7 @@
           <div [routerLink]="['/details', item._id]" class="child cursor-pointer">
             <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
             <div [ngClass]="{'row':!changeDisplay}">
-              <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden">
+              <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden h-100">
                 <img class="w-100" [src]="item.imageCover" [alt]="item.category.name">
                 <div
                   class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">

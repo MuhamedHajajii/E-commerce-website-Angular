@@ -187,3 +187,14 @@
       display: none !important;
     }
   }
+
+  .dropdown.Cart:hover {
+    background-color: initial;
+  }
+
+  .dropdown-menu.main li:nth-child(2) {
+    max-height: 50vh !important;
+    min-width: 50vw !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }

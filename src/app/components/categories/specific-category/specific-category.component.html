@@ -39,7 +39,7 @@
                   <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
                     [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
                 </div>
-                <div>
+                <div class=" d-none d-md-block">
                   <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
                       class="fa-solid fa-bars fa-2x"></i></button>
                   <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i

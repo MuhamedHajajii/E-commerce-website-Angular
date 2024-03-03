@@ -105,7 +105,9 @@ export class ProductsComponent {
           cartTotalProducts += element.count;
         });
         this._CartService.updateCartCound(cartTotalProducts);
-        this._ToastrService.success(response.message);
+        this._ToastrService.success(
+          response.message + '<img src="./assets/6828646.png">'
+        );
       },
       error: (err) => {
         this._ToastrService.warning(err.error.message);
