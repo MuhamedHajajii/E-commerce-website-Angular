@@ -63,6 +63,7 @@ export class AddressComponent {
   }
 
   emptyInputsAfterEdit(): void {
+    this.addressForm.get('name')?.enable();
     this.addressForm.reset();
   }
 
@@ -93,6 +94,7 @@ export class AddressComponent {
       next: (response: specificAddress) => {
         console.log(response);
         this.addressForm.get('name')?.setValue(response.data.name);
+        this.addressForm.get('name')?.disable();
         this.addressForm.get('details')?.setValue(response.data.details);
         this.addressForm.get('phone')?.setValue(response.data.phone);
         this.addressForm.get('city')?.setValue(response.data.city);
@@ -108,7 +110,6 @@ export class AddressComponent {
         next: (response) => {
           console.log(response);
           this.getUserAddress();
-          // this.currentUserAddress = response;
           this.emptyInputsAfterEdit();
           this._ToastrService.show(
             'Address has been Updated successfully <i class="text-main fa-2x fa-solid fa-house-circle-check"></i>'
