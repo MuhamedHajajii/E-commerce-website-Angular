@@ -62,6 +62,7 @@ export class ProductsComponent {
   }
 
   getAllproducts(): void {
+    this.imageIsLoading = false;
     this.callApi = this._GetHomeproductsService.gitHomeProducts().subscribe({
       next: (response) => {
         this.allProducts = response.data;
@@ -76,6 +77,7 @@ export class ProductsComponent {
         this.pageSize = response.metadata.limit;
         this.currentPage = response.metadata.currentPage;
         this.totalItems = response.results;
+        this.imageIsLoading = true;
       },
       error: (error) => {
         console.log(error);
@@ -179,6 +181,7 @@ export class ProductsComponent {
   allproductsFromPagenition!: Allproducts[];
   endPage: boolean = true;
   DisplayMoreDataPages(response?: Allproducts[]): void {
+    this.imageIsLoading = true;
     if (response) {
       this.homeProducts = response.splice(this.startNumber, this.endNumber);
     } else if (!response) {
@@ -188,13 +191,13 @@ export class ProductsComponent {
       ];
     }
     if (this.allproductsFromPagenition.length == 0) {
-      console.log('done');
       this.endPage = false;
     }
 
     console.log(this.allproductsFromPagenition.length);
   }
   pageChanged(e: any) {
+    this.imageIsLoading = true;
     this.endPage = true;
     this.startPaginitionFlag = false;
     this.endNumber = 10;
@@ -203,6 +206,7 @@ export class ProductsComponent {
       next: (response) => {
         this.allproductsFromPagenition = response.data;
         this.DisplayMoreDataPages(response.data);
+        this.imageIsLoading = true;
 
         this._SharedProductsService.currentProducts = response.data;
         this.productsLoaded = false;
@@ -219,5 +223,13 @@ export class ProductsComponent {
 
   scrollTopBtn(): void {
     scrollTo(0, 0);
+  }
+
+  imageIsLoading: boolean = true;
+  imageLoaded(): void {
+    setTimeout(() => {
+      this.imageIsLoading = false;
+    }, 1500);
+    console.log('Loaded Successfylly');
   }
 }

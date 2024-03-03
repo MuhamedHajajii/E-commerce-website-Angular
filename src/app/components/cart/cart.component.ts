@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { UserCart } from 'src/app/shared/interfaces/user-cart';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { OffersService } from 'src/app/shared/services/offers.service';
 import { WishListService } from 'src/app/shared/services/wish-list.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class CartComponent implements OnInit {
     private _CartService: CartService,
     private _ToastrService: ToastrService,
     private _Router: Router,
-    private _WishListService: WishListService
+    private _WishListService: WishListService,
+    private _OffersService: OffersService
   ) {}
   ngOnInit(): void {
     this.getCartData();
@@ -36,6 +38,7 @@ export class CartComponent implements OnInit {
     this._CartService.getCurrentUserCart().subscribe({
       next: (response: UserCart) => {
         this.allCartItems = response;
+        console.log(this.allCartItems);
         this.currentUserCartId = response.data._id;
         if (response.numOfCartItems == 0) {
           this.allCartItems = undefined;
@@ -141,5 +144,8 @@ export class CartComponent implements OnInit {
         this._CartService.updateCartCound(cartTotalProducts);
       },
     });
+  }
+  geOffer(name: string): number {
+    return this._OffersService.getOfferCart(name);
   }
 }

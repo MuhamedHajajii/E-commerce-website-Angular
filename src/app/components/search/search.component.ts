@@ -108,4 +108,13 @@ export class SearchComponent {
       },
     });
   }
+
+  imageIsLoading: boolean = true;
+
+  imageLoaded(): void {
+    setTimeout(() => {
+      this.imageIsLoading = false;
+    }, 1500);
+    console.log('Loaded Successfylly');
+  }
 }

@@ -39,7 +39,7 @@
             <div class="row justify-content-between justify-content-md-end justify-content-lg-between">
               <!-- first Column -->
               <div
-                class="col-12 col-md-12 col-lg-4  p-3 p-md-0 d-flex h-100 justify-content-between align-items-center flex-column">
+                class="col-12 col-md-6 col-lg-4  p-3 p-md-0 d-flex h-100 justify-content-between align-items-center flex-column">
                 <p class="w-100 text-center"><span class="border-bottom border-3">Item</span></p>
                 <div>
                   <h3 class="fw-bold h5">{{item.product.title | textterm:2}}</h3>
@@ -88,13 +88,37 @@
 
               <!-- third column -->
               <div
-                class="col-12 col-md-6 col-lg-4  p-3 p-md-0 d-flex h-100 justify-content-between align-items-center flex-column">
+                class="col-12 col-md-12 col-lg-4  p-3 p-md-0 d-flex h-100 justify-content-between align-items-center flex-column">
                 <p class="w-100 text-center"><span class="border-bottom border-3">Totla</span></p>
                 <div>
                   <div class="text-end-lg text-start">
-                    <h3 class="h5 fw-bold">Total Price:</h3>
-                    <p [style]="'color:var(--main-color);'" class="fw-bold h6 mb-2">{{item.price * item.count |
-                      currency:'EGP '}}</p>
+                    <div class="border-bottom border-2 mb-2">
+                      <p class="fw-bold d-flex justify-content-between align-items-center">
+                        <span>Subtotal:</span>
+                        <span>{{item.price * item.count | currency:' EGP '}}</span>
+                      </p>
+                      <p class="fw-dange fw-bold d-flex justify-content-between align-items-center">
+                        <span class="w-50 fw-bold text-danger">{{-geOffer(item.product.category.name)}}% offer</span>
+                        <span class="fw-bold text-danger">
+                          {{(geOffer(item.product.category.name)/100) * item.price * item.count | currency:' EGP '}}-
+                        </span>
+                      </p>
+                      <p class="fw-dange fw-bold d-flex justify-content-between align-items-center">
+                        <span class="w-50">included 14% Taxes: </span>
+                        <span>{{((item.price * item.count) - (geOffer(item.product.category.name)/100) * item.price *
+                          item.count) * 0.14 | currency:' EGP '}}</span>
+                      </p>
+                      <p class="fw-bold d-flex justify-content-between align-items-center">
+                        <span>shiping:</span>
+                        <span>{{100 | currency:' EGP '}}</span>
+                      </p>
+                    </div>
+                    <div class="text-center d-flex justify-content-between">
+                      <h3 class="h5 fw-bold">Total Price: </h3>
+                      <p class="fw-bold h6 mb-2">{{(item.price * item.count * 1.14)
+                        + 100 |
+                        currency:'EGP '}}</p>
+                    </div>
                     <button [routerLink]="['/details', item.product._id]" class="btn p-0 mt-5"><span
                         class="text-decoration-underline">product details</span></button>
                   </div>

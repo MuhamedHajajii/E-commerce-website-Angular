@@ -57,4 +57,29 @@ export class OffersService {
       return 1;
     }
   }
+  getOfferCart(name: any): number {
+    if (name == 'Music') {
+      return 3;
+    } else if (name == "Men's Fashion") {
+      return 7;
+    } else if (name == "Women's Fashion") {
+      return 9;
+    } else if (name == 'SuperMarket') {
+      return 3;
+    } else if (name == 'Home') {
+      return 6;
+    } else if (name == 'Books') {
+      return 2;
+    } else if (name == 'Mobiles') {
+      return 3;
+    } else if (name == 'Electronics') {
+      return 13;
+    } else if (name == 'Baby & Toys') {
+      return 11;
+    } else if (name == 'Beauty & Health') {
+      return 5;
+    } else {
+      return 1;
+    }
+  }
 }
