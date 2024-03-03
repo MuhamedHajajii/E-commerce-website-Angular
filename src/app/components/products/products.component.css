@@ -191,6 +191,11 @@
 }
 
 
-.position-sticky {
-  z-index: 999999;
+.sectionNav {
+  z-index: 1010;
+  transition: 0.8s all;
+}
+
+.mainSection {
+  min-height: 50vh;
 }

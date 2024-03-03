@@ -232,4 +232,20 @@ export class ProductsComponent {
     }, 1500);
     console.log('Loaded Successfylly');
   }
+
+  @ViewChild('FreshMarketLogo') ProductsLogo!: ElementRef;
+  @ViewChild('ComponentNav') ComponentNav!: ElementRef;
+
+  @HostListener('window:scroll')
+  onwindowScroll(): void {
+    if (scrollY > 120) {
+      this._Renderer2.removeClass(this.ProductsLogo.nativeElement, 'd-none');
+      this._Renderer2.removeClass(this.ProductsLogo.nativeElement, 'p-2');
+      this._Renderer2.addClass(this.ProductsLogo.nativeElement, 'p-4');
+    } else {
+      this._Renderer2.addClass(this.ProductsLogo.nativeElement, 'd-none');
+      this._Renderer2.addClass(this.ProductsLogo.nativeElement, 'p-2');
+      this._Renderer2.removeClass(this.ProductsLogo.nativeElement, 'p-4');
+    }
+  }
 }

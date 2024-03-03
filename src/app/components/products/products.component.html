@@ -1,9 +1,9 @@
-<section class="my-b">
-  <div class="container-fluid">
-    <ng-container *ngIf="!productsLoaded">
-      <div class="row align-items-start position-sticky p-4 bg-main-light" style="top: 88px;">
+<section class="d-flex flex-column justify-content-between mainSection">
+  <section class="my-b">
+    <div #ComponentNav class="bg-main-light sectionNav container-fluid position-sticky" style="top: 90px;">
+      <div class="row align-items-center mx-auto  container">
         <div class="col-12 col-md-6 mb-3 mb-md-0">
-          <h2 class="fw-bolder mb-0"><img src="./assets/images/freshcart-logo.svg" alt=""> All <span
+          <h2 class="fw-bolder mb-0"><img #FreshMarketLogo src="./assets/images/freshcart-logo.svg" alt=""> All <span
               class="text-main">Products</span>:</h2>
         </div>
         <div class="fw-boldercol-12 justify-content-end d-md-flex d-block col-md-6">
@@ -23,152 +23,156 @@
           </div>
         </div>
       </div>
-      <div [ngClass]="{
-        'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-5':changeDisplay,
-        'row-cols-1':!changeDisplay
-        }" class="row mt-5">
-        <div *ngFor="let item of homeProducts | paginate: { id: 'allProductsPagenetion',
-        itemsPerPage: pageSize,
-        currentPage: currentPage,
-        totalItems: totalItems } | search:searchTitle ; index as i"
-          class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
-          <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
-            (click)="currentIndex(i,lightBox)">
-            <i class="fa-solid fa-eye"></i>
-          </span>
+    </div>
+    <div class="container">
+      <ng-container *ngIf="!productsLoaded">
+        <div [ngClass]="{
+          'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-lg-5':changeDisplay,
+          'row-cols-1':!changeDisplay
+          }" class="row mt-5">
+          <div *ngFor="let item of homeProducts | paginate: { id: 'allProductsPagenetion',
+          itemsPerPage: pageSize,
+          currentPage: currentPage,
+          totalItems: totalItems } | search:searchTitle ; index as i"
+            class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
+            <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
+              (click)="currentIndex(i,lightBox)">
+              <i class="fa-solid fa-eye"></i>
+            </span>
 
-          <div *ngIf="imageIsLoading" class="position-absolute w-100 h-100 top-0 start-0 end-0 bottom-0 z-3 ">
-            <div class="card w-100 border-0 h-100 p-3 d-flex justify-content-between flex-column" aria-hidden="true">
-              <div style="aspect-ratio: 1/1;" class="bg-secondary card-img-top"></div>
-              <div class="card-body">
-                <h5 class="card-title placeholder-glow">
-                  <span class="placeholder col-6"></span>
-                </h5>
-                <p class="card-text placeholder-glow">
-                  <span class="placeholder col-7"></span>
-                  <span class="placeholder col-4"></span>
-                  <span class="placeholder col-4"></span>
-                  <span class="placeholder col-6"></span>
-                  <span class="placeholder col-8"></span>
-                </p>
-                <div class="d-flex justify-content-between">
-                  <a class="btn-main disabled placeholder col-6" aria-disabled="true"></a>
-                  <i class="fas fa-heart text-main fa-2x opacity-50"></i>
+            <div *ngIf="imageIsLoading" class="position-absolute w-100 h-100 top-0 start-0 end-0 bottom-0 z-3 ">
+              <div class="card w-100 border-0 h-100 p-3 d-flex justify-content-between flex-column" aria-hidden="true">
+                <div style="aspect-ratio: 1/1;" class="bg-secondary card-img-top"></div>
+                <div class="card-body">
+                  <h5 class="card-title placeholder-glow">
+                    <span class="placeholder col-6"></span>
+                  </h5>
+                  <p class="card-text placeholder-glow">
+                    <span class="placeholder col-7"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-4"></span>
+                    <span class="placeholder col-6"></span>
+                    <span class="placeholder col-8"></span>
+                  </p>
+                  <div class="d-flex justify-content-between">
+                    <a class="btn-main disabled placeholder col-6" aria-disabled="true"></a>
+                    <i class="fas fa-heart text-main fa-2x opacity-50"></i>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
 
-          <ng-container *ngIf="!(homeProducts | search:searchTitle).length ">
-            <div class="alert alert-danger my-4">No products with that name sorry</div>
-          </ng-container>
+            <ng-container *ngIf="!(homeProducts | search:searchTitle).length ">
+              <div class="alert alert-danger my-4">No products with that name sorry</div>
+            </ng-container>
 
 
-          <div [routerLink]="['/details', item._id]" class="child cursor-pointer">
-            <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
-            <div [ngClass]="{'row':!changeDisplay}">
-              <div [ngClass]="{'col-12 col-md-3':!changeDisplay}" class="position-relative overflow-hidden h-100">
-                <img [style]="imageIsLoading?'aspect-ratio: 1/1;':''" (load)="imageLoaded()" class="w-100"
-                  [src]="item.imageCover" [alt]="item.category.name">
-                <div
-                  class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
-                  <img class="w-100 h-100" [src]="item.images[2]?item.images[2]:item.images[0]"
-                    [alt]="item.category.name">
-                  <img class="w-100 h-100" [src]="item.images[0]?item.images[0]:item.images[0]"
-                    [alt]="item.category.name">
-                  <img class="w-100 h-100" [src]="item.images[1]?item.images[1]:item.images[0]"
-                    [alt]="item.category.name">
-                  <img class="w-100 h-100" [src]="item.images[3] ? item.images[3] :item.images[0] "
-                    [alt]="item.category.name">
+            <div [routerLink]="['/details', item._id]" class="child cursor-pointer">
+              <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
+              <div [ngClass]="{'row':!changeDisplay}">
+                <div [ngClass]="{'col-12 col-md-3':!changeDisplay}" class="position-relative overflow-hidden h-100">
+                  <img [style]="imageIsLoading?'aspect-ratio: 1/1;':''" (load)="imageLoaded()" class="w-100"
+                    [src]="item.imageCover" [alt]="item.category.name">
+                  <div
+                    class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
+                    <img class="w-100 h-100" [src]="item.images[2]?item.images[2]:item.images[0]"
+                      [alt]="item.category.name">
+                    <img class="w-100 h-100" [src]="item.images[0]?item.images[0]:item.images[0]"
+                      [alt]="item.category.name">
+                    <img class="w-100 h-100" [src]="item.images[1]?item.images[1]:item.images[0]"
+                      [alt]="item.category.name">
+                    <img class="w-100 h-100" [src]="item.images[3] ? item.images[3] :item.images[0] "
+                      [alt]="item.category.name">
+                  </div>
                 </div>
-              </div>
-              <ng-container *ngIf="changeDisplay">
-                <hr />
-              </ng-container>
+                <ng-container *ngIf="changeDisplay">
+                  <hr />
+                </ng-container>
 
-              <div [ngClass]="{'col-9 justify-content-between':!changeDisplay}" class="d-flex flex-column">
-                <div>
-                  <p class="fw-bold">{{item.category.name}}</p>
-                  <ng-container *ngIf="!changeDisplay">
-                    <p class="text-muted">{{item.description}}</p>
-                    <p><span class="fw-bold">reviews : </span>{{item.ratingsAverage}} <i class="fa-solid fa-eye"></i>
-                    </p>
-                    <p><span class="fw-bold">Sold : </span> {{item.sold}} <i class="fa-solid fa-bag-shopping"></i>
-                    </p>
-                  </ng-container>
+                <div [ngClass]="{'col-9 justify-content-between':!changeDisplay}" class="d-flex flex-column">
+                  <div>
+                    <p class="fw-bold">{{item.category.name}}</p>
+                    <ng-container *ngIf="!changeDisplay">
+                      <p class="text-muted">{{item.description}}</p>
+                      <p><span class="fw-bold">reviews : </span>{{item.ratingsAverage}} <i class="fa-solid fa-eye"></i>
+                      </p>
+                      <p><span class="fw-bold">Sold : </span> {{item.sold}} <i class="fa-solid fa-bag-shopping"></i>
+                      </p>
+                    </ng-container>
 
-                  <h2 class="fw-bolder h6">
-                    {{item.title | textterm:changeDisplay ?2:20 }}
-                  </h2>
-                </div>
-                <div>
-                  <p class="mb-0 text-decoration-line-through text-danger fs-8">
-                    EGP
-                    {{item.price}}
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <p class="mb-0 d-flex justify-content-start align-items-center">
-                      <span class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0">
-                        <span class="me-1">EGP</span>
-                        <span>{{item.price
-                          +item.price
-                          * (getOffer(i , homeProducts)/100) | number}}</span>
-                      </span>
+                    <h2 class="fw-bolder h6">
+                      {{item.title | textterm:changeDisplay ?2:20 }}
+                    </h2>
+                  </div>
+                  <div>
+                    <p class="mb-0 text-decoration-line-through text-danger fs-8">
+                      EGP
+                      {{item.price}}
                     </p>
-                    <div class="d-flex justify-content-end align-items-center">
-                      <i [style]="'color:yellow;'" class="fas fa-star"></i>
-                      {{item.ratingsAverage}}
+                    <div class="d-flex justify-content-between align-items-center">
+                      <p class="mb-0 d-flex justify-content-start align-items-center">
+                        <span class="h6 fw-bolder d-flex justify-content-center align-items-center mb-0">
+                          <span class="me-1">EGP</span>
+                          <span>{{item.price
+                            +item.price
+                            * (getOffer(i , homeProducts)/100) | number}}</span>
+                        </span>
+                      </p>
+                      <div class="d-flex justify-content-end align-items-center">
+                        <i [style]="'color:yellow;'" class="fas fa-star"></i>
+                        {{item.ratingsAverage}}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="row my-2 p-3">
-            <button (click)="addToCart(item._id)" class="col-9 d-block btn-main">Add To Cart</button>
+            <div class="row my-2 p-3">
+              <button (click)="addToCart(item._id)" class="col-9 d-block btn-main">Add To Cart</button>
 
-            <div class="px-2 col-3 ">
-              <button *ngIf="!currentWishList.includes($any(item._id))" (click)="addToWishList(item._id)"
-                class="wishListBtn btn-main w-100 h-100 d-flex justify-content-center align-items-center "><i
-                  class="fa-regular fa-heart fa-lg"></i></button>
+              <div class="px-2 col-3 ">
+                <button *ngIf="!currentWishList.includes($any(item._id))" (click)="addToWishList(item._id)"
+                  class="wishListBtn btn-main w-100 h-100 d-flex justify-content-center align-items-center "><i
+                    class="fa-regular fa-heart fa-lg"></i></button>
 
-              <button *ngIf="currentWishList.includes($any(item._id))" (click)="removeFromWishList(item._id)"
-                class="wishListBtn btn-danger btn w-100 h-100 d-flex justify-content-center align-items-center "><i
-                  class="fa-solid fa-heart fa-lg"></i></button>
+                <button *ngIf="currentWishList.includes($any(item._id))" (click)="removeFromWishList(item._id)"
+                  class="wishListBtn btn-danger btn w-100 h-100 d-flex justify-content-center align-items-center "><i
+                    class="fa-solid fa-heart fa-lg"></i></button>
+
+              </div>
+
 
             </div>
 
-
           </div>
-
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
 
+    </div>
+    <div #lightBox class="lightBoxContainer d-none" (click)="closeLightBox(lightBox)">
+      <ng-container *ngIf="homeProducts">
+        <app-home-eyelook [productIndex]="dataindex"
+          [AllproductsInit]="homeProducts | search:searchTitle"></app-home-eyelook>
+      </ng-container>
+
+    </div>
+  </section>
+
+  <div *ngIf="startPaginitionFlag" class="my-3">
+    <button [disabled]="!endThisButton" (click)="DisplayMoreData()" class="btn-main d-block w-50 m-auto p-2">Load More
+      Product</button>
   </div>
-  <div #lightBox class="lightBoxContainer d-none" (click)="closeLightBox(lightBox)">
-    <ng-container *ngIf="homeProducts">
-      <app-home-eyelook [productIndex]="dataindex"
-        [AllproductsInit]="homeProducts | search:searchTitle"></app-home-eyelook>
-    </ng-container>
+  <div *ngIf="!startPaginitionFlag" class="my-3">
+    <button [disabled]="!endPage" (click)="DisplayMoreDataPages()" class="btn-main d-block w-50 m-auto p-2">Load More
+      Product</button>
+  </div>
 
+  <div class="d-flex justify-content-center">
+    <pagination-controls class="AllProdcutsPagenation" id="allProductsPagenetion" (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
+      [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+    </pagination-controls>
   </div>
 </section>
-
-<div *ngIf="startPaginitionFlag" class="my-3">
-  <button [disabled]="!endThisButton" (click)="DisplayMoreData()" class="btn-main d-block w-50 m-auto p-2">Load More
-    Product</button>
-</div>
-<div *ngIf="!startPaginitionFlag" class="my-3">
-  <button [disabled]="!endPage" (click)="DisplayMoreDataPages()" class="btn-main d-block w-50 m-auto p-2">Load More
-    Product</button>
-</div>
-
-<div class="d-flex justify-content-center">
-  <pagination-controls class="AllProdcutsPagenation" id="allProductsPagenetion" (pageChange)="pageChanged($event)"
-    (pageBoundsCorrection)="pageChanged($event)" [maxSize]="9" [directionLinks]="true" [autoHide]="true"
-    [responsive]="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
-    screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-  </pagination-controls>
-</div>

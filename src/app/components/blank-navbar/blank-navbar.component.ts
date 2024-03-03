@@ -119,7 +119,7 @@ export class BlankNavbarComponent implements OnInit {
 
   @HostListener('window:scroll')
   onNavScroll(): void {
-    if (scrollY > 150) {
+    if (scrollY > 120) {
       this._Renderer2.addClass(this.navElement.nativeElement, 'd-none');
       this._Renderer2.addClass(this.navSocialIcons.nativeElement, 'd-none');
       this._Renderer2.removeClass(this.navCounters.nativeElement, 'd-none');

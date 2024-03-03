@@ -28,14 +28,14 @@
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </button>
         </li> -->
-        <li *ngIf="cartCount" (click)="fireCart()"
-          class="nav-item dropstart Cart position-relative flex-grow-0 p-3 me-2">
-          <a class="nav-link dropdown-toggle-split" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+        <li *ngIf="cartCount" class="nav-item dropstart Cart position-relative flex-grow-0 p-3 me-2">
+          <a (click)="fireCart()" class="nav-link dropdown-toggle-split" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </a>
-          <ul class="dropdown-menu main top-50" aria-labelledby="dropdownMenuButton" data-bs-auto-close="false">
+          <ul (click)="cartFlow($event)" class="dropdown-menu main top-50" aria-labelledby="dropdownMenuButton"
+            data-bs-auto-close="false">
             <li class="text-main mb-2 fw-bold p-4 d-flex justify-content-between align-items-center">Cart Items:
               <button routerLink="/cart" class="btn-main d-block">Open Cart <i
                   class="fa-solid fa-2x fa-cart-shopping text-warning"></i></button>
@@ -177,7 +177,7 @@
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </a>
-          <ul class="dropdown-menu main top-50">
+          <ul (click)="cartFlow($event)" class="dropdown-menu main top-50">
             <li class="text-main mb-2 fw-bold p-4 d-flex justify-content-between align-items-center">Cart Items:
               <button routerLink="/cart" class="btn-main d-block">Open Cart <i
                   class="fa-solid fa-2x fa-cart-shopping text-warning"></i></button>
