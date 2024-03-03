@@ -1,7 +1,7 @@
 <ng-container>
   <form [formGroup]="userUpdateDateForm" (ngSubmit)="UpdateUserData()">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-12 col-lg-8">
         <p class="h5 row">
           <span class="col-2 fw-bolder text-capitalize"><label for="name">name</label> </span>
           <span class="col-1"> :</span>
@@ -31,7 +31,7 @@
         </p>
       </div>
     </div>
-    <span class="col-2"><button *ngIf="editMood" class="btn-secondary btn">Update</button></span>
+    <span class="col-12 col-md-2"><button *ngIf="editMood" class="btn-secondary btn">Update</button></span>
   </form>
   <span class="col-2"><button *ngIf="!editMood" (click)="editing()" class="btn-main mb-3">Edit</button></span>
 </ng-container>

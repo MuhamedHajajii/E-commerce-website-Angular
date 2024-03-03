@@ -11,7 +11,7 @@ export class MainsliderComponent {
     loop: true,
     mouseDrag: true,
     touchDrag: true,
-    pullDrag: false,
+    pullDrag: true,
     dots: true,
     navSpeed: 500,
     autoplay: true,

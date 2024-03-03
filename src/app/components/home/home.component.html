@@ -4,19 +4,19 @@
     <h2 class="fw-bolder">Shop Popular Categories</h2>
     <app-categorie-slider></app-categorie-slider>
     <ng-container *ngIf="!productsLoaded">
-      <div class="row align-items-center">
-        <div class="col-12 col-md-6">
+      <div class="row align-items-start">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
           <h2 class="fw-bolder mb-0">Shop Popular Products</h2>
         </div>
-        <div class="fw-bolder col-12 col-md-6">
-          <div class="d-flex justify-content-between mt-2 mt-md-0 justify-content-md-end">
-            <div class="d-flex">
+        <div class="fw-boldercol-12 justify-content-end d-md-flex d-block col-md-6">
+          <div class="mt-2 mt-md-0">
+            <div class="d-flex aling-items-center justify-content-end">
               <button (click)="openSearchResult()" class="btn-main"><i
                   class="fa-solid fa-magnifying-glass"></i></button>
               <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
                 [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
             </div>
-            <div>
+            <div class="text-end">
               <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
                   class="fa-solid fa-bars fa-2x"></i></button>
               <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
@@ -25,25 +25,25 @@
           </div>
         </div>
       </div>
-      <div [ngClass]="{
-        'row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,
-        'row-cols-1':!changeDisplay
-        }" class="row mt-5">
-        <ng-container *ngIf="!(homeProducts | search:searchTitle).length ">
-          <div class="alert alert-danger my-4">No products with that name sorry</div>
-        </ng-container>
+
+
+
+      <div [ngClass]="{'row-cols-sm-2 row-cols-md-3 row-cols-lg-4':changeDisplay,'row-cols-1':!changeDisplay}"
+        class="row mt-5">
         <div *ngFor="let item of homeProducts | search:searchTitle | slice:0:10 ; index as i"
-          class="col p-4 shadow-sm position-relative parent overflow-hidden">
+          class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
           <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
             (click)="currentIndex(i,lightBox)">
             <i class="fa-solid fa-eye"></i>
           </span>
 
-
+          <ng-container *ngIf="!(homeProducts | search:searchTitle).length ">
+            <div class="alert alert-danger my-4">No products with that name sorry</div>
+          </ng-container>
           <div [routerLink]="['/details', item._id]" class="child cursor-pointer contentContainer">
             <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
             <div [ngClass]="{'row':!changeDisplay}">
-              <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden">
+              <div [ngClass]="{'col-12 col-md-3':!changeDisplay}" class="position-relative overflow-hidden h-100">
                 <img class="w-100" [src]="item.imageCover" [alt]="item.category.name">
                 <div
                   class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">
@@ -112,6 +112,7 @@
 
             </div>
           </div>
+
         </div>
       </div>
     </ng-container>

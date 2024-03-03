@@ -2,7 +2,7 @@
   <ng-container *ngIf="!isLoading">
     <div class="container">
       <div class="row">
-        <div class="col col-md-4 text-center">
+        <div class="col col-lg-4 text-center position-relative">
           <div>
             <div class="px-1 py-4 rounded-4 shadow position-relative">
               <span class="offer bg-danger">-{{currentoffer}}%</span>
@@ -23,8 +23,20 @@
               </div>
             </div>
           </div>
+          <div class="position-absolute p-3 top-0 start-0 m-3">
+            <button *ngIf="!currentWishList.includes($any(productDetails.data._id))"
+              (click)="addToWishList(productDetails.data._id)"
+              class="wishListBtn btn-main d-flex justify-content-center align-items-center "><i
+                class="fa-regular fa-heart fa-lg"></i></button>
+
+            <button *ngIf="currentWishList.includes($any(productDetails.data._id))"
+              (click)="removeFromWishList(productDetails.data._id)"
+              class="wishListBtn btn-danger btn d-flex justify-content-center align-items-center "><i
+                class="fa-solid fa-heart fa-lg"></i></button>
+
+          </div>
         </div>
-        <div class="col col-md-8 position-relative">
+        <div class="col col-lg-8 position-relative">
           <div class="p-4">
             <p class="fw-bolder">{{productDetails.data.description}}</p>
             <h2 class="mb-3 h4 fw-bold">{{productDetails.data.title}}</h2>
@@ -57,20 +69,9 @@
             </div>
             <button (click)="addToCart(productDetails.data._id)" class=" mt-1 d-block w-100 btn-main">+ add to
               cart</button>
-            <div class="position-absolute top-0 end-0 m-3">
-              <button *ngIf="!currentWishList.includes($any(productDetails.data._id))"
-                (click)="addToWishList(productDetails.data._id)"
-                class="wishListBtn btn-main d-flex justify-content-center align-items-center "><i
-                  class="fa-regular fa-heart fa-lg"></i></button>
-
-              <button *ngIf="currentWishList.includes($any(productDetails.data._id))"
-                (click)="removeFromWishList(productDetails.data._id)"
-                class="wishListBtn btn-danger btn d-flex justify-content-center align-items-center "><i
-                  class="fa-solid fa-heart fa-lg"></i></button>
-
-            </div>
           </div>
         </div>
+
       </div>
     </div>
   </ng-container>

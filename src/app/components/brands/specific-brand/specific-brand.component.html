@@ -56,7 +56,7 @@
               <div class="alert alert-danger my-4">No products with that name sorry</div>
             </ng-container>
             <div *ngFor="let item of categoryProducts | search:searchTitle ; index as i"
-              class="col p-4 shadow-sm position-relative parent overflow-hidden">
+              class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
               <span [ngClass]="{'top-0 start-0 m-3':!changeDisplay}" class="position-absolute"
                 (click)="currentIndex(i,lightBox)">
                 <i class="fa-solid fa-eye"></i>

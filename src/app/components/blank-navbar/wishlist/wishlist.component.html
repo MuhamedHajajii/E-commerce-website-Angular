@@ -20,11 +20,11 @@
         'row-cols-1':!changeDisplay
         }" class="row mt-5">
         <div *ngFor="let item of homeProducts ; index as i"
-          class="col p-4 shadow-sm position-relative parent overflow-hidden">
+          class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
           <div [routerLink]="['/details', item._id]" class="child cursor-pointer contentContainer">
             <span class="offer bg-danger">-{{ getOffer(i , homeProducts)}}%</span>
             <div [ngClass]="{'row':!changeDisplay}">
-              <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden">
+              <div [ngClass]="{'col-3':!changeDisplay}" class="position-relative overflow-hidden h-100">
                 <img class="w-100" [src]="item.imageCover" [alt]="item.category.name">
                 <div
                   class=" position-absolute top-0 end-0 bottom-0 start-0 d-flex justify-content-center align-items-center overflow-hidden sliderParent">

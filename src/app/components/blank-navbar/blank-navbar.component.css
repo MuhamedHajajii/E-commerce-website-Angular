@@ -162,3 +162,28 @@
     top: 100%;
     left: 0;
   }
+
+  @media screen and (max-width:767px) {
+
+    .fa-truck,
+    .fa-heart,
+    .fa-cart-shopping {
+      font-size: 20px;
+    }
+
+    .signOut.first {
+      display: none !important;
+    }
+
+    .fa-truck+span,
+    .fa-heart+span,
+    .fa-cart-shopping+span {
+      font-size: 12px;
+    }
+  }
+
+  @media screen and (min-width:767px) {
+    .signOut.two {
+      display: none !important;
+    }
+  }

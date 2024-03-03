@@ -6,7 +6,7 @@
           alt="fresh market logo"></a>
       <ul class="list-unstyled d-flex align-items-center mb-0">
         <!-- Truck -->
-        <li *ngIf="truckCount" class="position-relative flex-grow-0 p-2">
+        <li *ngIf="truckCount" class="position-relative flex-grow-0 p-2  me-2">
           <button routerLink="/allorders" class="btn"> <span class="p-1 d-none d-lg-inline position-relative">track your
               orders <span class="position-absolute top-0 start-0 translate-middle"
                 [style]="'color: var(--main-color);'"><i class="fa-solid fa-share"></i></span></span>
@@ -15,31 +15,33 @@
           </button>
         </li>
         <!-- Wish List -->
-        <li *ngIf="wishList" class="position-relative flex-grow-0 p-2 cart">
+        <li *ngIf="wishList" class="position-relative flex-grow-0 p-2 cart  me-2">
           <button routerLink="/wishlist" class="btn">
             <i class="fa-solid fa-heart fa-2x text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{wishList}}</span>
           </button>
         </li>
         <!-- Cart -->
-        <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart">
+        <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart me-2">
           <button routerLink="/cart" class="btn">
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </button>
         </li>
         <!-- Sign Out Session -->
-        <li (click)="showSignOut(logOutIcon)" class="ms-3 flex-grow-1 cursor-pointer
-        nav-item signOut position-relative">
-          <span><i class="fa-solid fa-user"></i></span>
-          <span class="text-white fw-bold mx-2 d-none d-md-inline">
-            {{userName}}</span>
-          <span #logOutIcon (click)="stopProp($event)" class="d-none translate-middle-x position-absolute signOutBtn">
+        <li class="nav-item dropdown ms-3 flex-grow-1 cursor-pointer signOut first position-relative">
+          <a class="nav-link dropdown-toggle-split d-flex justify-content-between align-items-center" href="#"
+            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span><i class="fa-solid fa-user"></i></span>
+            <span class="text-white fw-bold mx-2 d-none d-md-inline">
+              {{userName}}</span>
+          </a>
+          <ul class="dropdown-menu text-center mt-3">
             <button routerLink="/settings"
               class=" btn-dark border btn px-4 text-decoration-underline my-2">Settings</button>
             <button class=" btn-warning border btn px-4 text-decoration-underline my-2"
               (click)="singOut()">SignOut</button>
-          </span>
+          </ul>
         </li>
       </ul>
     </div>
@@ -88,8 +90,6 @@
                   <app-allsupcategories></app-allsupcategories>
                 </ul>
               </li>
-
-
               <li>
                 <ul class="list-unstyled categoriesUl">
                   <app-subcategories></app-subcategories>
@@ -97,48 +97,13 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item ms-0 ms-lg-2">
+          <li class="nav-item ms-0 ms-lg-2 d-none d-xl-block">
             <app-main-search-bar></app-main-search-bar>
           </li>
         </ul>
 
 
-        <ul #navCounters class="d-none list-unstyled d-flex align-items-center mb-0">
-          <!-- Truck -->
-          <li *ngIf="truckCount" class="position-relative flex-grow-0 p-2">
-            <button routerLink="/allorders" class="btn"> <span class="p-1 d-none d-lg-inline position-relative">track
-                your
-                orders <span class="position-absolute top-0 start-0 translate-middle"
-                  [style]="'color: var(--main-color);'"><i class="fa-solid fa-share"></i></span></span>
-              <i class="fa-solid fa-2x fa-truck text-main cart"></i>
-              <span class="badge bg-danger position-absolute p-2 top-0 end-0 cart">{{truckCount}}</span>
-            </button>
-          </li>
-          <!-- Wish List -->
-          <li *ngIf="wishList" class="position-relative flex-grow-0 p-2 cart">
-            <button routerLink="/wishlist" class="btn">
-              <i class="fa-solid fa-heart fa-2x text-main"></i>
-              <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{wishList}}</span>
-            </button>
-          </li>
-          <!-- Cart -->
-          <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart">
-            <button routerLink="/cart" class="btn">
-              <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
-              <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
-            </button>
-          </li>
-          <!-- Sign Out Session -->
-          <li *ngIf="!truckCount&&!wishList&&!cartCount" (click)="showSignOut(logOutIcon)" class="ms-3 flex-grow-1 cursor-pointer
-        nav-item signOut position-relative">
-            <span><i class="fa-solid fa-user"></i></span>
-            <span class="text-white fw-bold mx-2 d-none d-md-inline">
-              {{userName}}</span>
-            <span #logOutIcon (click)="stopProp($event)"
-              class="d-none translate-middle-x position-absolute signOutBtn"><button
-                class="btn-main text-decoration-underline " (click)="singOut()">SignOut</button></span>
-          </li>
-        </ul>
+
 
 
 
@@ -163,6 +128,49 @@
           </li>
         </ul>
       </div>
+      <ul #navCounters class="d-none mt-2 list-unstyled d-flex pe-3 align-items-center justify-content-end mb-0">
+        <!-- Truck -->
+        <li *ngIf="truckCount" class="position-relative flex-grow-0 p-2">
+          <button routerLink="/allorders" class="btn"> <span class="p-1 d-none d-lg-inline position-relative">track
+              your
+              orders <span class="position-absolute top-0 start-0 translate-middle"
+                [style]="'color: var(--main-color);'"><i class="fa-solid fa-share"></i></span></span>
+            <i class="fa-solid fa-2x fa-truck text-main cart"></i>
+            <span class="badge bg-danger position-absolute p-2 top-0 end-0 cart">{{truckCount}}</span>
+          </button>
+        </li>
+        <!-- Wish List -->
+        <li *ngIf="wishList" class="position-relative flex-grow-0 p-2 cart">
+          <button routerLink="/wishlist" class="btn">
+            <i class="fa-solid fa-heart fa-2x text-main"></i>
+            <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{wishList}}</span>
+          </button>
+        </li>
+        <!-- Cart -->
+        <li *ngIf="cartCount" class="position-relative flex-grow-0 p-2 cart">
+          <button routerLink="/cart" class="btn">
+            <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
+            <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
+          </button>
+        </li>
+      </ul>
+      <!-- Sign Out Session -->
+      <li class="nav-item dropstart ms-auto mt-2 cursor-pointer w-auto signOut two position-relative">
+        <a class="nav-link dropdown-toggle-split d-flex justify-content-between align-items-center" href="#"
+          role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <span><i class="fa-solid fa-user"></i></span>
+          <span class="text-white fw-bold mx-2 d-none d-md-inline">
+            {{userName}}</span>
+        </a>
+        <ul class="dropdown-menu text-center mt-3">
+          <button routerLink="/settings"
+            class=" btn-dark border btn px-4 text-decoration-underline my-2">Settings</button>
+          <button class=" btn-warning border btn px-4 text-decoration-underline my-2"
+            (click)="singOut()">SignOut</button>
+        </ul>
+      </li>
     </div>
   </nav>
+
+
 </header>

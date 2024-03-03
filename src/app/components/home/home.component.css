@@ -92,7 +92,7 @@
 }
 
 .parent button {
-  transform: translateY(250%);
+  transform: translateY(400%);
   transition: 0.5s all;
 }
 

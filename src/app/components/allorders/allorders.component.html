@@ -2,7 +2,7 @@
   <ng-container *ngIf="allOrders">
     <div class="container bg-main-light rounded-2 p-4 my-4">
       <div class="row mb-2 pb-2 border-bottom border-3" *ngFor="let item of allOrders">
-        <div class="col-3" height="200">
+        <div class="col-12 col-lg-3" height="200">
           <div class="d-flex flex-column rounded-5 overflow-hidden p-4">
             <div>
               <img class="w-100" [src]="item.cartItems[0].product.imageCover" alt="">
@@ -14,7 +14,7 @@
             </div>
           </div>
         </div>
-        <div class="col-9 d-flex flex-column justify-content-between py-3">
+        <div class="col-12 col-lg-9 d-flex flex-column justify-content-between py-3">
           <div class="d-flex justify-content-between align-items-center">
             <div>
               <p [style]="'color:var(--main-color);'"><span class="fw-bold">Order Id:</span> {{item.id}}</p>

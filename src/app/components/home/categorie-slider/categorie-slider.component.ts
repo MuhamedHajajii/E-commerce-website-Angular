@@ -28,8 +28,8 @@ export class CategorieSliderComponent implements OnInit {
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
-    touchDrag: false,
-    pullDrag: false,
+    touchDrag: true,
+    pullDrag: true,
     margin: 15,
     autoplay: true,
     autoplaySpeed: 1000,
