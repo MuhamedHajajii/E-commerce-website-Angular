@@ -2,7 +2,24 @@
   <div class="container bg-main-light rounded-4 p-5 w-75 mx-auto">
     <div class="row align-items-center  position-relative">
       <div class="col-12 col-lg-6">
-        <h2 class="h4 fw-bolder mb-4">fill your address details first </h2>
+        <div class="d-flex justify-content-between align-items-start flex-column mb-4">
+          <h2 class="h4 fw-bolder mb-4">Fill your address details</h2>
+          <label class="me-3 mb-2 fw-semibold text-main" for="address">Choose from your addresses:</label>
+          <ng-container *ngIf="currentUserAddress">
+            <ng-container *ngIf="currentUserAddress.results > 0">
+              <select (change)="currentAddress($event)" id="address" autofocus>
+                <option selected disabled>- Select address</option>
+                <optgroup *ngFor="let item of currentUserAddress.data ; index as i" [label]="i +1 +'-'">
+                  <option class="cursor-pointer" [value]="item._id">{{item.name}}
+                  </option>
+                  <option disabled [value]="item.city">{{item.city}}</option>
+                  <option disabled [value]="item.details">{{item.details}}</option>
+                  <option disabled [value]="item.phone">{{item.phone}}</option>
+                </optgroup>
+              </select>
+            </ng-container>
+          </ng-container>
+        </div>
         <form [formGroup]="userAddress" (ngSubmit)="confirmUserAddress()">
           <div>
             <div class="d-flex justify-content-between align-items-center">
@@ -58,12 +75,12 @@
             </button>
           </div>
         </form>
-        <button routerLink="/cart" class="btn-secondary btn d-block position-absolute top-0 end-0 m-3">Back to cart <i
-            class="fa-solid fa-cart-shopping"></i></button>
       </div>
       <div class="col-12 col-lg-6">
         <img src="./assets/address.svg" class="w-100" alt="address.logo">
       </div>
     </div>
+    <button routerLink="/cart" class="btn-secondary btn d-block ms-auto mt-3">Back to cart <i
+        class="fa-solid fa-cart-shopping"></i></button>
   </div>
 </section>

@@ -31,3 +31,32 @@ form input {
 
   }
 }
+
+
+select {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 14px;
+  padding: 10px 30px 10px 10px;
+  background-image: url("../../../favicon.ico");
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+  background-position: 85% center;
+  font-weight: 700;
+}
+
+option {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 15px;
+}
+
+option:checked {
+  background-color: var(--main-color) !important;
+}
