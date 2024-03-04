@@ -37,10 +37,10 @@
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </a>
-          <ul (click)="cartFlow($event)" class="dropdown-menu main top-50" aria-labelledby="dropdownMenuButton"
-            data-bs-auto-close="false">
+          <ul #dropDownCartOne (click)="cartFlow($event)" class="dropdown-menu main top-50"
+            aria-labelledby="dropdownMenuButton" data-bs-auto-close="false">
             <li class="text-main mb-2 fw-bold p-4 d-flex justify-content-between align-items-center">Cart Items:
-              <button routerLink="/cart" class="btn-main d-block">Open Cart <i
+              <button (click)="closeUl(dropDownCartOne)" routerLink="/cart" class="btn-main d-block">Open Cart <i
                   class="fa-solid fa-2x fa-cart-shopping text-warning"></i></button>
             </li>
             <li (click)="cartFlow($event)" class="rounded-3 shadow-lg w-100"><app-cart
@@ -183,9 +183,10 @@
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </a>
-          <ul (click)="cartFlow($event)" class="dropdown-menu main top-50">
-            <li class="text-main mb-2 fw-bold p-4 d-flex justify-content-between align-items-center">Cart Items:
-              <button routerLink="/cart" class="btn-main d-block">Open Cart <i
+          <ul #dropDownCartTwo (click)="cartFlow($event)" class="dropdown-menu main top-50">
+            <li (click)="closeUl(dropDownCartTwo)"
+              class="text-main mb-2 fw-bold p-4 d-flex justify-content-between align-items-center">Cart Items:
+              <button #openCartBtn2 routerLink="/cart" class="btn-main d-block">Open Cart <i
                   class="fa-solid fa-2x fa-cart-shopping text-warning"></i></button>
             </li>
             <li class="rounded-3 shadow-lg w-100"><app-cart [activeAction]="activeAction"></app-cart></li>

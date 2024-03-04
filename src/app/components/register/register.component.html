@@ -122,3 +122,16 @@
     </form>
   </div>
 </section>
+
+
+
+<div (click)="finishChangePassword()" *ngIf="finishChangePasswordFlag"
+  class="lightBox d-flex justify-content-center align-items-center p-2">
+  <div class="lighBoxContent bg-light p-5 rounded-5">
+    <h2 class="text-main">Success</h2>
+    <p>Welcome <span class="text-main fw-bolder fs-5 text-uppercase">{{userName}}</span> you have successflly Registerd
+      now you
+      can LogIn</p>
+    <button class="btn-main d-block ms-auto">Ok</button>
+  </div>
+</div>

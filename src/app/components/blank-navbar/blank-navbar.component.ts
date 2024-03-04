@@ -120,6 +120,7 @@ export class BlankNavbarComponent implements OnInit {
   @ViewChild('navCounters') navCounters!: ElementRef;
   @ViewChild('navSocialIcons') navSocialIcons!: ElementRef;
   @ViewChild('navMainCounters') navMainCounters!: ElementRef;
+  @ViewChild('dropDownCartOne') dropDownCartOne!: ElementRef;
 
   @HostListener('window:scroll')
   onNavScroll(): void {
@@ -128,6 +129,7 @@ export class BlankNavbarComponent implements OnInit {
       this._Renderer2.addClass(this.navSocialIcons.nativeElement, 'd-none');
       this._Renderer2.removeClass(this.navCounters.nativeElement, 'd-none');
       this._Renderer2.addClass(this.navMainCounters.nativeElement, 'd-none');
+      this._Renderer2.removeClass(this.dropDownCartOne.nativeElement, 'show');
     } else {
       this._Renderer2.removeClass(this.navElement.nativeElement, 'd-none');
       this._Renderer2.removeClass(this.navSocialIcons.nativeElement, 'd-none');
@@ -145,5 +147,9 @@ export class BlankNavbarComponent implements OnInit {
 
   closeNavBar(e: HTMLDivElement): void {
     e.classList.remove('show');
+  }
+
+  closeUl(e: HTMLUListElement) {
+    this._Renderer2.removeClass(this.dropDownCartOne.nativeElement, 'show');
   }
 }

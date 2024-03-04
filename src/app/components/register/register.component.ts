@@ -50,6 +50,8 @@ export class RegisterComponent {
     }
   }
 
+  userName: string = '';
+
   accountAreadyExistsMessage: string = '';
   isLoading: boolean = false;
   submitRegister(): void {
@@ -60,7 +62,8 @@ export class RegisterComponent {
         .subscribe({
           next: (response) => {
             if (response.message == 'success') {
-              this._Router.navigate(['/login']);
+              this.userName = response.user.name;
+              this.finishChangePasswordFlag = true;
               this.isLoading = false;
             }
           },
@@ -87,5 +90,10 @@ export class RegisterComponent {
           },
         });
     }
+  }
+
+  finishChangePasswordFlag: boolean = false;
+  finishChangePassword() {
+    this._Router.navigate(['/login']);
   }
 }
