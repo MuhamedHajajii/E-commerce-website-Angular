@@ -18,7 +18,6 @@ export class UserDetailsService {
 
   getCurrentUserData(): Observable<any> {
     let userID = this._AuthServisesService.userId;
-    console.log(userID);
     return this._HttpClient.get(`${this.baseUrl}${userID}`);
   }
 

@@ -48,6 +48,8 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response) => {
           this.getUserDetails();
+          localStorage.removeItem('userName');
+          localStorage.setItem('userName', response.user.name);
           this._AuthServisesService.userName.next(response.user.name);
           this.EndtEdit();
         },
