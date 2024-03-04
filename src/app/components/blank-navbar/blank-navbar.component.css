@@ -204,3 +204,7 @@
     opacity: 0;
     animation: NotEmpty 1s forwards;
   }
+
+  nav {
+    background-color: #fff;
+  }

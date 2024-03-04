@@ -1,6 +1,9 @@
-<header class="fixed-top bg-light shadow-sm">
-
-  <div #navMainCounters class="container">
+<header class="fixed-top bg-main-light shadow-sm">
+  <div #navBanner class="position-relative">
+    <img class="w-100 banarImage" src="./assets/images/paymob00_topstrip_ar_web.jpg" alt="paymob00_topstrip_ar_web">
+    <div class="layer"></div>
+  </div>
+  <div #navMainCounters class="container p-1 shadow-sm px-3 mb-2 mt-4">
     <div class="py-2 d-flex justify-content-between align-items-center">
       <a class="navbar-brand" routerLink="home"><img src="./assets/images/freshcart-logo.svg"
           alt="fresh market logo"></a>
@@ -74,13 +77,10 @@
       </ul>
     </div>
   </div>
-  <div #navBanner class="position-relative">
-    <img class="w-100 banarImage" src="./assets/images/paymob00_topstrip_ar_web.jpg" alt="">
-    <div class="layer"></div>
-  </div>
 
 
-  <nav #mainNavBar class="navbar navbar-expand-lg bg-main-light z-n1">
+
+  <nav #mainNavBar class="navbar navbar-expand-lg bg-main-light z-n1 shadow rounded-bottom-3">
     <div class="container">
 
       <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
