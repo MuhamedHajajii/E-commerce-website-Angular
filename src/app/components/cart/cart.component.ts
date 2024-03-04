@@ -38,7 +38,6 @@ export class CartComponent implements OnInit {
     this._CartService.getCurrentUserCart().subscribe({
       next: (response: UserCart) => {
         this.allCartItems = response;
-        console.log(this.allCartItems);
         this.currentUserCartId = response.data._id;
         if (response.numOfCartItems == 0) {
           this.allCartItems = undefined;
@@ -81,7 +80,6 @@ export class CartComponent implements OnInit {
   addToWishList(productId: string | null): void {
     this._WishListService.addToWisthList(productId).subscribe({
       next: (response) => {
-        console.log(response.data);
         this.currentWishList = response.data;
         this._WishListService.changeHeartCount(response.data.length);
         this._ToastrService.success(
@@ -119,18 +117,13 @@ export class CartComponent implements OnInit {
 
   ChangeCount(itemId: number, flag: string, currentIndex: number) {
     if (flag == 'plus' && itemId > 0) {
-      console.log(
-        (this.allCartItems.data.products[currentIndex].count = itemId++)
-      );
+      this.allCartItems.data.products[currentIndex].count = itemId++;
     } else if (flag == 'minus' && itemId > 0) {
-      console.log(
-        (this.allCartItems.data.products[currentIndex].count = itemId--)
-      );
+      this.allCartItems.data.products[currentIndex].count = itemId--;
     }
   }
 
   sendNewCount(productId: string, productCount: number): void {
-    console.log(productId, productCount);
     this._CartService.updateQuantity(productId, productCount).subscribe({
       next: (response: UserCart) => {
         this.allCartItems = response;

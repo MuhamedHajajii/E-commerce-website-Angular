@@ -36,17 +36,13 @@ export class WishlistComponent {
   getAllproducts(): void {
     this._WishListService.getUserWishList().subscribe({
       next: (response: Wishlist) => {
-        console.log(response.data);
-        console.log(response.data.length);
         this._WishListService.changeHeartCount(response.data.length);
         this.homeProducts = response.data;
 
         this._SharedProductsService.currentProducts = response.data;
         this.productsLoaded = false;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -95,6 +91,5 @@ export class WishlistComponent {
     setTimeout(() => {
       this.imageIsLoading = false;
     }, 1500);
-    console.log('Loaded Successfylly');
   }
 }

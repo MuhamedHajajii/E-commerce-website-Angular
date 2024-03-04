@@ -59,7 +59,6 @@ export class RegisterComponent {
         .sendUserData(this.registerForm.value)
         .subscribe({
           next: (response) => {
-            console.log(response);
             if (response.message == 'success') {
               this._Router.navigate(['/login']);
               this.isLoading = false;

@@ -66,7 +66,6 @@ export class ForgetPasswordComponent {
   sendTimeOutFlag: boolean = false;
   sendCodeAgain(): void {
     this.sendEmailForm.get('email')?.setValue(this.userEmail);
-    console.log(this.sendEmailForm.value);
     this._ForgetPasswordService
       .sendUserEmail(this.sendEmailForm.value)
       .subscribe({
@@ -130,7 +129,6 @@ export class ForgetPasswordComponent {
   sendNewPassword(): void {
     this.isLoading3 = true;
     this.newPasswordForm.get('email')?.setValue(this.userEmail);
-    console.log(this.newPasswordForm.value);
 
     this._ForgetPasswordService
       .sendUserNewPassword(this.newPasswordForm.value)
@@ -148,7 +146,6 @@ export class ForgetPasswordComponent {
   }
   validitonPassword(Password: HTMLInputElement, rePassword: HTMLInputElement) {
     if (Password.value == rePassword.value) {
-      console.log(true);
       this.repasswordAlert = true;
     } else {
       this.repasswordAlert = false;

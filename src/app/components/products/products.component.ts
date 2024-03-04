@@ -46,7 +46,6 @@ export class ProductsComponent {
   firstPageFlag: string = 'First';
   endThisButton: boolean = true;
   DisplayMoreData(): void {
-    console.log(this.allProducts.length);
     this.endNumber += 10;
     if (this.endNumber > this.ProductsLength) {
       this.endNumber = this.ProductsLength;
@@ -66,7 +65,6 @@ export class ProductsComponent {
     this.callApi = this._GetHomeproductsService.gitHomeProducts().subscribe({
       next: (response) => {
         this.allProducts = response.data;
-        console.log(this.allProducts);
         this.ProductsLength = response.data.length;
         this.homeProducts = response.data.splice(
           this.startNumber,
@@ -79,9 +77,7 @@ export class ProductsComponent {
         this.totalItems = response.results;
         this.imageIsLoading = true;
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -142,7 +138,6 @@ export class ProductsComponent {
   addToWishList(productId: string | null): void {
     this._WishListService.addToWisthList(productId).subscribe({
       next: (response) => {
-        console.log(response.data);
         this.currentWishList = response.data;
         this._WishListService.changeHeartCount(response.data.length);
         this._ToastrService.success(
@@ -193,8 +188,6 @@ export class ProductsComponent {
     if (this.allproductsFromPagenition.length == 0) {
       this.endPage = false;
     }
-
-    console.log(this.allproductsFromPagenition.length);
   }
   pageChanged(e: any) {
     this.imageIsLoading = true;
@@ -215,9 +208,7 @@ export class ProductsComponent {
         this.totalItems = response.results;
         this.scrollTopBtn();
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 
@@ -230,7 +221,6 @@ export class ProductsComponent {
     setTimeout(() => {
       this.imageIsLoading = false;
     }, 1500);
-    console.log('Loaded Successfylly');
   }
 
   @ViewChild('FreshMarketLogo') ProductsLogo!: ElementRef;

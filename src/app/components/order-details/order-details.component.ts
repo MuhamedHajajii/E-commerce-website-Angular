@@ -36,7 +36,7 @@ export class OrderDetailsComponent implements OnInit {
   getSingleUserOrder(_id: string | null): void {
     this._AllordersService.getSingleOrderDetails(_id).subscribe({
       next: (response: SingleOrder) => {
-        console.log((this.singleOrderDeatails = response));
+        this.singleOrderDeatails = response;
       },
     });
   }

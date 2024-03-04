@@ -57,7 +57,6 @@ export class AddressComponent {
     this._UserAddressService.getUserAddress().subscribe({
       next: (response) => {
         this.currentUserAddress = response;
-        console.log(response);
       },
     });
   }
@@ -77,7 +76,6 @@ export class AddressComponent {
   addNewAddress(): void {
     this._UserAddressService.addNewAddress(this.addressForm.value).subscribe({
       next: (response) => {
-        console.log(response);
         this.currentUserAddress = response;
         this.addAddressFlag = false;
         this._ToastrService.show(
@@ -92,7 +90,6 @@ export class AddressComponent {
     this.addressId = addressId;
     this._UserAddressService.getSpecificAddress(addressId).subscribe({
       next: (response: specificAddress) => {
-        console.log(response);
         this.addressForm.get('name')?.setValue(response.data.name);
         this.addressForm.get('name')?.disable();
         this.addressForm.get('details')?.setValue(response.data.details);
@@ -108,7 +105,6 @@ export class AddressComponent {
       .updateUserAddress(this.addressForm.value, this.addressId)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.getUserAddress();
           this.emptyInputsAfterEdit();
           this._ToastrService.show(
@@ -139,7 +135,6 @@ export class AddressComponent {
   RemoveAddress(addressId: string): void {
     this._UserAddressService.removeUserAddress(addressId).subscribe({
       next: (response) => {
-        console.log(response);
         this.getUserAddress();
         this._ToastrService.warning('Address has been Deleted');
       },

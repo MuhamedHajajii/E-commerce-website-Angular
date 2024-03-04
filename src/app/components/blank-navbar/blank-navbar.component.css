@@ -198,3 +198,9 @@
     overflow-y: scroll;
     overflow-x: hidden;
   }
+
+  .Cart {
+    transform: scale(0);
+    opacity: 0;
+    animation: NotEmpty 1s forwards;
+  }

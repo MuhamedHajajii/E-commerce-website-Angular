@@ -170,10 +170,9 @@
           </button>
         </li>
         <!-- Cart -->
-        <li *ngIf="cartCount" (click)="fireCart()"
-          class="nav-item dropstart Cart position-relative flex-grow-0 p-3 me-2">
-          <a class="nav-link dropdown-toggle-split" href="#" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+        <li *ngIf="cartCount" class="nav-item dropstart Cart position-relative flex-grow-0 p-3 me-2">
+          <a (click)="fireCart()" class="nav-link dropdown-toggle-split" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-2x fa-cart-shopping text-main"></i>
             <span class="badge bg-danger position-absolute p-2 top-0 end-0">{{cartCount}}</span>
           </a>

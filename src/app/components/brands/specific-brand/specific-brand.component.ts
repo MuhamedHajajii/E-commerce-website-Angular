@@ -125,7 +125,6 @@ export class SpecificBrandComponent {
   addToWishList(productId: string | null): void {
     this._WishListService.addToWisthList(productId).subscribe({
       next: (response) => {
-        console.log(response.data);
         this.currentWishList = response.data;
         this._WishListService.changeHeartCount(response.data.length);
         this._ToastrService.success(
@@ -162,6 +161,5 @@ export class SpecificBrandComponent {
     setTimeout(() => {
       this.imageIsLoading = false;
     }, 1500);
-    console.log('Loaded Successfylly');
   }
 }

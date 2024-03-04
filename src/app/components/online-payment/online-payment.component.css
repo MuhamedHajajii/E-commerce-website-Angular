@@ -34,7 +34,7 @@ form input {
 
 
 select {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
   color: white;
   border: 1px solid var(--main-color);
   border-radius: 5px;
@@ -44,7 +44,7 @@ select {
   margin-top: 5px;
   font-size: 14px;
   padding: 10px 30px 10px 10px;
-  background-image: url("../../../favicon.ico");
+  background-image: url("../../../assets/images/favicon.ico");
   background-repeat: no-repeat;
   background-size: 30px 30px;
   background-position: 85% center;
