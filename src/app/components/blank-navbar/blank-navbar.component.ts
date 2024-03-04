@@ -138,4 +138,8 @@ export class BlankNavbarComponent implements OnInit {
   cartFlow(e: Event): void {
     e.stopPropagation();
   }
+
+  closeNavBar(e: HTMLDivElement): void {
+    e.classList.remove('show');
+  }
 }

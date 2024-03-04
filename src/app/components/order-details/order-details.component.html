@@ -14,9 +14,9 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-9 d-flex flex-column justify-content-between py-3">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
+        <div class="col-12 col-lg-9 row py-3">
+          <div class="row">
+            <div class="col-12 col-md-6 mb-2">
               <p><span class="text-main fw-bold">Order Id:</span>
                 {{singleOrderDeatails.data.id}}</p>
               <p class=" mb-0"><span class="fw-bold">order date:</span> {{singleOrderDeatails.data.createdAt | date
@@ -32,7 +32,8 @@
                   Address:</span>{{singleOrderDeatails.data.shippingAddress.details}}</p>
               <p class="mb-0"><span class="fw-bold">Phone:</span>{{singleOrderDeatails.data.shippingAddress.phone}}</p>
             </div>
-            <div>
+            <hr class="d-block d-md-none border-2" />
+            <div class="col-12 col-md-6 mb-2 border rounded-3 p-2 my-2">
               <div class="mb-2 pb-2 border-bottom border-3 text-center text-uppercase">
                 <p class="d-flex justify-content-between"><span class="fw-bold me-3">shipping Price:
                   </span><span>{{singleOrderDeatails.data.shippingPrice +80 | currency:'EGP '}}</span></p>
@@ -46,7 +47,7 @@
             </div>
           </div>
           <div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between col-12 mb-2">
               <div>
                 <h6>Order Delivered:
                   <span class="text-success" *ngIf="singleOrderDeatails.data.isDelivered"><i
@@ -64,8 +65,6 @@
                   {{singleOrderDeatails.data.updatedAt | date
                   :'medium'}}
                 </p>
-              </div>
-              <div>
               </div>
             </div>
           </div>
@@ -95,7 +94,7 @@
               'row-cols-1':!changeDisplay
               }" class="row mt-5">
               <div *ngFor="let item of singleOrderDeatails.data.cartItems; index as i"
-                class="col p-4 shadow-sm position-relative parent overflow-hidden">
+                class="col-12 p-4 shadow-sm position-relative parent overflow-hidden">
 
 
                 <div [routerLink]="['/details', item.product._id]" class="child cursor-pointer">

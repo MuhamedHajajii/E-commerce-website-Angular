@@ -28,6 +28,8 @@ export class PrivacySettingsComponent {
     this.EndEditing();
   }
 
+  startEditFlag: boolean = true;
+
   isLoading: boolean = false;
 
   loggedUseChangePasswordForm: FormGroup = new FormGroup(
@@ -83,6 +85,7 @@ export class PrivacySettingsComponent {
   }
   isEditing: boolean = true;
   startEdit(): void {
+    this.startEditFlag = false;
     this.isEditing = false;
     this.loggedUseChangePasswordForm.get('currentPassword')?.enable();
     this.loggedUseChangePasswordForm.get('password')?.enable();

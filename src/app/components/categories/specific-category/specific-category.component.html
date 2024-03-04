@@ -10,7 +10,7 @@
         <div class="col-md-10">
           <div class="h-100">
             <div class="d-flex flex-column justify-content-between h-100">
-              <div>
+              <div class="my-3 my-md-0">
                 <h2 class="h4 fw-bold">Category Name:</h2>
                 <h3 class="h5 fw-bold">{{categoryDetails.name}}</h3>
                 <h4 class="h6 fw-bold" [style]="'color:var(--main-color);'">{{categoryDetails.slug}}</h4>
@@ -28,23 +28,19 @@
 
       <div class="container">
         <ng-container *ngIf="categoryProducts">
-          <div class="row align-items-center">
-            <div class="col-12 col-md-6">
-            </div>
-            <div class="fw-bolder col-12 col-md-6">
-              <div class="d-flex justify-content-between mt-2 mt-md-0 justify-content-md-end">
-                <div class="d-flex">
-                  <button (click)="openSearchResult()" class="btn-main"><i
-                      class="fa-solid fa-magnifying-glass"></i></button>
-                  <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
-                    [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
-                </div>
-                <div class=" d-none d-md-block">
-                  <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
-                      class="fa-solid fa-bars fa-2x"></i></button>
-                  <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
-                      class="fa-solid fa-table-cells fa-2x"></i></button>
-                </div>
+          <div class="fw-bolder my-3">
+            <div class="d-flex justify-content-between mt-2 mt-md-0 justify-content-md-end">
+              <div class="d-flex">
+                <button (click)="openSearchResult()" class="btn-main"><i
+                    class="fa-solid fa-magnifying-glass"></i></button>
+                <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
+                  [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
+              </div>
+              <div class=" d-none d-md-block">
+                <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
+                    class="fa-solid fa-bars fa-2x"></i></button>
+                <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i
+                    class="fa-solid fa-table-cells fa-2x"></i></button>
               </div>
             </div>
           </div>

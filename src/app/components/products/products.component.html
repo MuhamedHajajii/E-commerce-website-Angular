@@ -1,12 +1,13 @@
 <section class="d-flex flex-column justify-content-between mainSection">
   <section class="my-b">
-    <div #ComponentNav class="bg-main-light sectionNav container-fluid position-sticky" style="top: 90px;">
+    <div #ComponentNav class="bg-main-light sectionNav  d-none d-lg-block container-fluid position-sticky"
+      style="top: 88px;">
       <div class="row align-items-center mx-auto  container">
         <div class="col-12 col-md-6 mb-3 mb-md-0">
           <h2 class="fw-bolder mb-0"><img #FreshMarketLogo src="./assets/images/freshcart-logo.svg" alt=""> All <span
               class="text-main">Products</span>:</h2>
         </div>
-        <div class="fw-boldercol-12 justify-content-end d-md-flex d-block col-md-6">
+        <div class="fw-bolder col-12 justify-content-end d-lg-flex d-none col-md-6">
           <div class="mt-2 mt-md-0 d-flex justify-content-end align-items-center">
             <div class="d-flex aling-items-center justify-content-end">
               <button (click)="openSearchResult()" class="btn-main"><i
@@ -14,7 +15,7 @@
               <input #search (keyup.Enter)="openSearchResult();" (input)="searchReasult(search.value)"
                 [(ngModel)]="searchTitle" placeholder="search .. " type="search" class="form-control search">
             </div>
-            <div #changeDisplayBtns class="text-end  d-none d-md-block">
+            <div #changeDisplayBtns class="text-end  d-none d-md-flex">
               <button (click)="changedisplayClicOne()" [disabled]="changeDisplay" class="btn border-0 p-2"><i
                   class="fa-solid fa-bars fa-2x"></i></button>
               <button (click)="changedisplayClicTwo()" [disabled]="!changeDisplay" class="btn border-0 p-2"><i

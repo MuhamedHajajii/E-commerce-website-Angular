@@ -51,10 +51,14 @@
         id="rePassword">
     </div>
 
-    <button [disabled]="loggedUseChangePasswordForm.invalid || isLoading" class="btn-main d-block my-3 w-75 mx-auto">
-      <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
-      <span>Update Password</span>
-    </button>
+    <ng-container *ngIf="!startEditFlag">
+      <button [disabled]="loggedUseChangePasswordForm.invalid || isLoading" class="btn-main d-block my-3 w-75 mx-auto">
+        <span *ngIf="isLoading" class="faspin"><i class="fas fa-spinner fa-spin"></i></span>
+        <span>Update Password</span>
+      </button>
+    </ng-container>
+
+
   </form>
 </div>
 
