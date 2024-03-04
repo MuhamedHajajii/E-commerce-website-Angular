@@ -11,6 +11,7 @@ export class AuthServisesService {
     this.GetUserToken();
   }
   userName: BehaviorSubject<string> = new BehaviorSubject('');
+
   userdata: any;
   userId: string = '';
   GetUserToken(): void {
@@ -18,10 +19,6 @@ export class AuthServisesService {
       let encode: any = localStorage.getItem('userToken');
       let Decode = jwtDecode(encode);
       this.userdata = Decode;
-      localStorage.removeItem('userName');
-      localStorage.setItem('userName', this.userdata.name);
-      let userNameRef: any = localStorage.getItem('userName');
-      this.userName.next(userNameRef);
       this.userId = this.userdata.id;
     }
   }

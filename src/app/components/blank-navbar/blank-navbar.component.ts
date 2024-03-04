@@ -20,7 +20,7 @@ import { WishListService } from 'src/app/shared/services/wish-list.service';
   styleUrls: ['./blank-navbar.component.css'],
 })
 export class BlankNavbarComponent implements OnInit {
-  userName: string = '';
+  userName: string | null = '';
   truckCount: number = 0;
   wishList: number = 0;
   constructor(
@@ -75,7 +75,11 @@ export class BlankNavbarComponent implements OnInit {
   getUserNAme(): void {
     this._AuthServisesService.userName.subscribe({
       next: (response) => {
-        this.userName = response;
+        if (response != '') {
+          this.userName = response;
+        } else if (localStorage.getItem('userName') != null) {
+          this.userName = localStorage.getItem('userName');
+        }
       },
     });
   }

@@ -24,9 +24,13 @@ export class LoginComponent {
       this.isLoading = true;
       this._AuthServisesService.logInUser(this.loginForm.value).subscribe({
         next: (response) => {
+          console.log(response);
           if (response.message == 'success') {
             localStorage.setItem('userToken', response.token);
+            this._AuthServisesService.userName.next(response.user.name);
             this._AuthServisesService.GetUserToken();
+            console.log(response.user.name);
+            localStorage.setItem('userName', response.user.name);
             this._Router.navigate(['/home']);
             this.isLoading = false;
           }
