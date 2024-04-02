@@ -18,6 +18,7 @@ export class UserDetailsService {
 
   getCurrentUserData(): Observable<any> {
     let userID = this._AuthServisesService.userId;
+    console.log(userID);
     return this._HttpClient.get(`${this.baseUrl}${userID}`);
   }
 
@@ -47,8 +48,8 @@ export class UserDetailsService {
     return this._HttpClient.put(
       'https://ecommerce.routemisr.com/api/v1/users/updateMe/',
       {
-        name: 'TestTestTest',
-        email: 'TestTestTestTestTestTest@outlook.com',
+        name: 'TestTestTestTestTestTest',
+        email: 'TestTestTestTesTestTestTesttTestTest@outlook.com',
         phone: '01010700700',
       },
       { headers: { token: this.userToken } }

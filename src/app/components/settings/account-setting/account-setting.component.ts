@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthServisesService } from 'src/app/shared/services/auth-servises.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-account-setting',
@@ -18,7 +19,8 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
   constructor(
     private _UserDetailsService: UserDetailsService,
     private _FormBuilder: FormBuilder,
-    private _AuthServisesService: AuthServisesService
+    private _AuthServisesService: AuthServisesService,
+    private _ToastrService:ToastrService
   ) {}
   currentUserDetails!: UserDetails;
 
@@ -51,8 +53,11 @@ export class AccountSettingComponent implements OnInit, OnDestroy {
           this._AuthServisesService.userName.next(response.user.name);
           this._AuthServisesService.userdata.name = response.user.name;
           localStorage.setItem('userName', response.user.name);
+          this._ToastrService.success('success')
           this.EndtEdit();
-        },
+        },error:(res) => {
+          this._ToastrService.error('E-mail already in use')
+        }
       });
   }
   editing(): void {
